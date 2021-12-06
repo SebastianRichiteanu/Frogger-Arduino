@@ -3,40 +3,68 @@
 const byte startMenuItems = 4;
 
 void StartMenuState::printMenuLabels() const {
-  lcd.setCursor(2, 0);
+  lcd.setCursor(1, 0);
   lcd.print("Play");
 
-  lcd.setCursor(8, 0);
+  lcd.setCursor(7, 0);
   lcd.print("HiScores");
 
-  lcd.setCursor(2,1);
+  lcd.setCursor(1,1);
   lcd.print("About");
 
-  lcd.setCursor(8,1);
+  lcd.setCursor(7,1);
   lcd.print("Settings");
 }
 
 void StartMenuState::printSelectionArrow() const {
   switch(selIndex) {
     case 1:
-      lcd.setCursor(7,0);
+      lcd.setCursor(6,0);
       break;
     case 2:
-      lcd.setCursor(1,1);
+      lcd.setCursor(0,1);
       break;
     case 3:
-      lcd.setCursor(7,1);
+      lcd.setCursor(6,1);
       break;
     default:
-      lcd.setCursor(1,0);
+      lcd.setCursor(0,0);
       break;
   }
   lcd.print('>');
 }
 
-void StartMenuState::onBegin() { selIndex = 0; }
+void StartMenuState::deleteSelectionArrow() const {
+  switch(selIndex) {
+    case 1:
+      lcd.setCursor(6,0);
+      break;
+    case 2:
+      lcd.setCursor(0,1);
+      break;
+    case 3:
+      lcd.setCursor(6,1);
+      break;
+    default:
+      lcd.setCursor(0,0);
+      break;
+  }
+  lcd.print(' ');
+}
+
+void StartMenuState::onBegin() { 
+  selIndex = 0; 
+  lcd.clear();
+  printMenuLabels();
+}
+
+void StartMenuState::onEnd() {
+  lcd.clear();
+  //deleteSelectionArrow();
+}
 
 void StartMenuState::update() {
+  deleteSelectionArrow();
   if (js.isLeftDebounce()) {
     selIndex = (selIndex + startMenuItems - 1) % startMenuItems;
   } 
@@ -63,15 +91,11 @@ void StartMenuState::update() {
         setGameState(GameState::AboutMenu);
         break;
       case 3:
-        // setGameState(GameState::SettingsMenu);
-        Serial.println("Settings");
+        setGameState(GameState::SettingsMenu);
         break;
     }
   }
-}
-
-void StartMenuState::render() const {
-  lcd.clear();
-  printMenuLabels();
+ 
   printSelectionArrow();
+  
 }

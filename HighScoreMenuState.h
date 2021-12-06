@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Highscore.h"
+#include "SavedData.h"
 #include "State.h"
 
 class HighScoreMenuState : public State {

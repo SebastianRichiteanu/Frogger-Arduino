@@ -1,18 +1,17 @@
 #include "State.h"
-
-#include "Highscore.h"
+#include "SavedData.h"
 
 const Timer skipTime = 30;
-
 Timer updateTime = 0;
 
 void setup () {
+  loadSavedData();
   initHardware();
   getGameState().onBegin();
 
-  //resetHighscores();
-  loadHighscores();
-  //saveHighscores();
+  //resetSavedData();
+  
+  //saveSavedData();
 }
 
 void loop() {
@@ -26,5 +25,5 @@ void loop() {
     getGameState().update();
   } while (millis() - startTime < skipTime);
 
-  getGameState().render();
+  //getGameState().render();
 }

@@ -7,9 +7,11 @@ class StartMenuState : public State {
 
   void printMenuLabels() const;
   void printSelectionArrow() const;
+  void deleteSelectionArrow() const;
 
   public:
     void onBegin() override;
+    void onEnd() override;
     void update() override;
-    void render() const override;
+    //void render() const override;
 };

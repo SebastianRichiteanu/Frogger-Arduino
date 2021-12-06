@@ -1,16 +1,11 @@
 #include "HighScoreMenuState.h"
 
 void HighScoreMenuState::printScore(byte index) {
-  //const Highscore& score = highscores[index]; // try catch?
-
-  //char name[4] = {};
-  //strncpy(name, highscores[index].name, playerNameLen);
-
   lcd.print(index+1); // idented at 0
   lcd.print(". ");
-  lcd.print(highscores[index].name);
+  lcd.print(savedData.highscores[index].name);
   lcd.print(" ");
-  lcd.print(highscores[index].score);
+  lcd.print(savedData.highscores[index].score);
 }
 
 void HighScoreMenuState::printScores() {

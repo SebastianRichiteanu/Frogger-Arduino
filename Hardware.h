@@ -10,3 +10,4 @@ extern Joystick js;
 // extern buzzer
 
 void initHardware();
+void updateHardware();

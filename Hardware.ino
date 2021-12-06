@@ -2,13 +2,13 @@
 
 //LCD
 const byte RS = 7;
-const byte enable = 6;
+const byte enable = 13;
 const byte d4 = 5;
 const byte d5 = 4;
 const byte d6 = 3;
 const byte d7 = 2;
 const byte lcdPinContrast = 9;
-const int lcdContrast = 80;
+const byte lcdPinBrightness = 6; // PWM
 LiquidCrystal lcd(RS, enable, d4, d5, d6, d7);
 
 
@@ -26,11 +26,20 @@ void initHardware() {
 
   lcd.begin(16,2);
 
-  // set brightness of led
   pinMode(lcdPinContrast, OUTPUT);
-  analogWrite(lcdPinContrast, lcdContrast);
+  pinMode(lcdPinBrightness, OUTPUT);
+  analogWrite(lcdPinContrast, savedData.lcdContrast);
+  byte mappedBrightness = map(savedData.lcdBrightness, 0, 95, 0, 255);
+  analogWrite(lcdPinBrightness, mappedBrightness);
 
   lc.shutdown(0, false); // turn off power saving, enables display
   lc.setIntensity(0, matrixBrightness); // sets brightness (0~15 possible values)
   lc.clearDisplay(0);// clear screen
+}
+
+void updateHardware() {
+  analogWrite(lcdPinContrast, savedData.lcdContrast);
+  byte mappedBrightness = map(savedData.lcdBrightness, 0, 95, 0, 255);
+  analogWrite(lcdPinBrightness, mappedBrightness);
+  lc.setIntensity(0, matrixBrightness);
 }
