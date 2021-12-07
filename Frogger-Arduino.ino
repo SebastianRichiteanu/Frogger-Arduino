@@ -25,5 +25,5 @@ void loop() {
     getGameState().update();
   } while (millis() - startTime < skipTime);
 
-  //getGameState().render();
+  getGameState().render();
 }

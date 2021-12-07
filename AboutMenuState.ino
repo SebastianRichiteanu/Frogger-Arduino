@@ -1,11 +1,11 @@
 #include "AboutMenuState.h"
 
-// #include matrix pentru un efect cv
+#include "Matrix.h"
 
 const char* const info[] = { "Frogger",
                                   "Created by Richiteanu Sebastian",
                                   "Project for @UnibucRobotics",
-                                  "GitHub: TBD",
+                                  "GitHub: github.com/SebastianRichiteanu/Frogger-Arduino",
                                   "Press JS to go to menu"};
                                   
 
@@ -45,11 +45,11 @@ void AboutMenuState::printCurrentLines() {
 
 void AboutMenuState::onBegin() {
   scrollToLine(0);
-  // efect matrice
+  matrix.snowingEffect();
 }
 
 void AboutMenuState::onEnd() {
-  //clear matrice
+  matrix.clear();
 }
 
 void AboutMenuState::update() {

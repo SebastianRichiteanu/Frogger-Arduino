@@ -81,8 +81,7 @@ void StartMenuState::update() {
   if (js.isPressedDebounce()) {
     switch(selIndex) {
       case 0:
-        // setGameState(GameState::Starting);
-        Serial.println("Starting");
+        setGameState(GameState::Starting);
         break;
       case 1:
         setGameState(GameState::HighScoreMenu);
