@@ -11,6 +11,10 @@ class Score {
 
     bool isHighScore() const;
     void updateHighScoreList();
+
+    void addPointsForTimeLeft(byte timeLeft);
+    void addPointsForLivesLeft(byte livesLeft);
+    void addPointsForCollectedObj(byte collectedObj);
 };
 
 extern Score score;

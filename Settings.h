@@ -14,6 +14,10 @@ void setCurrentDif(Difficulty diff);
 void increaseDif();
 void decreaseDif();
 
+Timer getStartingTimeByDif();
+Timer getStartingTimeByDifAsSec();
+byte getStartingLivesByDif();
+
 // lcd
 
 const byte maxLcdContrast = 100;

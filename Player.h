@@ -34,6 +34,7 @@ class Player {
     void setLives(byte newLives);
     byte getLives() const;
     bool hasNoLivesLeft() const;
+    bool finishedLevel() const;
 };
 
 

@@ -6,26 +6,26 @@ void StartMenuState::printMenuLabels() const {
   lcd.setCursor(1, 0);
   lcd.print("Play");
 
-  lcd.setCursor(7, 0);
+  lcd.setCursor(8, 0);
   lcd.print("HiScores");
 
   lcd.setCursor(1,1);
   lcd.print("About");
 
-  lcd.setCursor(7,1);
+  lcd.setCursor(8,1);
   lcd.print("Settings");
 }
 
 void StartMenuState::printSelectionArrow() const {
   switch(selIndex) {
     case 1:
-      lcd.setCursor(6,0);
+      lcd.setCursor(7,0);
       break;
     case 2:
       lcd.setCursor(0,1);
       break;
     case 3:
-      lcd.setCursor(6,1);
+      lcd.setCursor(7,1);
       break;
     default:
       lcd.setCursor(0,0);
@@ -37,13 +37,13 @@ void StartMenuState::printSelectionArrow() const {
 void StartMenuState::deleteSelectionArrow() const {
   switch(selIndex) {
     case 1:
-      lcd.setCursor(6,0);
+      lcd.setCursor(7,0);
       break;
     case 2:
       lcd.setCursor(0,1);
       break;
     case 3:
-      lcd.setCursor(6,1);
+      lcd.setCursor(7,1);
       break;
     default:
       lcd.setCursor(0,0);
@@ -59,8 +59,8 @@ void StartMenuState::onBegin() {
 }
 
 void StartMenuState::onEnd() {
+  deleteSelectionArrow();
   lcd.clear();
-  //deleteSelectionArrow();
 }
 
 void StartMenuState::update() {
@@ -94,7 +94,7 @@ void StartMenuState::update() {
         break;
     }
   }
- 
-  printSelectionArrow();
-  
+  if (checkMainState()) {
+    printSelectionArrow();
+  }
 }

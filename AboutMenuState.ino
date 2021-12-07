@@ -3,10 +3,10 @@
 #include "Matrix.h"
 
 const char* const info[] = { "Frogger",
-                                  "Created by Richiteanu Sebastian",
-                                  "Project for @UnibucRobotics",
-                                  "GitHub: github.com/SebastianRichiteanu/Frogger-Arduino",
-                                  "Press JS to go to menu"};
+                             "Created by Richiteanu Sebastian",
+                             "Project for @UnibucRobotics",
+                             "GitHub: tinyurl.com/2umzw7wf",
+                             "Press JS to go to menu"};
                                   
 
 const byte infoNum = 5;
@@ -34,18 +34,18 @@ byte AboutMenuState::printInfoLine(byte index, byte startingAt) const {
 void AboutMenuState::printCurrentLines() {
   lcd.clear();
   lcd.print('>');
-  lcd.setCursor(1,0);
+  lcd.setCursor(1, 0);
   byte lineLen = printInfoLine(topLineIndex, currentScroll);
   maxScroll = lineLen;
   if (topLineIndex + 1 < infoNum) {
-    lcd.setCursor(1,1);
+    lcd.setCursor(1, 1);
     printInfoLine(topLineIndex + 1);
   }
 }
 
 void AboutMenuState::onBegin() {
   scrollToLine(0);
-  matrix.snowingEffect();
+  matrix.happyFace();
 }
 
 void AboutMenuState::onEnd() {
@@ -53,7 +53,6 @@ void AboutMenuState::onEnd() {
 }
 
 void AboutMenuState::update() {
-
   if (maxScroll > 0 && debounce(lastScrollTime, scrollDelay)) {
     if (scrollingLeft) {
       ++currentScroll;

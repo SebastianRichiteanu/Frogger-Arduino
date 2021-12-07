@@ -16,9 +16,9 @@ class Map {
 
     // void createWall(int x, int y, int length);
 
-    // void shiftDown(); ??
-
     void render() const;
+
+    void clean();
 
     //void setTest(byte x);
 
@@ -29,24 +29,3 @@ class Map {
 };
 
 extern Map levelMap;
-
-/**
-class MapView {
-  byte xOffset, yOffset;
-
-  public:
-    MapView(byte x, byte y);
-
-    byte get(byte row) const;
-
-    byte getX() const;
-    byte getY() const;
-
-    void moveUp();
-
-    // in game over scroll la toata harta?
-    void moveToTop();
-};
-
-extern MapView currentView;
-**/

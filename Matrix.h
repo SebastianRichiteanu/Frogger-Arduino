@@ -8,6 +8,8 @@ class Matrix {
     void set(byte row, byte column, byte value);
 
     void snowingEffect();
+    void randomEffect();
+    void happyFace();
 
     void clear();
     void fill();

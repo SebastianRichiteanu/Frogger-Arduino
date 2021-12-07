@@ -26,3 +26,4 @@ enum class GameState {
 
 State& getGameState();
 void setGameState(GameState newState);
+bool checkMainState();

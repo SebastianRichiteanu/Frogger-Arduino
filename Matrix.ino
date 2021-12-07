@@ -20,6 +20,20 @@ void Matrix::fill() {
   }
 }
 
+void Matrix::happyFace() {
+  byte smile[8] = {0x3C,0x42,0xA5,0x81,0xA5,0x99,0x42,0x3C};
+  for (byte row = 0; row < 8; ++row) 
+    setRow(row, smile[row]);
+}
+
 void Matrix::snowingEffect() {
   fill();
+}
+
+void Matrix::randomEffect() {
+  for (byte times = 0; times < 10; ++times) {
+    for (byte row = 0; row < 8; ++row) 
+      for (byte column = 0; column < 8; ++column) 
+        set(row, column, (byte)random(0,2));
+  }
 }

@@ -20,6 +20,17 @@ const char* getCurrentDifAsString() {
   }
 }
 
+const char getCurrentDifAsChar() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 'E';
+    case Difficulty::Medium:
+      return 'M';
+    case Difficulty::Hard:
+      return 'H';
+  }
+}
+
 void increaseDifficulty() {
   byte diff = (byte)getCurrentDif();
   diff = (diff + 1) % difficultyNum;
@@ -30,6 +41,32 @@ void decreaseDifficulty() {
   byte diff = (byte)getCurrentDif();
   diff = (diff + difficultyNum - 1) % difficultyNum;
   savedData.difficulty = (Difficulty)diff;
+}
+
+Timer getStartingTimeByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 100000;
+    case Difficulty::Medium:
+      return 75000;
+    case Difficulty::Hard:
+      return 50000;
+  }
+}
+
+Timer getStartingTimeByDifAsSec() {
+  return getStartingTimeByDif() / 1000;
+}
+
+byte getStartingLivesByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 3;
+    case Difficulty::Medium:
+      return 2;
+    case Difficulty::Hard:
+      return 1;
+  }
 }
 
 // lcd
@@ -46,8 +83,7 @@ void increaseLcdContrast() {
 void decreaseLcdContrast() {
   byte contrast = getCurrentLcdContrast();
   contrast = (contrast + maxLcdContrast - 5) % maxLcdContrast;
-  //savedData.lcdContrast = contrast;
-  savedData.lcdContrast = 90;
+  savedData.lcdContrast = contrast;
 }
 
 void increaseLcdBrightness() {

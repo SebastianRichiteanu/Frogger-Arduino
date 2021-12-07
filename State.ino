@@ -7,6 +7,7 @@
 #include "SettingsMenuState.h"
 #include "StartingState.h"
 #include "PlayingState.h"
+#include "GameOverState.h"
 
 IntroState introState;
 StartMenuState startMenuState;
@@ -15,14 +16,16 @@ HighScoreMenuState highScoreMenuState;
 SettingsMenuState settingsMenuState;
 StartingState startingState;
 PlayingState playingState;
+GameOverState gameOverState;
 
 State* currentState = &introState;
 
 State& getGameState() { return *currentState; }
 
+bool checkMainState() { return currentState == &startMenuState; }
+
 void setGameState(GameState newState) {
-  // print again and clean
-  //currentState -> render();
+  currentState -> render();
   currentState -> onEnd();
 
   // change
@@ -44,6 +47,9 @@ void setGameState(GameState newState) {
       break;
     case GameState::Playing:
       currentState = &playingState;
+      break;
+    case GameState::GameOver:
+      currentState = &gameOverState;
       break;
     default:
       currentState = &startMenuState;

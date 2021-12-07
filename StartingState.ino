@@ -3,33 +3,34 @@
 #include "Player.h"
 //#include "MelodyPlayer.h"
 #include "Settings.h"
-#include "Matrix.h"
+
 
 const Timer startUpTime = 5000;
 const Timer scrollDelayTime = 150;
 
 void StartingState::generateInitialMap() {
-  
+  levelMap.clean();
 }
 
 void StartingState::onBegin() {
   lcd.clear();
-  lcd.setCursor(3, 0);
-  lcd.print("Loading...");
+  lcd.setCursor(2, 0);
+  lcd.print("Hi! Press JS");
+  lcd.setCursor(4, 1);
+  lcd.print("to start");
 
-  // melody.play
-
-  matrix.fill();
+  levelMap.clean();
   player.reset();
 }
 
 void StartingState::update() {
+  // song
   if (js.isPressedDebounce()) {
+    timerDisplay.setTime(getStartingTimeByDif());
     setGameState(GameState::Playing);
   }
 }
 
 void StartingState::render() const{
   levelMap.render();
-  // render lcd
 }

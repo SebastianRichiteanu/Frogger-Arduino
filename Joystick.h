@@ -23,6 +23,8 @@ class Joystick {
   bool isDownDebounce();
   bool isUpDebounce();
 
+  bool isAnyDebounce();
+
   bool isPressedDebounce();
 
   int getX() const;

@@ -1,11 +1,16 @@
 #include "HighScoreMenuState.h"
 
 void HighScoreMenuState::printScore(byte index) {
+  // if i don t do this the string will not be null-terminated
+  const Highscore& score = savedData.highscores[index];
+  char name[4] = {};
+  strncpy(name, score.name, playerNameLen);
+  
   lcd.print(index+1); // idented at 0
   lcd.print(". ");
-  lcd.print(savedData.highscores[index].name);
+  lcd.print(name);
   lcd.print(" ");
-  lcd.print(savedData.highscores[index].score);
+  lcd.print(score.score);
 }
 
 void HighScoreMenuState::printScores() {
