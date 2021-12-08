@@ -17,7 +17,7 @@ static byte heartChar[] = {0b00000,
 const Timer deathDelay = 2000;
 
 bool PlayingState::isGameOver() const {
-  return player.hasNoLivesLeft() || timerDisplay.isFinished() || player.finishedLevel();
+  return player.hasNoLivesLeft() || timerDisplay.isFinished() || player.finishedLevel(); // || player.wasCrashed(); not working yet
 }
 
 void PlayingState::onBegin() {
@@ -118,5 +118,6 @@ void PlayingState::render() const {
   }
 
   timerDisplay.update();
+  levelMap.update();
   levelMap.render();
 }

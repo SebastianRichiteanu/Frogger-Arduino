@@ -10,8 +10,6 @@ void setup () {
   getGameState().onBegin();
 
   //resetSavedData();
-  
-  //saveSavedData();
 }
 
 void loop() {

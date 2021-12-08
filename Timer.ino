@@ -1,6 +1,6 @@
 #include "Timer.h"
 
-bool debounce(bool value, unsigned long& lastTime, unsigned long interval) {
+bool debounce(bool value, Timer& lastTime, Timer interval) {
   if (value && (updateTime > lastTime + interval)) {
     lastTime = updateTime;
     return true;
@@ -8,7 +8,7 @@ bool debounce(bool value, unsigned long& lastTime, unsigned long interval) {
   return false;
 }
 
-bool debounce(unsigned long& lastTime, unsigned long interval) {
+bool debounce(Timer& lastTime, Timer interval) {
   if (updateTime > lastTime + interval) {
     lastTime = updateTime;
     return true;

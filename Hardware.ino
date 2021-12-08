@@ -16,7 +16,6 @@ const byte dinPin = 12;
 const byte clockPin = 11;
 const byte loadPin = 10;
 const byte noDrivers = 1;
-const byte matrixBrightness = 15;
 LedControl lc(dinPin, clockPin, loadPin, noDrivers);
 
 Joystick js;
@@ -29,11 +28,13 @@ void initHardware() {
   pinMode(lcdPinContrast, OUTPUT);
   pinMode(lcdPinBrightness, OUTPUT);
   analogWrite(lcdPinContrast, savedData.lcdContrast);
-  byte mappedBrightness = map(savedData.lcdBrightness, 0, 95, 0, 255);
-  analogWrite(lcdPinBrightness, mappedBrightness);
+  byte mappedLcdBrightness = map(savedData.lcdBrightness, 0, 95, 0, 255);
+  analogWrite(lcdPinBrightness, mappedLcdBrightness);
+  byte mappedMatrixBright = map(savedData.matrixBrightness, 0, 95, 0, 15);
+
 
   lc.shutdown(0, false); // turn off power saving, enables display
-  lc.setIntensity(0, matrixBrightness); // sets brightness (0~15 possible values)
+  lc.setIntensity(0, mappedMatrixBright); // sets brightness (0~15 possible values)
   lc.clearDisplay(0);// clear screen
 }
 
@@ -41,5 +42,6 @@ void updateHardware() {
   analogWrite(lcdPinContrast, savedData.lcdContrast);
   byte mappedBrightness = map(savedData.lcdBrightness, 0, 95, 0, 255);
   analogWrite(lcdPinBrightness, mappedBrightness);
-  lc.setIntensity(0, matrixBrightness);
+  byte mappedMatrixBright = map(savedData.matrixBrightness, 0, 95, 0, 15);
+  lc.setIntensity(0, mappedMatrixBright);
 }

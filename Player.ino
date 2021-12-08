@@ -69,6 +69,10 @@ bool Player::hasNoLivesLeft() const { return lives == 0; }
 
 bool Player::finishedLevel() const { return x == 0; }
 
+bool Player::isPlayer(byte X, byte Y) const { return x == X && y == Y; }
+
+bool Player::wasCrashed() const { return levelMap.vehicles[x].getMoving(); }
+
 int Player::getRelativeX() const { return 0; } //return int(x) - currentView.getX(); 
   
 int Player::getRelativeY() const { return 0; } //return int(y) - currentView.getY(); }

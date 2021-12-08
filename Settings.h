@@ -8,15 +8,17 @@ enum class Difficulty : byte { Easy, Medium, Hard} ;
 const byte difficultyNum = 3;
 
 Difficulty getCurrentDif();
+const char getCurrentDifAsChar();
 const char* getCurrentDifAsString();
 void setCurrentDif(Difficulty diff);
 
 void increaseDif();
 void decreaseDif();
 
-Timer getStartingTimeByDif();
-Timer getStartingTimeByDifAsSec();
-byte getStartingLivesByDif();
+const Timer getStartingTimeByDif();
+const Timer getStartingTimeByDifAsSec();
+const byte getStartingLivesByDif();
+const byte getVehicleSpeedByDif();
 
 // lcd
 

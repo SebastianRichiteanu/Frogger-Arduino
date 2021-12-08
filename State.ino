@@ -8,6 +8,7 @@
 #include "StartingState.h"
 #include "PlayingState.h"
 #include "GameOverState.h"
+#include "SaveSettingsMenuState.h"
 
 IntroState introState;
 StartMenuState startMenuState;
@@ -17,6 +18,7 @@ SettingsMenuState settingsMenuState;
 StartingState startingState;
 PlayingState playingState;
 GameOverState gameOverState;
+SaveSettingsMenuState saveSettingsMenuState;
 
 State* currentState = &introState;
 
@@ -50,6 +52,9 @@ void setGameState(GameState newState) {
       break;
     case GameState::GameOver:
       currentState = &gameOverState;
+      break;
+    case GameState::SaveSettingsMenu:
+      currentState = &saveSettingsMenuState;
       break;
     default:
       currentState = &startMenuState;

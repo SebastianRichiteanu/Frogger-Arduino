@@ -17,7 +17,7 @@ enum class GameState {
   StartMenu,
   HighScoreMenu,
   SettingsMenu,
-  // AreYouSureMenu,
+  SaveSettingsMenu,
   AboutMenu,
   Starting,
   Playing,

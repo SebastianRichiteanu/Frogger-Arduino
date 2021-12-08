@@ -1,6 +1,6 @@
 #include "SettingsMenuState.h"
-
-// #include "Settings.h"
+#include "SaveSettingsMenuState.h"
+#include "Settings.h"
 
 const byte settingsNum = 5;
 
@@ -114,7 +114,16 @@ void SettingsMenuState::changeToNextChar() {
   }
 }
 
+void SettingsMenuState::copySaveData() {
+  strcpy(copySavedData.playerName, savedData.playerName);
+  copySavedData.lcdBrightness = savedData.lcdBrightness;
+  copySavedData.lcdContrast = savedData.lcdContrast;
+  copySavedData.matrixBrightness = savedData.matrixBrightness;
+  copySavedData.difficulty = savedData.difficulty;
+}
+
 void SettingsMenuState::onBegin() {
+  copySaveData();
   currentIndex = 0;
   isEditing = false;
   printFields(currentIndex);
@@ -207,10 +216,8 @@ void SettingsMenuState::update() {
       printFields(currentIndex);
     }
     if (js.isLeftDebounce()) {
-      
-      updateHardware(); // are you sure?
-      saveSavedData();
-      setGameState(GameState::StartMenu);
+      Serial.println("aaa");
+      setGameState(GameState::SaveSettingsMenu);
     }
   }
 }

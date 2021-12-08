@@ -43,7 +43,7 @@ void decreaseDifficulty() {
   savedData.difficulty = (Difficulty)diff;
 }
 
-Timer getStartingTimeByDif() {
+const Timer getStartingTimeByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
       return 100000;
@@ -54,11 +54,11 @@ Timer getStartingTimeByDif() {
   }
 }
 
-Timer getStartingTimeByDifAsSec() {
+const Timer getStartingTimeByDifAsSec() {
   return getStartingTimeByDif() / 1000;
 }
 
-byte getStartingLivesByDif() {
+const byte getStartingLivesByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
       return 3;
@@ -66,6 +66,17 @@ byte getStartingLivesByDif() {
       return 2;
     case Difficulty::Hard:
       return 1;
+  }
+}
+
+const byte getVehicleSpeedByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 0;
+    case Difficulty::Medium:
+      return 2;
+    case Difficulty::Hard:
+      return 4;
   }
 }
 

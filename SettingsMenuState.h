@@ -1,13 +1,15 @@
 #pragma once
 
-// #include "Settings.h"
+#include "Settings.h"
 #include "State.h"
+#include "SavedData.h"
 
 class SettingsMenuState : public State {
   byte currentIndex;
   byte chrIndex;
   bool isEditing;
 
+  void copySaveData();
   void clearSelArrow();
   void printSelArrow();
   void printNameField();
@@ -24,3 +26,5 @@ class SettingsMenuState : public State {
     void onBegin() override;
     void update() override;
 };
+
+extern SavedData copySavedData = {};

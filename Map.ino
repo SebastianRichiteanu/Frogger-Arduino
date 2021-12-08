@@ -8,17 +8,34 @@
 
 Map levelMap;
 
-Map::Map() {}
+Map::Map() {
+  isActive = true;
+  lastFinishBlinkUpdateTime = updateTime;
+}
 
-//bool[] Map::get(byte row) const { return data[row]; }
 bool Map::get(byte x, byte y) const { return data[x][y]; }
 
+void Map::setRow(byte x, bool value) { 
+  for (byte y = 0; y < width; ++y) {
+    data[x][y] = value;
+  }
+}
 void Map::set(byte x, byte y, bool value) { data[x][y] = value; }
+
+void Map::update() {
+  if (debounce(lastFinishBlinkUpdateTime, blinkDelay)) {
+    setRow(0, isActive);
+    isActive = !isActive;
+    lastFinishBlinkUpdateTime = updateTime;
+  }
+  for (byte i = 0; i < levelMap.height - 2; ++i) { // - 2 (start line && finish line)
+    levelMap.vehicles[i].update(i + 1); // i + 1 = real x
+  }
+}
 
 void Map::clean() {
   for (byte i = 0; i < 8; ++i)
-    for (byte j = 0; j < 8; ++j)
-      data[i][j] = false;
+    setRow(i, false);
 }
 
 void Map::render() const {

@@ -4,7 +4,6 @@
 
 class Player {
   byte x, y;
-  byte accelY;
   unsigned long actualY, actualX;  
   
   Timer lastMoveTime;
@@ -35,6 +34,9 @@ class Player {
     byte getLives() const;
     bool hasNoLivesLeft() const;
     bool finishedLevel() const;
+    bool wasCrashed() const;
+
+    bool isPlayer(byte X, byte Y) const;
 };
 
 
