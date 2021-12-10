@@ -2,7 +2,7 @@
 #include "SaveSettingsMenuState.h"
 #include "Settings.h"
 
-const byte settingsNum = 5;
+const byte settingsNum = 6;
 
 const Timer arrowBlinkDelay = 1000;
 const Timer chrBlinkDelay = 500;
@@ -25,7 +25,7 @@ void SettingsMenuState::printNameField() {
 }
 
 void SettingsMenuState::printDifficultyLevelField() {
-  lcd.print("Level: ");
+  lcd.print("Diff: ");
   if (isEditing && currentIndex == 1) {
     lcd.print("{");
   }
@@ -72,6 +72,23 @@ void SettingsMenuState::printMatrixBright() {
   }
 }
 
+void SettingsMenuState::printMusicState() {
+  lcd.print("Music:");
+  if (isEditing && currentIndex == 5) {
+    lcd.print("{");
+  } else {
+    lcd.print(" ");
+  }
+  if (savedData.musicState) {
+    lcd.print("ON");
+  } else {
+    lcd.print("OFF");
+  }
+  if (isEditing && currentIndex == 5) {
+    lcd.print("}");
+  }
+}
+
 void SettingsMenuState::printField(byte index) {
   if (index == 0) {
     printNameField();
@@ -83,6 +100,8 @@ void SettingsMenuState::printField(byte index) {
     printLcdBrightness();
   } else if (index == 4) {
     printMatrixBright();
+  } else if (index == 5) {
+    printMusicState();
   }
 }
 
@@ -120,6 +139,7 @@ void SettingsMenuState::copySaveData() {
   copySavedData.lcdContrast = savedData.lcdContrast;
   copySavedData.matrixBrightness = savedData.matrixBrightness;
   copySavedData.difficulty = savedData.difficulty;
+  copySavedData.musicState = savedData.musicState;
 }
 
 void SettingsMenuState::onBegin() {
@@ -203,6 +223,11 @@ void SettingsMenuState::update() {
         increaseMatrixBright();
         printFields(currentIndex);
       }
+    } else if (currentIndex == 5) {
+      if (js.isLeftDebounce() || js.isRightDebounce()) {
+        changeMusicState();
+        printFields(currentIndex);
+      }
     }
     
   } else {
@@ -216,7 +241,6 @@ void SettingsMenuState::update() {
       printFields(currentIndex);
     }
     if (js.isLeftDebounce()) {
-      Serial.println("aaa");
       setGameState(GameState::SaveSettingsMenu);
     }
   }

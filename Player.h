@@ -39,5 +39,4 @@ class Player {
     bool isPlayer(byte X, byte Y) const;
 };
 
-
 extern Player player;

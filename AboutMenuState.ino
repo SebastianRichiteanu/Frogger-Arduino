@@ -47,7 +47,7 @@ void AboutMenuState::printCurrentLines() {
 void AboutMenuState::onBegin() {
   scrollToLine(0);
   matrix.happyFace();
-  buzzer.setMelody(testMelody);
+  buzzer.setMelody(takeOnMeMelody);
   buzzer.play();
 }
 
@@ -83,8 +83,6 @@ void AboutMenuState::update() {
   }
 
   // melody
-  buzzer.update();
-  if (!buzzer.isPlaying()) {
-    buzzer.play();
-  }
+  buzzer.updateOrRestart();
+
 }

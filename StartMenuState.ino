@@ -103,10 +103,7 @@ void StartMenuState::update() {
   }
 
   // melody
-  buzzer.update();
-  if (!buzzer.isPlaying()) {
-    buzzer.play();
-  }
+  buzzer.updateOrRestart();
 
   
 }

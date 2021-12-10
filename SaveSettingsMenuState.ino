@@ -31,6 +31,7 @@ void SaveSettingsMenuState::resetSettings() {
   savedData.lcdContrast = copySavedData.lcdContrast;
   savedData.matrixBrightness = copySavedData.matrixBrightness;
   savedData.difficulty = copySavedData.difficulty;
+  savedData.musicState = copySavedData.musicState;
 }
 
 void SaveSettingsMenuState::update() {

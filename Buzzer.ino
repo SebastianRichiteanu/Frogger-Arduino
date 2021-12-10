@@ -31,8 +31,15 @@ void Buzzer::stop() {
   nextTimerNote = updateTime;
 }
 
+void Buzzer::updateOrRestart() {
+  update();
+  if (!isPlaying()) {
+    buzzer.play();
+  }
+}
+
 void Buzzer::update() {
-  if (!playing || !featureStarted) {
+  if (!playing || !savedData.musicState) {
     return;
   }
   const uint16_t currentNoteFreq = pgm_read_word_near(frequencies + currentNote);

@@ -9,4 +9,5 @@ struct Melody {
 };
 
 extern Melody jingleBellsMelody;
-extern Melody testMelody;
+extern Melody takeOnMeMelody;
+extern Melody tetrisMelody;

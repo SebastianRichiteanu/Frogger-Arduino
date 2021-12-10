@@ -109,6 +109,10 @@ void decreaseLcdBrightness() {
   savedData.lcdBrightness = brightness; 
 }
 
+void changeMusicState() { 
+  savedData.musicState = !savedData.musicState;
+}
+
 // matrix
 
 byte getCurrentMatrixBright() { return savedData.matrixBrightness; }

@@ -5,8 +5,6 @@
 
 class Buzzer {
   private:
-    const static bool featureStarted = false; // super annoying while working on something else
-  
     const static int buzzerPin = 5;
     
     Timer baseDuration;
@@ -29,6 +27,7 @@ class Buzzer {
     void play();
     void stop();
     void update();
+    void updateOrRestart();
 
     bool isPlaying() const;
 };

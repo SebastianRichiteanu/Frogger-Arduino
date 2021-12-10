@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Score.h"
 #include "TimerDisplay.h"
+#include "Buzzer.h"
 
 static byte heartChar[] = {0b00000,
   0b01010,
@@ -39,7 +40,9 @@ void PlayingState::onBegin() {
   paused = false;
   playerMoved = false;
   playerDied = false;
-  
+
+  buzzer.setMelody(tetrisMelody);
+  buzzer.play();
 }
 
 void PlayingState::onEnd() {
@@ -120,4 +123,7 @@ void PlayingState::render() const {
   timerDisplay.update();
   levelMap.update();
   levelMap.render();
+
+  // melody
+  buzzer.updateOrRestart();
 }
