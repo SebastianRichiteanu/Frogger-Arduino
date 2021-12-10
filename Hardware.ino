@@ -3,7 +3,7 @@
 //LCD
 const byte RS = 7;
 const byte enable = 13;
-const byte d4 = 5;
+const byte d4 = A5;
 const byte d5 = 4;
 const byte d6 = 3;
 const byte d7 = 2;

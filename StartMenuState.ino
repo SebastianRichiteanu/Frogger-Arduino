@@ -1,4 +1,5 @@
 #include "StartMenuState.h"
+#include "Buzzer.h"
 
 const byte startMenuItems = 4;
 
@@ -56,6 +57,9 @@ void StartMenuState::onBegin() {
   selIndex = 0; 
   lcd.clear();
   printMenuLabels();
+
+  buzzer.setMelody(jingleBellsMelody);
+  buzzer.play();
 }
 
 void StartMenuState::onEnd() {
@@ -97,4 +101,12 @@ void StartMenuState::update() {
   if (checkMainState()) {
     printSelectionArrow();
   }
+
+  // melody
+  buzzer.update();
+  if (!buzzer.isPlaying()) {
+    buzzer.play();
+  }
+
+  
 }

@@ -24,4 +24,7 @@ void loop() {
   } while (millis() - startTime < skipTime);
 
   getGameState().render();
+
+
+ 
 }

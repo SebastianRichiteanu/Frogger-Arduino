@@ -1,6 +1,7 @@
 #include "AboutMenuState.h"
 
 #include "Matrix.h"
+#include "Buzzer.h"
 
 const char* const info[] = { "Frogger",
                              "Created by Richiteanu Sebastian",
@@ -46,6 +47,8 @@ void AboutMenuState::printCurrentLines() {
 void AboutMenuState::onBegin() {
   scrollToLine(0);
   matrix.happyFace();
+  buzzer.setMelody(testMelody);
+  buzzer.play();
 }
 
 void AboutMenuState::onEnd() {
@@ -77,5 +80,11 @@ void AboutMenuState::update() {
   }
   if (js.isPressedDebounce()) {
     setGameState(GameState::StartMenu);
+  }
+
+  // melody
+  buzzer.update();
+  if (!buzzer.isPlaying()) {
+    buzzer.play();
   }
 }
