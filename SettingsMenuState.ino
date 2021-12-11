@@ -147,6 +147,7 @@ void SettingsMenuState::onBegin() {
   currentIndex = 0;
   isEditing = false;
   printFields(currentIndex);
+  matrix.fill();
 }
 
 void SettingsMenuState::update() {
@@ -200,28 +201,34 @@ void SettingsMenuState::update() {
       if (js.isLeftDebounce()) {
         decreaseLcdContrast();
         printFields(currentIndex);
+        updateHardware();
       }
       if (js.isRightDebounce()) {
         increaseLcdContrast();
         printFields(currentIndex);
+        updateHardware();
       }
     } else if (currentIndex == 3) {
       if (js.isLeftDebounce()) {
         decreaseLcdBrightness();
         printFields(currentIndex);
+        updateHardware();
       }
       if (js.isRightDebounce()) {
         increaseLcdBrightness();
         printFields(currentIndex);
+        updateHardware();
       }
     } else if (currentIndex == 4) {
       if (js.isLeftDebounce()) {
         decreaseMatrixBright();
         printFields(currentIndex);
+        updateHardware();
       }
       if (js.isRightDebounce()) {
         increaseMatrixBright();
         printFields(currentIndex);
+        updateHardware();
       }
     } else if (currentIndex == 5) {
       if (js.isLeftDebounce() || js.isRightDebounce()) {

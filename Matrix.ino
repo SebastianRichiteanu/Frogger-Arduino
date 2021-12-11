@@ -26,6 +26,12 @@ void Matrix::happyFace() {
     setRow(row, smile[row]);
 }
 
+void Matrix::sadFace() {
+  byte sad[8] = {0x3C,0x42,0xA5,0x81,0x99,0xA5,0x42,0x3C};
+  for (byte row = 0; row < 8; ++row)
+    setRow(row, sad[row]);
+}
+
 void Matrix::snowingEffect() {
   fill();
 }

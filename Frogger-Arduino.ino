@@ -9,7 +9,7 @@ void setup () {
   initHardware();
   getGameState().onBegin();
 
-  //resetSavedData();
+  // resetSavedData();
 }
 
 void loop() {
@@ -24,7 +24,4 @@ void loop() {
   } while (millis() - startTime < skipTime);
 
   getGameState().render();
-
-
- 
 }

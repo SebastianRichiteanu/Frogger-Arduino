@@ -6,7 +6,9 @@ class Player {
   byte x, y;
   unsigned long actualY, actualX;  
   
-  Timer lastMoveTime;
+  Timer lastMoveTime, lastDeathTime, lastUpdateTime;
+
+  const static Timer deathDelay = 1000;
 
   byte lives;
   void setPlayerCell(bool value);
@@ -34,7 +36,7 @@ class Player {
     byte getLives() const;
     bool hasNoLivesLeft() const;
     bool finishedLevel() const;
-    bool wasCrashed() const;
+    void checkCrash();
 
     bool isPlayer(byte X, byte Y) const;
 };

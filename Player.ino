@@ -30,10 +30,11 @@ void Player::reset() {
   setPlayerCell(true);
 
   actualY = y;
-  lastMoveTime = 0;
+  lastUpdateTime = updateTime;
 }
 
 void Player::update() {
+
   if (updateTime - lastMoveTime > moveDelay) {
     if (js.isLeftDebounce() && !collidesLeft()) {
       moveTo(x, y - 1);
@@ -71,7 +72,12 @@ bool Player::finishedLevel() const { return x == 0; }
 
 bool Player::isPlayer(byte X, byte Y) const { return x == X && y == Y; }
 
-bool Player::wasCrashed() const { return levelMap.vehicles[x].getMoving(); }
+void Player::checkCrash() { 
+  if (levelMap.vehicles[x - 1].getMoving() && debounce(lastDeathTime, deathDelay)) {
+    buzzer.playCrashed();
+    --lives;
+  }
+}
 
 int Player::getRelativeX() const { return 0; } //return int(x) - currentView.getX(); 
   

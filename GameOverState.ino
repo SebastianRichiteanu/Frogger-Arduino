@@ -10,6 +10,7 @@ void GameOverState::printCongrats() {
   printingCongrats = true;
   printingScore = false;
   printingHighscore = false;
+  matrix.sadFace();
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Congrats for rea");

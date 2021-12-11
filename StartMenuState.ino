@@ -54,6 +54,7 @@ void StartMenuState::deleteSelectionArrow() const {
 }
 
 void StartMenuState::onBegin() { 
+  matrix.clear();
   selIndex = 0; 
   lcd.clear();
   printMenuLabels();

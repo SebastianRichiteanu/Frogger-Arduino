@@ -30,4 +30,6 @@ class Buzzer {
     void updateOrRestart();
 
     bool isPlaying() const;
+
+    void playCrashed() const;
 };

@@ -10,6 +10,7 @@ class Matrix {
     void snowingEffect();
     void randomEffect();
     void happyFace();
+    void sadFace();
 
     void clear();
     void fill();
