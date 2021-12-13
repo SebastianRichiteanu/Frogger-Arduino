@@ -12,10 +12,47 @@ Player player;
 
 void Player::setPlayerCell(bool value) { levelMap.set(x, y, value); }
 
-bool Player::collidesLeft() const { return y == 0; }
-bool Player::collidesRight() const { return y == 7; }
-bool Player::collidesUp() const { return x == levelMap.height - 1; }
-bool Player::collidesDown() const { return x == 0; }
+
+bool Player::collidesLeft() const { 
+  short currentWall = levelMap.walls[x - 1];
+  if (currentWall) {
+    if (currentWall > 0) {
+      return y <= currentWall;
+    } 
+  }
+  return y == 0; 
+}
+bool Player::collidesRight() const { 
+  short currentWall = levelMap.walls[x - 1];
+  if (currentWall) {
+    if (currentWall < 0) {
+      return y >= levelMap.width + currentWall;
+    } 
+  }
+  return y == 7;
+}
+bool Player::collidesUp() const { 
+  short currentWall = levelMap.walls[x];
+  if (currentWall) {
+    if (currentWall > 0) {
+      return y < currentWall;
+    } else {
+      return y >= levelMap.width + currentWall; // -1
+    }
+  }
+  return x == levelMap.height - 1; 
+}
+bool Player::collidesDown() const { 
+  short currentWall = levelMap.walls[x - 2];
+  if (currentWall) {
+    if (currentWall > 0) {
+      return y < currentWall;
+    } else {
+      return y >= levelMap.width + currentWall; // -1
+    }
+  }
+  return x == 0; 
+}
 
 void Player::moveTo(byte newX, byte newY) {
   setPlayerCell(false);
@@ -34,7 +71,6 @@ void Player::reset() {
 }
 
 void Player::update() {
-
   if (updateTime - lastMoveTime > moveDelay) {
     if (js.isLeftDebounce() && !collidesLeft()) {
       moveTo(x, y - 1);

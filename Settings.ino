@@ -80,6 +80,28 @@ const byte getVehicleSpeedByDif() {
   }
 }
 
+const byte getNumberOfWallsByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 2;
+    case Difficulty::Medium:
+      return 3;
+    case Difficulty::Hard:
+      return 4;
+  }
+}
+
+const byte getLengthOfWallsByBif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return random(2, 5);
+    case Difficulty::Medium:
+      return random(3, 6);
+    case Difficulty::Hard:
+      return random(4, 7);
+  }
+}
+
 // lcd
 
 byte getCurrentLcdContrast() { return savedData.lcdContrast; }

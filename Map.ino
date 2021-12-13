@@ -1,5 +1,4 @@
 #include "Map.h"
-
 #include "Hardware.h"
 #include "Matrix.h"
 #include "Score.h"
@@ -24,6 +23,34 @@ void Map::setRow(byte x, bool value) {
 }
 void Map::set(byte x, byte y, bool value) { data[x].set(width - y - 1, value); }
 
+void Map::createWalls() {
+  byte lastRandom = 0;
+  for (byte i = 0; i < getNumberOfWallsByDif(); ++i) {
+    byte randomX = random(2, 4); // distance between walls
+    short randomLen = getLengthOfWallsByBif();
+    short randomDir = random(0, 2); // direction
+    if (randomDir) {
+      randomLen = -randomLen;
+    }
+    lastRandom += randomX;
+    walls[lastRandom] = randomLen;
+  }
+}
+
+void Map::updateWalls(byte x) {
+  short y = walls[x];
+  byte offset = 0;
+  if (y < 0) { // the wall is sticking to the right
+    y = -y;
+    offset = levelMap.width - y;
+  }
+  
+  for (byte i = 0; i < y; ++i) {
+    levelMap.set(x + 1, offset + i, true);
+  }
+  
+}
+
 void Map::update() {
   if (debounce(lastFinishBlinkUpdateTime, blinkDelay) && xOffset == 0) {
     setRow(0, isActive);
@@ -31,7 +58,12 @@ void Map::update() {
     lastFinishBlinkUpdateTime = updateTime;
   }
   for (byte i = 0; i < levelMap.height - 2; ++i) { // - 2 (start line && finish line)
-    levelMap.vehicles[i].update(i + 1); // i + 1 = real x
+    if (walls[i]) { // if is a wall
+      levelMap.updateWalls(i);
+    }
+    if (!walls[i]) { 
+      levelMap.vehicles[i].update(i + 1); // i + 1 = real x
+    }
   }
 }
 

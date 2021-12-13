@@ -20,6 +20,7 @@ void StartingState::onBegin() {
   lcd.print("to start");
 
   levelMap.clean();
+  levelMap.createWalls();
   player.reset();
 }
 

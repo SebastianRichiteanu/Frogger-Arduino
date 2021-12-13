@@ -13,6 +13,7 @@ class Map {
     bool isActive;
     Timer lastFinishBlinkUpdateTime;
     Vehicle vehicles[height];
+    short walls[height]; // if 0 no wall, if > 0 then length 
 
     Map();
 
@@ -21,17 +22,13 @@ class Map {
 
     void setRow(byte x, bool value);
     void set(byte x, byte y, bool value);
-
     bool hasSpaceLeft();
-
-    // void createWall(int x, int y, int length);
+    void createWalls();
+    void updateWalls(byte x);
 
     void render() const;
-
     void clean();
-
     void update();
-
 
     byte getOffset() const;
     void moveUp();
