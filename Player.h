@@ -27,8 +27,7 @@ class Player {
 
     unsigned long getActualHeight() const;
 
-    int getRelativeX() const;
-    int getRelativeY() const;
+    byte getRelativeX() const;
 
     void moveTo(byte newX, byte newY);
 

@@ -1,11 +1,14 @@
 #pragma once
 
 #include "Vehicle.h"
+#include "Matrix.h"
+#include "BitOps.h"
 
 class Map {
   public:
-    static const byte height = 8;
+    static const byte height = 16;
     static const byte width = 8;
+    byte xOffset = height - matrix.rows;
     static const byte blinkDelay = 250;
     bool isActive;
     Timer lastFinishBlinkUpdateTime;
@@ -21,8 +24,6 @@ class Map {
 
     bool hasSpaceLeft();
 
-    //void createVehicles();
-
     // void createWall(int x, int y, int length);
 
     void render() const;
@@ -31,10 +32,14 @@ class Map {
 
     void update();
 
-    
+
+    byte getOffset() const;
+    void moveUp();
+    void moveDown();
 
   private:
-    bool data[width][height];
+    Bitfield<unsigned int> data[height];
+    //bool data[width][height];
 
     // byte prevX, prevY, prevLength;
 };

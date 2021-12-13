@@ -14,7 +14,7 @@ void Player::setPlayerCell(bool value) { levelMap.set(x, y, value); }
 
 bool Player::collidesLeft() const { return y == 0; }
 bool Player::collidesRight() const { return y == 7; }
-bool Player::collidesUp() const { return x == 7; }
+bool Player::collidesUp() const { return x == levelMap.height - 1; }
 bool Player::collidesDown() const { return x == 0; }
 
 void Player::moveTo(byte newX, byte newY) {
@@ -25,7 +25,7 @@ void Player::moveTo(byte newX, byte newY) {
 }
 
 void Player::reset() {
-  x = 7;
+  x = levelMap.height - 1; 
   y = 3;
   setPlayerCell(true);
 
@@ -57,7 +57,7 @@ void Player::update() {
   } else {
     setPlayerCell(false);
   }
-  
+
 }
 
 byte Player::getX() const { return x; }
@@ -76,9 +76,9 @@ void Player::checkCrash() {
   if (levelMap.vehicles[x - 1].getMoving() && debounce(lastDeathTime, deathDelay)) {
     buzzer.playCrashed();
     --lives;
+    
   }
 }
 
-int Player::getRelativeX() const { return 0; } //return int(x) - currentView.getX(); 
+byte Player::getRelativeX() const { return x - levelMap.getOffset(); }
   
-int Player::getRelativeY() const { return 0; } //return int(y) - currentView.getY(); }

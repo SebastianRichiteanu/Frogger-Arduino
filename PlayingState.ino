@@ -32,7 +32,7 @@ void PlayingState::onBegin() {
 
   // start melody
 
-  player.moveTo(7, 3);
+  player.moveTo(levelMap.height - 1, 3);
   player.setLives(getStartingLivesByDif());
 
   timerDisplay.pause();
@@ -86,7 +86,16 @@ void PlayingState::update() {
     player.update();
   }
 
- 
+  // move pan cam
+  
+  if (player.getRelativeX() < 3) {
+    levelMap.moveDown();
+  } 
+  if (player.getRelativeX() > 4) {
+    levelMap.moveUp();
+  }
+
+
 }
 
 void PlayingState::render() const {
