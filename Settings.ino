@@ -69,6 +69,17 @@ const byte getStartingLivesByDif() {
   }
 }
 
+const byte getStartingJumpsByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 3;
+    case Difficulty::Medium:
+      return 2;
+    case Difficulty::Hard:
+      return 1;
+  }
+}
+
 const byte getVehicleSpeedByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:

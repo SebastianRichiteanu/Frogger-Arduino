@@ -6,11 +6,11 @@ class Player {
   byte x, y;
   unsigned long actualY, actualX;  
   
-  Timer lastMoveTime, lastDeathTime, lastUpdateTime;
-
-  const static Timer deathDelay = 1000;
+  Timer lastMoveTime, lastJumpTime, lastDeathTime, lastUpdateTime;
 
   byte lives;
+  byte jumps;
+  bool canJump;
   void setPlayerCell(bool value);
 
   bool collidesLeft() const;
@@ -30,9 +30,12 @@ class Player {
     byte getRelativeX() const;
 
     void moveTo(byte newX, byte newY);
+    void jump();
 
     void setLives(byte newLives);
     byte getLives() const;
+    void setJumps(byte newJumps);
+    byte getJumps() const;
     bool hasNoLivesLeft() const;
     bool finishedLevel() const;
     void checkCrash();

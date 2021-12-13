@@ -15,8 +15,6 @@ static byte heartChar[] = {0b00000,
   0b00000,
   0b00000};
 
-const Timer deathDelay = 2000;
-
 bool PlayingState::isGameOver() const {
   return player.hasNoLivesLeft() || timerDisplay.isFinished() || player.finishedLevel();
 }
@@ -34,6 +32,7 @@ void PlayingState::onBegin() {
 
   player.moveTo(levelMap.height - 1, 3);
   player.setLives(getStartingLivesByDif());
+  player.setJumps(getStartingJumpsByDif());
 
   timerDisplay.pause();
 
@@ -66,7 +65,7 @@ void PlayingState::update() {
     setGameState(GameState::GameOver);
   }
   
-  if (js.isPressedDebounce()) {
+  if (buttonPressed()) { //js.isPressedDebounce()) {
     paused = !paused;
   }
 
@@ -104,7 +103,7 @@ void PlayingState::render() const {
     lcd.setCursor(2, 0);
     lcd.print("Game paused");
     lcd.setCursor(3, 1);
-    lcd.print("Press JS");
+    lcd.print("Press Button");
     return;
   } else {
     lcd.clear();
@@ -127,6 +126,10 @@ void PlayingState::render() const {
    // lcd.print(savedData.playerName);
     lcd.print("Time:");
     lcd.print(timerDisplay.getTimeLeftInSec());
+
+    lcd.setCursor(9, 1);
+    lcd.print("Jumps:");
+    lcd.print(player.getJumps());
     
   }
 

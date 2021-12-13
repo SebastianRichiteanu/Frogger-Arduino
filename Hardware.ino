@@ -20,6 +20,12 @@ LedControl lc(dinPin, clockPin, loadPin, noDrivers);
 
 Joystick js;
 
+bool lastButtonState = LOW;
+bool buttonState = LOW;
+const byte buttonPin = A4;
+const Timer buttonDebounceDelay = 100;
+Timer lastButtonDebounceTime = updateTime;
+
 void initHardware() {
   Serial.begin(9600); // debugging purposes
 
@@ -36,6 +42,9 @@ void initHardware() {
   lc.shutdown(0, false); // turn off power saving, enables display
   lc.setIntensity(0, mappedMatrixBright); // sets brightness (0~15 possible values)
   lc.clearDisplay(0);// clear screen
+
+  // button
+  pinMode(A4, INPUT_PULLUP);
 }
 
 void updateHardware() {
@@ -44,4 +53,22 @@ void updateHardware() {
   analogWrite(lcdPinBrightness, mappedBrightness);
   byte mappedMatrixBright = map(savedData.matrixBrightness, 0, 95, 0, 15);
   lc.setIntensity(0, mappedMatrixBright);
+}
+
+bool buttonPressed() {
+  bool retVal = false;
+  bool reading = digitalRead(buttonPin);
+  if (reading != lastButtonState) {
+    lastButtonDebounceTime = updateTime;
+  }
+  if (updateTime - lastButtonDebounceTime > buttonDebounceDelay) {
+    if (reading != buttonState) {
+      buttonState = reading;
+      if (buttonState == LOW) {
+        retVal = true;
+      }
+    }
+  }
+  lastButtonState = reading;
+  return retVal;
 }

@@ -18,6 +18,7 @@ void decreaseDif();
 const Timer getStartingTimeByDif();
 const Timer getStartingTimeByDifAsSec();
 const byte getStartingLivesByDif();
+const byte getStartingJumpsByDif();
 const byte getVehicleSpeedByDif();
 const byte getNumberOfWallsByDif();
 const byte getLengthOfWallsByBif();

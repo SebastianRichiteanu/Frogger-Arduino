@@ -4,9 +4,12 @@
 #include "Map.h"
 #include "Score.h"
 #include "Timer.h"
+#include "State.h"
 
 const Timer blinkDelay = 500;
-const Timer moveDelay = 120;
+const Timer moveDelay = 100;
+const Timer jumpDelay = 150;
+const Timer deathDelay = 2000;
 
 Player player;
 
@@ -61,17 +64,32 @@ void Player::moveTo(byte newX, byte newY) {
   setPlayerCell(true);
 }
 
+void Player::jump() {
+  if (canJump && jumps && x > 1) {
+    --jumps;
+    moveTo(x - 2, y);
+  }
+}
+
 void Player::reset() {
   x = levelMap.height - 1; 
   y = 3;
   setPlayerCell(true);
+  canJump = false;
 
   actualY = y;
   lastUpdateTime = updateTime;
+  lastJumpTime = updateTime;
 }
 
 void Player::update() {
-  if (updateTime - lastMoveTime > moveDelay) {
+  if (debounce(lastJumpTime, jumpDelay)) {
+    if (js.isPressed()) {
+      jump();
+    }
+  }
+  
+  if (debounce(lastMoveTime, moveDelay)) { 
     if (js.isLeftDebounce() && !collidesLeft()) {
       moveTo(x, y - 1);
     } 
@@ -94,6 +112,7 @@ void Player::update() {
     setPlayerCell(false);
   }
 
+  canJump = true;
 }
 
 byte Player::getX() const { return x; }
@@ -101,6 +120,9 @@ byte Player::getY() const { return y; }
 
 void Player::setLives(byte newLives) { lives = newLives; }
 byte Player::getLives() const { return lives; }
+
+void Player::setJumps(byte newJumps) { jumps = newJumps; }
+byte Player::getJumps() const { return jumps; }
 
 bool Player::hasNoLivesLeft() const { return lives == 0; }
 
@@ -112,7 +134,6 @@ void Player::checkCrash() {
   if (levelMap.vehicles[x - 1].getMoving() && debounce(lastDeathTime, deathDelay)) {
     buzzer.playCrashed();
     --lives;
-    
   }
 }
 

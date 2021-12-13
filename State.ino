@@ -26,6 +26,8 @@ State& getGameState() { return *currentState; }
 
 bool checkMainState() { return currentState == &startMenuState; }
 
+bool checkPlayingState() { return currentState == &playingState; }
+
 void setGameState(GameState newState) {
   currentState -> render();
   currentState -> onEnd();
