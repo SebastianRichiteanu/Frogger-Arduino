@@ -1,7 +1,5 @@
 #pragma once
 
-#include "SavedData.h"
-
 const byte playerNameLen = 3;
 
 enum class Difficulty : byte { Easy, Medium, Hard} ;

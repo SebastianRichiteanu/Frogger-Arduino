@@ -23,5 +23,4 @@ class Vehicle {
     Vehicle();
     void update(byte x);
     bool getMoving();
-
 };

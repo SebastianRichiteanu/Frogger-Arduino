@@ -1,9 +1,5 @@
 #pragma once
 
-#include "Settings.h"
-#include "State.h"
-#include "Timer.h"
-
 class PlayingState : public State {
   bool paused, playerMoved, playerDied;
   Difficulty savedDifficulty;

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "State.h"
-
 class SaveSettingsMenuState : public State {
   byte selIndex;
 
@@ -12,7 +10,6 @@ class SaveSettingsMenuState : public State {
 
   public:
     void onBegin() override;
-    //void onEnd() override;
     void update() override;
     void render() const override;
 };

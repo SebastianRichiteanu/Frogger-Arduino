@@ -1,8 +1,5 @@
 #include "Settings.h"
 
-#include "SavedData.h"
-#include "Timer.h"
-
 Difficulty getCurrentDif() { return savedData.difficulty; }
 
 void setCurrentDif(Difficulty diff) { 

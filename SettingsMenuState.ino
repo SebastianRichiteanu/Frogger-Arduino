@@ -1,6 +1,4 @@
 #include "SettingsMenuState.h"
-#include "SaveSettingsMenuState.h"
-#include "Settings.h"
 
 const byte settingsNum = 6;
 

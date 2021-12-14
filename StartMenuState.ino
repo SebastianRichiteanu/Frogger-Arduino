@@ -1,5 +1,4 @@
 #include "StartMenuState.h"
-#include "Buzzer.h"
 
 const byte startMenuItems = 4;
 

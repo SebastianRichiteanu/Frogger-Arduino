@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Vehicle.h"
-#include "Matrix.h"
 #include "BitOps.h"
 
 class Map {
@@ -9,6 +8,8 @@ class Map {
     static const byte height = 16;
     static const byte width = 8;
     byte xOffset = height - matrix.rows;
+
+    byte level;
     static const byte blinkDelay = 250;
     bool isActive; //, bonusActive;
     Timer lastFinishBlinkUpdateTime; //, lastBonusBlinkTime;
@@ -18,7 +19,7 @@ class Map {
 
     Map();
 
-    unsigned int get(byte row) const;
+    int get(byte row) const;
     bool get(byte x, byte y) const;
 
     void setRow(byte x, bool value);
@@ -37,9 +38,13 @@ class Map {
     void moveUp();
     void moveDown();
 
+    byte getLevel() const;
+    bool isFirstLevel() const;
+    void setLevel(byte newLevel);
+    void increaseLevel();
+    
   private:
-    Bitfield<unsigned int> data[height];
-
+    Bitfield<int> data[height];
 };
 
 extern Map levelMap;

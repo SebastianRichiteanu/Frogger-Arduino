@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Hardware.h"
-#include "Time.h" // ???
 
 class State {
   public:
@@ -22,6 +21,7 @@ enum class GameState {
   Starting,
   Playing,
   GameOver,
+  NewLevel,
 };
 
 State& getGameState();

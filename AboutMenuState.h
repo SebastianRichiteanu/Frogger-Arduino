@@ -1,7 +1,6 @@
 #pragma once
 
 #include "State.h"
-#include "Timer.h"
 
 class AboutMenuState : public State {
   Timer lastScrollTime;

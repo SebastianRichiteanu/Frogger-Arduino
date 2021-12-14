@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Timer.h"
 #include "Melody.h"
 
 class Buzzer {

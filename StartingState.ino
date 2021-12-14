@@ -1,15 +1,9 @@
 #include "StartingState.h"
 
-#include "Player.h"
-//#include "MelodyPlayer.h"
-#include "Settings.h"
-
-
-const Timer startUpTime = 5000;
-const Timer scrollDelayTime = 150;
-
 void StartingState::generateInitialMap() {
   levelMap.clean();
+  levelMap.createWalls();
+  levelMap.createBonus();
 }
 
 void StartingState::onBegin() {
@@ -19,16 +13,17 @@ void StartingState::onBegin() {
   lcd.setCursor(4, 1);
   lcd.print("to start");
 
-  levelMap.clean();
-  levelMap.createWalls();
-  levelMap.createBonus();
+  generateInitialMap();
   player.reset();
+  if (levelMap.isFirstLevel()) {
+    player.setLives(getStartingLivesByDif());
+    player.setJumps(getStartingJumpsByDif());
+    timerDisplay.setTime(getStartingTimeByDif());
+  }
 }
 
 void StartingState::update() {
-  // song
   if (js.isPressedDebounce()) {
-    timerDisplay.setTime(getStartingTimeByDif());
     setGameState(GameState::Playing);
   }
 }

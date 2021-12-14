@@ -1,15 +1,9 @@
 #include "Player.h" 
 
-#include "Joystick.h"
-#include "Map.h"
-#include "Score.h"
-#include "Timer.h"
-#include "State.h"
-
 const Timer blinkDelay = 500;
+const Timer deathDelay = 2000;
 const Timer moveDelay = 100;
 const Timer jumpDelay = 150;
-const Timer deathDelay = 2000;
 
 Player player;
 
@@ -72,11 +66,8 @@ void Player::getRandomBonus() {
     case 1:
       ++jumps;
       return;
-    case 2:
-      timerDisplay.increaseTime(10000);
-      return;
     default:
-      // mby speed
+      timerDisplay.increaseTime(10000);
       return;
   }
 }
@@ -101,12 +92,12 @@ void Player::reset() {
   setPlayerCell(true);
   canJump = false;
 
-  actualY = y;
   lastUpdateTime = updateTime;
   lastJumpTime = updateTime;
 }
 
 void Player::update() {
+  
   if (debounce(lastJumpTime, jumpDelay)) {
     if (js.isPressed()) {
       jump();

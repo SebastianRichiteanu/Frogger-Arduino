@@ -1,15 +1,3 @@
-#include "State.h"
-
-#include "IntroState.h"
-#include "StartMenuState.h"
-#include "AboutMenuState.h"
-#include "HighScoreMenuState.h"
-#include "SettingsMenuState.h"
-#include "StartingState.h"
-#include "PlayingState.h"
-#include "GameOverState.h"
-#include "SaveSettingsMenuState.h"
-
 IntroState introState;
 StartMenuState startMenuState;
 AboutMenuState aboutMenuState;
@@ -19,6 +7,7 @@ StartingState startingState;
 PlayingState playingState;
 GameOverState gameOverState;
 SaveSettingsMenuState saveSettingsMenuState;
+NewLevelState newLevelState;
 
 State* currentState = &introState;
 
@@ -57,6 +46,9 @@ void setGameState(GameState newState) {
       break;
     case GameState::SaveSettingsMenu:
       currentState = &saveSettingsMenuState;
+      break;
+    case GameState::NewLevel:
+      currentState = &newLevelState;
       break;
     default:
       currentState = &startMenuState;

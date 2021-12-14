@@ -1,16 +1,13 @@
 #include "Vehicle.h"
-#include "Map.h"
-#include "Settings.h"
-#include "Player.h"
 
 Vehicle::Vehicle() {
   blinking = false;
   isMoving = false;
-  delayTime = random(5000, 10000); 
+  delayTime = random(5000, 10000); // TODO different for each dif
   lastUpdateTime = updateTime;
   lastBlinkUpdateTime = updateTime;
   if (direction) { // from right
-    y = 0;
+    y = levelMap.width - 1;
   } else { // from left
     y = levelMap.width - 1;
   }
@@ -45,6 +42,7 @@ void Vehicle::moveVehicleLeft(byte x) {
       y = 0;
     } else {
       isMoving = false;
+      // kinda broken for now
       blink(x, 0);
     }
   }

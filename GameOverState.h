@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Map.h"
 #include "Score.h"
-#include "State.h"
 
 class GameOverState : public State {
   Timer lastTime;

@@ -32,7 +32,7 @@ bool Joystick::isLeftDebounce() { return debounce(isLeft(), lastCheckedTime); }
 bool Joystick::isRightDebounce() { return debounce(isRight(), lastCheckedTime); }
 bool Joystick::isDownDebounce() { return debounce(isDown(), lastCheckedTime); }
 bool Joystick::isUpDebounce() { return debounce(isUp(), lastCheckedTime); }
-bool Joystick::isAnyDebounce() { return isLeftDebounce() || isRightDebounce() || isUpDebounce() || isDownDebounce(); }
+bool Joystick::isAnyDebounce() { return isLeftDebounce() || isRightDebounce() || isUpDebounce() || isDownDebounce() || isPressedDebounce(); }
 bool Joystick::isPressedDebounce() { return debounce(isPressed(), lastCheckedTime); }
 int Joystick::getX() const { return xValue; }
 int Joystick::getY() const { return yValue; }

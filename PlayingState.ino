@@ -1,11 +1,5 @@
 #include "PlayingState.h"
 
-#include "Map.h"
-#include "Player.h"
-#include "Score.h"
-#include "TimerDisplay.h"
-#include "Buzzer.h"
-
 static byte heartChar[] = {0b00000,
   0b01010,
   0b11111,
@@ -16,15 +10,11 @@ static byte heartChar[] = {0b00000,
   0b00000};
 
 bool PlayingState::isGameOver() const {
-  return player.hasNoLivesLeft() || timerDisplay.isFinished() || player.finishedLevel();
+  return player.hasNoLivesLeft() || timerDisplay.isFinished();
 }
 
 void PlayingState::onBegin() {
   savedDifficulty = getCurrentDif();
-
-  player.moveTo(levelMap.height - 1, 3);
-  player.setLives(getStartingLivesByDif());
-  player.setJumps(getStartingJumpsByDif());
 
   timerDisplay.pause();
 
@@ -37,12 +27,9 @@ void PlayingState::onBegin() {
 }
 
 void PlayingState::onEnd() {
-  // stop song
-
   score.addPointsForTimeLeft(timerDisplay.getTimeLeftInSec());
   score.addPointsForLivesLeft(player.getLives());
-  // score.addPointsForCollectedObj();
-
+ 
   if (score.isHighScore()) {
     score.updateHighScoreList();
   }
@@ -56,6 +43,13 @@ void PlayingState::update() {
   
   if (isGameOver()) {
     setGameState(GameState::GameOver);
+  }
+
+  if (player.finishedLevel()) {
+    if (levelMap.getLevel() == 3) {
+      setGameState(GameState::GameOver);
+    }
+    setGameState(GameState::NewLevel);
   }
   
   if (buttonPressed()) { 
@@ -82,8 +76,6 @@ void PlayingState::update() {
   if (!playerDied) {
     player.update();
   }
-
-  // move pan cam
   
   if (player.getRelativeX() < 3) {
     levelMap.moveDown();
@@ -91,8 +83,6 @@ void PlayingState::update() {
   if (player.getRelativeX() > 4) {
     levelMap.moveUp();
   }
-
-
 }
 
 void PlayingState::render() const {
@@ -105,14 +95,15 @@ void PlayingState::render() const {
     return;
   } else {
     lcd.clear();
-    lcd.createChar(0, heartChar); // do this once somewhere
+    lcd.createChar(0, heartChar); // TODO do this once somewhere
 
     lcd.setCursor(0, 0);
     lcd.print("Dif:");
     lcd.print(getCurrentDifAsChar());
     
     lcd.setCursor(6, 0);
-    lcd.print("Lvl:1");
+    lcd.print("Lvl:");
+    lcd.print(levelMap.getLevel());
 
     lcd.setCursor(12, 0);
     lcd.write((byte)0);
@@ -120,15 +111,12 @@ void PlayingState::render() const {
     lcd.print(player.getLives());
 
     lcd.setCursor(0, 1);
-   // lcd.print("Name:");
-   // lcd.print(savedData.playerName);
     lcd.print("Time:");
     lcd.print(timerDisplay.getTimeLeftInSec());
 
     lcd.setCursor(9, 1);
     lcd.print("Jumps:");
     lcd.print(player.getJumps());
-    
   }
 
   timerDisplay.update();

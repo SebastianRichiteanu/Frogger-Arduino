@@ -1,9 +1,5 @@
 #pragma once
 
-#include "Settings.h"
-#include "State.h"
-#include "SavedData.h"
-
 class SettingsMenuState : public State {
   byte currentIndex;
   byte chrIndex;

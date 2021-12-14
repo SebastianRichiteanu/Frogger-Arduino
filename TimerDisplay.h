@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Timer.h"
-
 class TimerDisplay {
-  Timer lastUpdateTime = 0;
-  Timer timeLeft = 0;
+  Timer lastUpdateTime = 0,
+        timeLeft = 0,
+        elapsedTime = 0;
   bool paused = false;
 
   public :
@@ -13,7 +12,7 @@ class TimerDisplay {
     bool isFinished() const;
     void setTime(Timer newTime);
     void increaseTime(Timer increaseTime);
-
+    Timer getElapsedTimeInSec() const;
     Timer getTimeLeft() const;
     Timer getTimeLeftInSec() const;
     void update();

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "State.h"
-
 class StartMenuState : public State {
   byte selIndex;
 

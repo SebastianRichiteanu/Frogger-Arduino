@@ -1,18 +1,14 @@
 #include "Map.h"
-#include "Hardware.h"
-#include "Matrix.h"
-#include "Score.h"
-#include "Settings.h"
-#include "TimerDisplay.h"
 
 Map levelMap;
 
 Map::Map() {
+  level = 1;
   isActive = true;
   lastFinishBlinkUpdateTime = updateTime;
 }
 
-unsigned int Map::get(byte x) const { return data[x]; }
+int Map::get(byte x) const { return data[x]; }
 bool Map::get(byte x, byte y) const { return data[x].get(width - y - 1); }
 
 void Map::setRow(byte x, bool value) { 
@@ -49,10 +45,6 @@ void Map::createBonus() {
 }
 
 void Map::updateBonus(byte x) {
-//  if (debounce(lastBonusBlinkTime, blinkDelay)) {
-//    levelMap.set(x + 1, bonus[x], bonusActive);
-//    bonusActive = !bonusActive;
-//  }
   levelMap.set(x + 1, bonus[x], true);
 }
 
@@ -115,8 +107,7 @@ void Map::moveDown() {
   }
 }
 
-//MapView
-
-//void MapView::centerOnX() { xOffset = (levelMap.width - matrix.rows) / 2; }
-
-//void MapView::moveToTop() { xOffset = levelMap.height - matrix.rows; }
+byte Map::getLevel() const { return level; }
+bool Map::isFirstLevel() const { return level == 1; }
+void Map::setLevel(byte newLevel) { level = newLevel; }
+void Map::increaseLevel() { ++level; }

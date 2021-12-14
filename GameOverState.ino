@@ -1,8 +1,8 @@
 #include "GameOverState.h"
 
-#include "Matrix.h"
 #include "TimerDisplay.h"
 #include "Player.h"
+#include "Map.h"
 
 const Timer messageDisplayDelay = 4000;
 
@@ -32,7 +32,7 @@ void GameOverState::printScore() {
   lcd.print(player.getLives());
   lcd.setCursor(2, 1);
   lcd.print("Time: ");
-  lcd.print(getStartingTimeByDifAsSec() - timerDisplay.getTimeLeftInSec());
+  lcd.print(timerDisplay.getElapsedTimeInSec() - timerDisplay.getTimeLeftInSec());
   lcd.print(" sec");
 }
 
@@ -67,6 +67,7 @@ void GameOverState::onBegin() {
 
 void GameOverState::onEnd() {
   score.reset();
+  levelMap.setLevel(1);
 }
 
 void GameOverState::update() {

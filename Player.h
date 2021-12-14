@@ -1,12 +1,9 @@
 #pragma once
 
-#include "Timer.h"
-
 class Player {
   byte x, y;
-  unsigned long actualY, actualX;  
   
-  Timer lastMoveTime, lastJumpTime, lastDeathTime, lastUpdateTime;
+  Timer lastMoveTime, lastJumpTime, lastDeathTime, lastUpdateTime, lastBoostTime;
 
   byte lives;
   byte jumps;
