@@ -12,7 +12,7 @@ class TimerDisplay {
     void unpause();
     bool isFinished() const;
     void setTime(Timer newTime);
-    // void increaseTime (mby pick something up)?
+    void increaseTime(Timer increaseTime);
 
     Timer getTimeLeft() const;
     Timer getTimeLeftInSec() const;

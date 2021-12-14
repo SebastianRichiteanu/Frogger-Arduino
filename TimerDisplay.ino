@@ -1,5 +1,4 @@
 #include "TimerDisplay.h"
-
 #include "Hardware.h"
 #include "Settings.h"
 
@@ -22,6 +21,8 @@ Timer TimerDisplay::getTimeLeft() const { return timeLeft; }
 Timer TimerDisplay::getTimeLeftInSec() const { return timeLeft / 1000; }
 
 void TimerDisplay::setTime(Timer newTime) { timeLeft = newTime; }
+
+void TimerDisplay::increaseTime(Timer increaseTime) { timeLeft += increaseTime; }
 
 void TimerDisplay::update() {
   if (!paused) {

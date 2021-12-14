@@ -21,7 +21,8 @@ const byte getStartingLivesByDif();
 const byte getStartingJumpsByDif();
 const byte getVehicleSpeedByDif();
 const byte getNumberOfWallsByDif();
-const byte getLengthOfWallsByBif();
+const byte getLengthOfWallsByDif();
+const byte getNumberOfBonusByDif();
 
 // lcd
 

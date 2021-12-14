@@ -15,7 +15,6 @@ Player player;
 
 void Player::setPlayerCell(bool value) { levelMap.set(x, y, value); }
 
-
 bool Player::collidesLeft() const { 
   short currentWall = levelMap.walls[x - 1];
   if (currentWall) {
@@ -55,6 +54,31 @@ bool Player::collidesDown() const {
     }
   }
   return x == 0; 
+}
+
+void Player::collectBonus() {
+  if (y > 0 && y == levelMap.bonus[x - 1]) {
+     levelMap.bonus[x - 1] = 0;
+     getRandomBonus();
+     buzzer.playBonus();
+  }
+}
+
+void Player::getRandomBonus() {
+  switch (random(0, 3)) {
+    case 0:
+      ++lives;
+      return;
+    case 1:
+      ++jumps;
+      return;
+    case 2:
+      timerDisplay.increaseTime(10000);
+      return;
+    default:
+      // mby speed
+      return;
+  }
 }
 
 void Player::moveTo(byte newX, byte newY) {
@@ -113,6 +137,7 @@ void Player::update() {
   }
 
   canJump = true;
+  collectBonus();
 }
 
 byte Player::getX() const { return x; }

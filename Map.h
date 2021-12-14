@@ -10,9 +10,10 @@ class Map {
     static const byte width = 8;
     byte xOffset = height - matrix.rows;
     static const byte blinkDelay = 250;
-    bool isActive;
-    Timer lastFinishBlinkUpdateTime;
+    bool isActive; //, bonusActive;
+    Timer lastFinishBlinkUpdateTime; //, lastBonusBlinkTime;
     Vehicle vehicles[height];
+    byte bonus[height]; // if 0 no bonus, if > 0 then bonus point at matrix[x][bonus[x]]
     short walls[height]; // if 0 no wall, if > 0 then length 
 
     Map();
@@ -25,6 +26,8 @@ class Map {
     bool hasSpaceLeft();
     void createWalls();
     void updateWalls(byte x);
+    void createBonus();
+    void updateBonus(byte x);
 
     void render() const;
     void clean();
@@ -36,9 +39,7 @@ class Map {
 
   private:
     Bitfield<unsigned int> data[height];
-    //bool data[width][height];
 
-    // byte prevX, prevY, prevLength;
 };
 
 extern Map levelMap;

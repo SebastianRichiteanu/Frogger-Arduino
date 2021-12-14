@@ -21,6 +21,7 @@ void StartingState::onBegin() {
 
   levelMap.clean();
   levelMap.createWalls();
+  levelMap.createBonus();
   player.reset();
 }
 

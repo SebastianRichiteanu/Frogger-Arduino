@@ -102,7 +102,7 @@ const byte getNumberOfWallsByDif() {
   }
 }
 
-const byte getLengthOfWallsByBif() {
+const byte getLengthOfWallsByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
       return random(2, 5);
@@ -110,6 +110,17 @@ const byte getLengthOfWallsByBif() {
       return random(3, 6);
     case Difficulty::Hard:
       return random(4, 7);
+  }
+}
+
+const byte getNumberOfBonusByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return random(2, 4);
+    case Difficulty::Medium:
+      return random(1, 3);
+    case Difficulty::Hard:
+      return random(0, 2);
   }
 }
 

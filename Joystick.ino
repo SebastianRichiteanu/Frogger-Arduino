@@ -19,7 +19,6 @@ Joystick::Joystick() {
 
 void Joystick::read() {
   buttonState = digitalRead(pinSW);
-
   xValue = analogRead(pinJoyX);
   yValue = analogRead(pinJoyY);
 }

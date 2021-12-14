@@ -17,6 +17,10 @@ class Player {
   bool collidesRight() const;
   bool collidesUp() const;
   bool collidesDown() const;
+  
+  void collectBonus();
+
+  void getRandomBonus();
 
   public:
     void reset();

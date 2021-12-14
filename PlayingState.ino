@@ -22,14 +22,6 @@ bool PlayingState::isGameOver() const {
 void PlayingState::onBegin() {
   savedDifficulty = getCurrentDif();
 
-//  lcd.clear();
-//  lcd.setCursor(1, 0);
-//  lcd.print("Use JS to move.");
-//  lcd.setCursor(0, 1);
-//  lcd.print("Press for pause.");
-
-  // start melody
-
   player.moveTo(levelMap.height - 1, 3);
   player.setLives(getStartingLivesByDif());
   player.setJumps(getStartingJumpsByDif());
@@ -61,12 +53,18 @@ void PlayingState::onEnd() {
 
 void PlayingState::update() {
   player.checkCrash();
+  
   if (isGameOver()) {
     setGameState(GameState::GameOver);
   }
   
-  if (buttonPressed()) { //js.isPressedDebounce()) {
+  if (buttonPressed()) { 
     paused = !paused;
+    if (paused) {
+      timerDisplay.pause();
+    } else {
+      timerDisplay.unpause();
+    }
   }
 
   if (paused) {
@@ -102,7 +100,7 @@ void PlayingState::render() const {
     lcd.clear();
     lcd.setCursor(2, 0);
     lcd.print("Game paused");
-    lcd.setCursor(3, 1);
+    lcd.setCursor(2, 1);
     lcd.print("Press Button");
     return;
   } else {

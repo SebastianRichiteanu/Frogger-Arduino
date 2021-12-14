@@ -13,14 +13,12 @@ class Buzzer {
     int currentNote = 0;
     Timer nextTimerNote = 0;
    
-
     const uint16_t* frequencies;
     const uint8_t* durations;
     int noteCount = 0;
 
   public:
 
-    
     void playTone(int frequency, Timer duration);
     void setMelody(const Melody& melody);
 
@@ -32,4 +30,5 @@ class Buzzer {
     bool isPlaying() const;
 
     void playCrashed() const;
+    void playBonus() const;
 };

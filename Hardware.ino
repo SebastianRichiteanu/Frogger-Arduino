@@ -45,6 +45,9 @@ void initHardware() {
 
   // button
   pinMode(A4, INPUT_PULLUP);
+
+  // random seed on pin 0 because it s not connected and will generate noise
+  randomSeed(analogRead(0));
 }
 
 void updateHardware() {
