@@ -27,12 +27,7 @@ void PlayingState::onBegin() {
 }
 
 void PlayingState::onEnd() {
-  score.addPointsForTimeLeft(timerDisplay.getTimeLeftInSec());
-  score.addPointsForLivesLeft(player.getLives());
- 
-  if (score.isHighScore()) {
-    score.updateHighScoreList();
-  }
+
   
   player.reset();
 }
@@ -46,9 +41,7 @@ void PlayingState::update() {
   }
 
   if (player.finishedLevel()) {
-    if (levelMap.getLevel() == 3) {
-      setGameState(GameState::GameOver);
-    }
+    buzzer.playFinishedLevel();
     setGameState(GameState::NewLevel);
   }
   

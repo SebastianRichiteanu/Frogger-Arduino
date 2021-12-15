@@ -2,7 +2,7 @@
 
 class Vehicle {
   bool direction, isMoving, visibility, blinking;
-  byte y, speed, length;
+  byte y, length;
   Timer delayTime, lastUpdateTime, lastBlinkUpdateTime;
 
   static const int blinkDelay = 300;

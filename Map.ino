@@ -22,7 +22,10 @@ void Map::createWalls() {
   byte lastRandom = 0;
   for (byte i = 0; i < getNumberOfWallsByDif(); ++i) {
     byte randomX = random(2, 4); // distance between walls
-    short randomLen = getLengthOfWallsByDif();
+    short randomLen = getLengthOfWallsByDif() * getLengthOfWallsByLvl();
+    if (randomLen > 7) {
+      randomLen = 7;
+    }
     short randomDir = random(0, 2); // direction
     if (randomDir) {
       randomLen = -randomLen;

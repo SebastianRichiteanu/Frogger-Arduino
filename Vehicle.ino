@@ -3,7 +3,7 @@
 Vehicle::Vehicle() {
   blinking = false;
   isMoving = false;
-  delayTime = random(5000, 10000); // TODO different for each dif
+  delayTime = random(5000, 10000) * vehicleDelayByDif() * vehicleDelayByLevel();
   lastUpdateTime = updateTime;
   lastBlinkUpdateTime = updateTime;
   if (direction) { // from right
@@ -11,11 +11,12 @@ Vehicle::Vehicle() {
   } else { // from left
     y = levelMap.width - 1;
   }
-  speed = random(0, 4) + getVehicleSpeedByDif();
   direction = random(0, 2);
-  length = random(2, 5);
+  length = random(2, 5) * vehicleLenByDif() * vehicleLenByLevel();
   visibility = false;
 }
+
+
 
 bool Vehicle::getMoving() { return isMoving; }
 

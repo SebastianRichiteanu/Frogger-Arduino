@@ -30,4 +30,5 @@ class Buzzer {
 
     void playCrashed() const;
     void playBonus() const;
+    void playFinishedLevel() const;
 };

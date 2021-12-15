@@ -63,9 +63,13 @@ void Buzzer::update() {
 }
 
 void Buzzer::playCrashed() const {
-  buzzer.playTone(75, 300);
+  playTone(75, 300);
 }
 
 void Buzzer::playBonus() const {
-  buzzer.playTone(1568, 200);
+  playTone(2512, 200);
+}
+
+void Buzzer::playFinishedLevel() const {
+  playTone(1568, 200);
 }

@@ -58,11 +58,11 @@ const Timer getStartingTimeByDifAsSec() {
 const byte getStartingLivesByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 3;
+      return 4;
     case Difficulty::Medium:
-      return 2;
+      return 3;
     case Difficulty::Hard:
-      return 1;
+      return 2;
   }
 }
 
@@ -102,11 +102,23 @@ const byte getNumberOfWallsByDif() {
 const byte getLengthOfWallsByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return random(2, 5);
+      return random(2, 4);
     case Difficulty::Medium:
-      return random(3, 6);
+      return random(2, 5);
     case Difficulty::Hard:
-      return random(4, 7);
+      return random(3, 5);
+  }
+}
+
+const float getLengthOfWallsByLvl() {
+  byte currentLvl = levelMap.getLevel();
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 1 + currentLvl * 0.3;
+    case Difficulty::Medium:
+      return 1 + currentLvl * 0.25;
+    case Difficulty::Hard:
+      return 1 + currentLvl * 0.2;
   }
 }
 
@@ -120,6 +132,63 @@ const byte getNumberOfBonusByDif() {
       return random(0, 2);
   }
 }
+
+const byte getScoreMultiplierByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 30;
+    case Difficulty::Medium:
+      return 40;
+    case Difficulty::Hard:
+      return 50;
+  }
+}
+
+const float vehicleDelayByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 1;
+    case Difficulty::Medium:
+      return 0.9;
+    case Difficulty::Hard:
+      return 0.8;
+  }
+}
+const float vehicleDelayByLevel() {
+  byte currentLvl = levelMap.getLevel();
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 1 - currentLvl * 0.01;
+    case Difficulty::Medium:
+      return 1 - currentLvl * 0.025;
+    case Difficulty::Hard:
+      return 1 - currentLvl * 0.05;
+  }
+}
+
+const float vehicleLenByDif() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 1;
+    case Difficulty::Medium:
+      return 1.1;
+    case Difficulty::Hard:
+      return 1.2;
+  }
+}
+
+const float vehicleLenByLevel() {
+  byte currentLvl = levelMap.getLevel();
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 1 + currentLvl * 0.01;
+    case Difficulty::Medium:
+      return 1 + currentLvl * 0.025;
+    case Difficulty::Hard:
+      return 1 + currentLvl * 0.05;
+  }
+}
+
 
 // lcd
 

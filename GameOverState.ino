@@ -60,6 +60,14 @@ void GameOverState::printReturnToMenu() {
 }
 
 void GameOverState::onBegin() {
+  score.addPointsForLevel(levelMap.getLevel() - 1);
+  score.addPointsForTimeLeft(timerDisplay.getTimeLeftInSec());
+  score.addPointsForLivesLeft(player.getLives());
+ 
+  if (score.isHighScore()) {
+    score.updateHighScoreList();
+  }
+
   matrix.clear();
   lastTime = updateTime;
   printCongrats();

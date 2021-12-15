@@ -20,7 +20,14 @@ const byte getStartingJumpsByDif();
 const byte getVehicleSpeedByDif();
 const byte getNumberOfWallsByDif();
 const byte getLengthOfWallsByDif();
+const float getLengthOfWallsByLvl();
 const byte getNumberOfBonusByDif();
+const byte getScoreMultiplierByDif();
+const float vehicleDelayByDif();
+const float vehicleDelayByLevel();
+const float vehicleLenByDif();
+const float vehicleLenByLevel();
+
 
 // lcd
 

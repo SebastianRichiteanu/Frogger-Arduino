@@ -7,17 +7,16 @@ void Score::setCurrentScore(unsigned newScore) { current = newScore; }
 unsigned Score::getCurrentScore() const { return current; }
 void Score::reset() { current = 0; }
 
-
-void Score::addPointsForTimeLeft(byte timeLeft) {
-  current += timeLeft;
+void Score::addPointsForLevel(byte level) {
+  current += level * getScoreMultiplierByDif();
 }
 
 void Score::addPointsForLivesLeft(byte livesLeft) {
-  current += 50 * livesLeft; // need tweaking
+  current += livesLeft * getScoreMultiplierByDif();
 }
 
-void Score::addPointsForCollectedObj(byte collectedObj) {
-  current += 5 * collectedObj; // need tweaking
+void Score::addPointsForTimeLeft(byte timeLeft) {
+  current += timeLeft * getScoreMultiplierByDif() / 10;
 }
 
 bool Score::isHighScore() const {
