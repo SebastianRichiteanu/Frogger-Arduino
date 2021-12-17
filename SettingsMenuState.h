@@ -14,6 +14,7 @@ class SettingsMenuState : public State {
   void printLcdBrightness();
   void printMatrixBright();
   void printMusicState();
+  void printSoundState();
   void printField(byte);
   void printFields(byte);
   void changeToPrevChar();

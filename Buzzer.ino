@@ -3,7 +3,9 @@
 Buzzer buzzer;
 
 void Buzzer::playTone(int frequency, Timer duration) {
-  tone(buzzerPin, frequency, duration);
+  if (savedData.soundState) {
+    tone(buzzerPin, frequency, duration);
+  }
 }
 
 bool Buzzer::isPlaying () const { return playing; }

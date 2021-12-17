@@ -15,6 +15,7 @@ struct SavedData {
   byte lcdContrast;
   byte matrixBrightness;
   bool musicState;
+  bool soundState;
   Difficulty difficulty;
   Highscore highscores[maxHighScores];
 }savedData;

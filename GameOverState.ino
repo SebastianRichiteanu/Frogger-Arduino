@@ -24,16 +24,19 @@ void GameOverState::printScore() {
   printingScore = true;
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Score: ");
-  lcd.print(score.getCurrentScore());
-  lcd.setCursor(13, 0);
+  lcd.print("Name: ");
+  lcd.print(savedData.playerName);
+  lcd.setCursor(12, 0);
   lcd.write((byte)0);
   lcd.print(":");
   lcd.print(player.getLives());
-  lcd.setCursor(2, 1);
+  lcd.setCursor(0, 1);
   lcd.print("Time: ");
   lcd.print(timerDisplay.getElapsedTimeInSec() - timerDisplay.getTimeLeftInSec());
-  lcd.print(" sec");
+  lcd.print(" s");
+  lcd.setCursor(12, 1);
+  lcd.print("J:");
+  lcd.print(player.getJumps());
 }
 
 void GameOverState::printHighscore() {

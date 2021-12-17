@@ -1,6 +1,6 @@
 #include "SettingsMenuState.h"
 
-const byte settingsNum = 6;
+const byte settingsNum = 7;
 
 const Timer arrowBlinkDelay = 1000;
 const Timer chrBlinkDelay = 500;
@@ -87,6 +87,23 @@ void SettingsMenuState::printMusicState() {
   }
 }
 
+void SettingsMenuState::printSoundState() {
+  lcd.print("Sound:");
+  if (isEditing && currentIndex == 6) {
+    lcd.print("{");
+  } else {
+    lcd.print(" ");
+  }
+  if (savedData.soundState) {
+    lcd.print("ON");
+  } else {
+    lcd.print("OFF");
+  }
+  if (isEditing && currentIndex == 6) {
+    lcd.print("}");
+  }
+}
+
 void SettingsMenuState::printField(byte index) {
   if (index == 0) {
     printNameField();
@@ -100,6 +117,8 @@ void SettingsMenuState::printField(byte index) {
     printMatrixBright();
   } else if (index == 5) {
     printMusicState();
+  } else if (index == 6) {
+    printSoundState();
   }
 }
 
@@ -138,6 +157,7 @@ void SettingsMenuState::copySaveData() {
   copySavedData.matrixBrightness = savedData.matrixBrightness;
   copySavedData.difficulty = savedData.difficulty;
   copySavedData.musicState = savedData.musicState;
+  copySavedData.soundState = savedData.soundState;
 }
 
 void SettingsMenuState::onBegin() {
@@ -145,7 +165,7 @@ void SettingsMenuState::onBegin() {
   currentIndex = 0;
   isEditing = false;
   printFields(currentIndex);
-  matrix.fill();
+  matrix.hammerEffect();
 }
 
 void SettingsMenuState::update() {
@@ -231,6 +251,11 @@ void SettingsMenuState::update() {
     } else if (currentIndex == 5) {
       if (js.isLeftDebounce() || js.isRightDebounce()) {
         changeMusicState();
+        printFields(currentIndex);
+      } 
+    } else if (currentIndex == 6) {
+      if (js.isLeftDebounce() || js.isRightDebounce()) {
+        changeSoundState();
         printFields(currentIndex);
       }
     }

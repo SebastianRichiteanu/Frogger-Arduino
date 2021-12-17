@@ -34,9 +34,9 @@ void initHardware() {
   pinMode(lcdPinContrast, OUTPUT);
   pinMode(lcdPinBrightness, OUTPUT);
   analogWrite(lcdPinContrast, savedData.lcdContrast);
-  byte mappedLcdBrightness = map(savedData.lcdBrightness, 0, 95, 0, 255);
+  byte mappedLcdBrightness = map(savedData.lcdBrightness, 0, 95, 100, 255);
   analogWrite(lcdPinBrightness, mappedLcdBrightness);
-  byte mappedMatrixBright = map(savedData.matrixBrightness, 0, 95, 0, 15);
+  byte mappedMatrixBright = map(savedData.matrixBrightness, 0, 95, 5, 15);
 
 
   lc.shutdown(0, false); // turn off power saving, enables display
@@ -52,9 +52,9 @@ void initHardware() {
 
 void updateHardware() {
   analogWrite(lcdPinContrast, savedData.lcdContrast);
-  byte mappedBrightness = map(savedData.lcdBrightness, 0, 95, 0, 255);
+  byte mappedBrightness = map(savedData.lcdBrightness, 0, 95, 100, 255);
   analogWrite(lcdPinBrightness, mappedBrightness);
-  byte mappedMatrixBright = map(savedData.matrixBrightness, 0, 95, 0, 15);
+  byte mappedMatrixBright = map(savedData.matrixBrightness, 0, 95, 5, 15);
   lc.setIntensity(0, mappedMatrixBright);
 }
 

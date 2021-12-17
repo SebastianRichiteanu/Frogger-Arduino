@@ -25,7 +25,10 @@ void HighScoreMenuState::printScores() {
   }
 }
 
-void HighScoreMenuState::onBegin() { printScores(); }
+void HighScoreMenuState::onBegin() { 
+  matrix.cupEffect();
+  printScores(); 
+}
 
 void HighScoreMenuState::update() {
   if (js.isDownDebounce()) {

@@ -6,9 +6,11 @@ class Matrix {
 
     void setRow(byte row, byte rowValue);
     void set(byte row, byte column, byte value);
+    void setEffect(byte matr[]);
 
-    void snowingEffect();
-    void randomEffect();
+    void hammerEffect();
+    void cupEffect();
+    void heartEffect();
     void happyFace();
     void sadFace();
 

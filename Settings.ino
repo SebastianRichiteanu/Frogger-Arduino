@@ -223,6 +223,9 @@ void changeMusicState() {
   savedData.musicState = !savedData.musicState;
 }
 
+void changeSoundState() {
+  savedData.soundState = !savedData.soundState;
+}
 // matrix
 
 byte getCurrentMatrixBright() { return savedData.matrixBrightness; }

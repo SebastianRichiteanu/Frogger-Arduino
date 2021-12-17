@@ -32,6 +32,7 @@ void SaveSettingsMenuState::resetSettings() {
   savedData.matrixBrightness = copySavedData.matrixBrightness;
   savedData.difficulty = copySavedData.difficulty;
   savedData.musicState = copySavedData.musicState;
+  savedData.soundState = copySavedData.soundState;
 }
 
 void SaveSettingsMenuState::update() {

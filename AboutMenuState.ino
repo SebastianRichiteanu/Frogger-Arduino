@@ -46,7 +46,7 @@ void AboutMenuState::printCurrentLines() {
 
 void AboutMenuState::onBegin() {
   scrollToLine(0);
-  matrix.happyFace();
+  matrix.heartEffect();
   buzzer.setMelody(takeOnMeMelody);
   buzzer.play();
 }
