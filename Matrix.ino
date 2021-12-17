@@ -4,12 +4,12 @@ const byte addrMatrix = 0;
 
 Matrix matrix;
 
-void Matrix::setRow(byte row, byte rowValue) {
-  lc.setRow(addrMatrix, row, rowValue);
-}
-
 void Matrix::set(byte row, byte column, byte value) {
   lc.setLed(addrMatrix, row, column, value);
+}
+
+void Matrix::setRow(byte row, byte rowValue) {
+  lc.setRow(addrMatrix, row, rowValue);
 }
 
 void Matrix::clear() { lc.clearDisplay(addrMatrix); }
@@ -27,7 +27,7 @@ void Matrix::setEffect(byte matr[]) {
 }
 
 void Matrix::cupEffect() {
-  byte cup[8] = {0x42, 0x7E, 0x7E, 0x7E, 0x3C, 0x18, 0x18, 0x3C} ;
+  byte cup[8] = {0x42, 0x7E, 0x7E, 0x7E, 0x3C, 0x18, 0x18, 0x3C};
   setEffect(cup);
 }
 

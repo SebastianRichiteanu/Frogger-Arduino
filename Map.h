@@ -5,18 +5,15 @@
 
 class Map {
   public:
-    static const byte height = 16;
-    static const byte width = 8;
-    byte xOffset = height - matrix.rows;
-
-    byte level;
-    static const byte removeStartLevel = 5;
+    static const byte height = 16, width = 8;
+   
+    static const byte removeStartLevel = 5, blinkDelay = 250;
     static const Timer removeDelay = 5000;
-    static const byte blinkDelay = 250;
+
     bool isActive;
+    byte level, xOffset = height - matrix.rows, bonus[height];;
     Timer lastFinishBlinkUpdateTime, lastBonusRemoveTime;
     Vehicle vehicles[height];
-    byte bonus[height]; // if 0 no bonus, if > 0 then bonus point at matrix[x][bonus[x]]
     short walls[height]; // if 0 no wall, if > 0 then length 
 
     Map();
@@ -24,19 +21,19 @@ class Map {
     int get(byte row) const;
     bool get(byte x, byte y) const;
 
-    void setRow(byte x, bool value);
     void set(byte x, byte y, bool value);
-    bool hasSpaceLeft();
+    void setRow(byte x, bool value);
+    
     void createWalls();
-    void updateWalls(byte x);
     void createBonus();
-    void removeBonus(byte x);
     void updateBonus(byte x);
+    void removeBonus(byte x);
+    void updateWalls(byte x);
 
-    void render() const;
-    void clean();
     void update();
-
+    void clean();
+    void render() const;
+    
     byte getOffset() const;
     void moveUp();
     void moveDown();

@@ -4,8 +4,7 @@
 
 class AboutMenuState : public State {
   Timer lastScrollTime;
-  byte topLineIndex;
-  byte currentScroll, maxScroll;
+  byte topLineIndex, currentScroll, maxScroll;
   bool scrollingLeft;
 
   void addScrollDelayAtStart();

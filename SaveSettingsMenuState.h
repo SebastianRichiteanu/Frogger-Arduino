@@ -5,7 +5,6 @@ class SaveSettingsMenuState : public State {
 
   void printMenuLabels() const;
   void printSelectionArrow() const;
-  void deleteSelectionArrow() const;
   void resetSettings();
 
   public:

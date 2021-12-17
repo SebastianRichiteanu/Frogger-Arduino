@@ -10,8 +10,6 @@ void Buzzer::playTone(int frequency, Timer duration) {
   }
 }
 
-bool Buzzer::isPlaying () const { return playing; }
-
 void Buzzer::setMelody(const Melody &melody) {
   frequencies = melody.frequencies;
   durations = melody.durations;
@@ -32,13 +30,6 @@ void Buzzer::stop() {
   playing = false;
   currentNote = 0;
   nextTimerNote = updateTime;
-}
-
-void Buzzer::updateOrRestart() {
-  update();
-  if (!isPlaying()) {
-    buzzer.play();
-  }
 }
 
 void Buzzer::update() {
@@ -63,8 +54,16 @@ void Buzzer::update() {
     playing = false;
     noTone(buzzerPin);
   }
-     
 }
+
+void Buzzer::updateOrRestart() {
+  update();
+  if (!isPlaying()) {
+    buzzer.play();
+  }
+}
+
+bool Buzzer::isPlaying () const { return playing; }
 
 void Buzzer::playCrashed() const {
   playTone(75, 300);

@@ -1,11 +1,21 @@
 #include "SettingsMenuState.h"
 
-const byte settingsNum = 7;
+const byte settingsNum = 8;
 
-const Timer arrowBlinkDelay = 1000;
-const Timer chrBlinkDelay = 500;
+const int arrowBlinkDelay = 1000;
+const int chrBlinkDelay = 500;
 
 const char nameFieldString[] = "Name: ";
+
+void SettingsMenuState::copySaveData() {
+  strcpy(copySavedData.playerName, savedData.playerName);
+  copySavedData.lcdBrightness = savedData.lcdBrightness;
+  copySavedData.lcdContrast = savedData.lcdContrast;
+  copySavedData.matrixBrightness = savedData.matrixBrightness;
+  copySavedData.difficulty = savedData.difficulty;
+  copySavedData.musicState = savedData.musicState;
+  copySavedData.soundState = savedData.soundState;
+}
 
 void SettingsMenuState::clearSelArrow() {
   lcd.setCursor(0, 0);
@@ -104,6 +114,16 @@ void SettingsMenuState::printSoundState() {
   }
 }
 
+void SettingsMenuState::printResetEEPROM() {
+  if (isEditing && currentIndex == 7) {
+    lcd.print("{");
+  }
+  lcd.print("Reset EEPROM");
+  if (isEditing && currentIndex == 7) {
+    lcd.print("}");
+  }
+}
+
 void SettingsMenuState::printField(byte index) {
   if (index == 0) {
     printNameField();
@@ -119,6 +139,8 @@ void SettingsMenuState::printField(byte index) {
     printMusicState();
   } else if (index == 6) {
     printSoundState();
+  } else if (index == 7) {
+    printResetEEPROM();
   }
 }
 
@@ -148,16 +170,6 @@ void SettingsMenuState::changeToNextChar() {
   } else {
     ch = 'a' + (ch - 'a' + 1) % 26;
   }
-}
-
-void SettingsMenuState::copySaveData() {
-  strcpy(copySavedData.playerName, savedData.playerName);
-  copySavedData.lcdBrightness = savedData.lcdBrightness;
-  copySavedData.lcdContrast = savedData.lcdContrast;
-  copySavedData.matrixBrightness = savedData.matrixBrightness;
-  copySavedData.difficulty = savedData.difficulty;
-  copySavedData.musicState = savedData.musicState;
-  copySavedData.soundState = savedData.soundState;
 }
 
 void SettingsMenuState::onBegin() {
@@ -258,8 +270,12 @@ void SettingsMenuState::update() {
         changeSoundState();
         printFields(currentIndex);
       }
+    } else if (currentIndex == 7) {
+      if (js.isLeftDebounce() || js.isRightDebounce()) {
+        resetSavedData();
+        printFields(currentIndex);
+      }
     }
-    
   } else {
     printSelArrow();
     if (js.isDownDebounce()) {

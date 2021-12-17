@@ -27,8 +27,6 @@ void PlayingState::onBegin() {
 }
 
 void PlayingState::onEnd() {
-
-  
   player.reset();
 }
 

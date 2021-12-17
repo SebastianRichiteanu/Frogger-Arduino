@@ -10,14 +10,16 @@ Map::Map() {
 }
 
 int Map::get(byte x) const { return data[x]; }
+
 bool Map::get(byte x, byte y) const { return data[x].get(width - y - 1); }
+
+void Map::set(byte x, byte y, bool value) { data[x].set(width - y - 1, value); }
 
 void Map::setRow(byte x, bool value) { 
   for (byte y = 0; y < width; ++y) {
     data[x].set(width - y - 1, value);
   }
 }
-void Map::set(byte x, byte y, bool value) { data[x].set(width - y - 1, value); }
 
 void Map::createWalls() {
   byte lastRandom = 0;
@@ -69,7 +71,6 @@ void Map::updateWalls(byte x) {
     levelMap.set(x + 1, offset + i, true);
   }
 }
-
 
 void Map::update() {
   if (debounce(lastFinishBlinkUpdateTime, blinkDelay) && xOffset == 0) {

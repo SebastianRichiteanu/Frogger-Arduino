@@ -15,7 +15,13 @@ Vehicle::Vehicle() {
   visibility = false;
 }
 
-
+void Vehicle::update(byte x) {
+  setVehicleCells(x);
+  moveVehicle();
+  if (isMoving) {
+    increaseLength(x);
+  }
+}
 
 bool Vehicle::getMoving() const { return isMoving; }
 
@@ -24,6 +30,14 @@ byte Vehicle::getY() const { return y; }
 void Vehicle::increaseLength(byte x) {
   if (length < maxLength) {
     ++length;
+  }
+}
+
+void Vehicle::moveVehicle() {
+  if (direction) {
+    moveVehicleRight();
+  } else {
+    moveVehicleLeft();
   }
 }
 
@@ -57,6 +71,13 @@ void Vehicle::moveVehicleRight() {
   }
 }
 
+void Vehicle::setVehicleCells(byte x) {
+  if (direction) {
+    setVehicleCellsRight(x);
+  } else {
+    setVehicleCellsLeft(x);
+  }
+}
 
 void Vehicle::setVehicleCellsLeft(byte x) {
   for (byte i = 0; i < y; ++i) {
@@ -95,29 +116,5 @@ void Vehicle::setVehicleCellsRight(byte x) {
     for (byte i = 0; i < length && y - i >= 0; ++i) {
       levelMap.set(x, y - i, true);
     }
-  }
-}
-
-void Vehicle::setVehicleCells(byte x) {
-  if (direction) {
-    setVehicleCellsRight(x);
-  } else {
-    setVehicleCellsLeft(x);
-  }
-}
-
-void Vehicle::moveVehicle() {
-  if (direction) {
-    moveVehicleRight();
-  } else {
-    moveVehicleLeft();
-  }
-}
-
-void Vehicle::update(byte x) {
-  setVehicleCells(x);
-  moveVehicle();
-  if (isMoving) {
-    increaseLength(x);
   }
 }

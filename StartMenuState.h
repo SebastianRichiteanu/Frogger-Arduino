@@ -11,5 +11,4 @@ class StartMenuState : public State {
     void onBegin() override;
     void onEnd() override;
     void update() override;
-    //void render() const override;
 };

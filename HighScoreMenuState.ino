@@ -1,14 +1,18 @@
 #include "HighScoreMenuState.h"
 
 void HighScoreMenuState::printScore(byte index) {
-  // if i don t do this the string will not be null-terminated
+  // if i don't do this the string will not be null-terminated
   const Highscore& score = savedData.highscores[index];
   char name[4] = {};
   strncpy(name, score.name, playerNameLen);
   
   lcd.print(index+1); // idented at 0
   lcd.print(". ");
-  lcd.print(name);
+  if (strlen(name)) {
+    lcd.print(name);
+  } else {
+    lcd.print("NaN");
+  }
   lcd.print(" ");
   lcd.print(score.score);
 }

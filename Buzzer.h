@@ -6,15 +6,12 @@ class Buzzer {
   private:
     const static int buzzerPin = 5;
     
-    Timer baseDuration;
-  
     bool playing = 0;
-    int currentNote = 0;
-    Timer nextTimerNote = 0;
+    int currentNote = 0, noteCount = 0;
+    Timer baseDuration, nextTimerNote = 0;
    
     const uint16_t* frequencies;
     const uint8_t* durations;
-    int noteCount = 0;
 
   public:
 

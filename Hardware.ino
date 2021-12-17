@@ -1,6 +1,6 @@
 #include "Hardware.h"
 
-//LCD
+// LCD
 const byte RS = 7;
 const byte enable = 13;
 const byte d4 = A5;
@@ -11,15 +11,17 @@ const byte lcdPinContrast = 9;
 const byte lcdPinBrightness = 6; // PWM
 LiquidCrystal lcd(RS, enable, d4, d5, d6, d7);
 
-
+// matrix
 const byte dinPin = 12;
 const byte clockPin = 11;
 const byte loadPin = 10;
 const byte noDrivers = 1;
 LedControl lc(dinPin, clockPin, loadPin, noDrivers);
 
+// JS
 Joystick js;
 
+// button
 bool lastButtonState = LOW;
 bool buttonState = LOW;
 const byte buttonPin = A4;
@@ -33,18 +35,17 @@ void initHardware() {
 
   pinMode(lcdPinContrast, OUTPUT);
   pinMode(lcdPinBrightness, OUTPUT);
+  // button
+  pinMode(A4, INPUT_PULLUP);
+  
   analogWrite(lcdPinContrast, savedData.lcdContrast);
   byte mappedLcdBrightness = map(savedData.lcdBrightness, 0, 95, 100, 255);
   analogWrite(lcdPinBrightness, mappedLcdBrightness);
   byte mappedMatrixBright = map(savedData.matrixBrightness, 0, 95, 5, 15);
 
-
   lc.shutdown(0, false); // turn off power saving, enables display
   lc.setIntensity(0, mappedMatrixBright); // sets brightness (0~15 possible values)
   lc.clearDisplay(0);// clear screen
-
-  // button
-  pinMode(A4, INPUT_PULLUP);
 
   // random seed on pin 0 because it s not connected and will generate noise
   randomSeed(analogRead(0));

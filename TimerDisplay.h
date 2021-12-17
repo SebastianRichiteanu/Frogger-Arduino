@@ -16,7 +16,6 @@ class TimerDisplay {
     Timer getTimeLeft() const;
     Timer getTimeLeftInSec() const;
     void update();
-
 };
 
 extern TimerDisplay timerDisplay;

@@ -1,13 +1,10 @@
 #pragma once
 
 class Player {
-  byte x, y;
-  
-  Timer lastMoveTime, lastJumpTime, lastDeathTime, lastUpdateTime, lastBoostTime;
-
-  byte lives;
-  byte jumps;
+  byte x, y, lives, jumps;
   bool canJump;
+  Timer lastMoveTime, lastJumpTime, lastDeathTime, lastUpdateTime, lastBoostTime;
+  
   void setPlayerCell(bool value);
 
   bool collidesLeft() const;
@@ -16,32 +13,26 @@ class Player {
   bool collidesDown() const;
   
   void collectBonus();
-
   void getRandomBonus();
 
   public:
+    void moveTo(byte newX, byte newY);
+    void jump();
+    
     void reset();
     void update();
 
     byte getX() const;
-    byte getY() const;
-
-    unsigned long getActualHeight() const;
-
     byte getRelativeX() const;
-
-    void moveTo(byte newX, byte newY);
-    void jump();
-
+    byte getY() const;
     void setLives(byte newLives);
     byte getLives() const;
     void setJumps(byte newJumps);
     byte getJumps() const;
     bool hasNoLivesLeft() const;
     bool finishedLevel() const;
-    void checkCrash();
-
     bool isPlayer(byte X, byte Y) const;
+    void checkCrash();
 };
 
 extern Player player;

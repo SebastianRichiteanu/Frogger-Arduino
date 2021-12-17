@@ -12,3 +12,4 @@ extern Buzzer buzzer;
 
 void initHardware();
 void updateHardware();
+bool buttonPressed();

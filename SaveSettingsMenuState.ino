@@ -3,8 +3,6 @@
 
 const byte saveSettingsMenuItems = 2;
 
-void SaveSettingsMenuState::onBegin() { selIndex = 0; }
-
 void SaveSettingsMenuState::printMenuLabels() const {
   lcd.setCursor(1, 0);
   lcd.print("Save Settings?");
@@ -34,6 +32,8 @@ void SaveSettingsMenuState::resetSettings() {
   savedData.musicState = copySavedData.musicState;
   savedData.soundState = copySavedData.soundState;
 }
+
+void SaveSettingsMenuState::onBegin() { selIndex = 0; }
 
 void SaveSettingsMenuState::update() {
   if (js.isLeftDebounce()) {

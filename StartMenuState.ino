@@ -104,6 +104,4 @@ void StartMenuState::update() {
 
   // melody
   buzzer.updateOrRestart();
-
-  
 }

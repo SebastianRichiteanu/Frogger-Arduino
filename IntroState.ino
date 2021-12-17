@@ -1,6 +1,6 @@
 #include "IntroState.h"
 
-const int introDuration = 3000; // Timer?
+const int introDuration = 3000;
 
 void IntroState::onBegin() {
   startTime = updateTime;

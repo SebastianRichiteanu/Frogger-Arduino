@@ -25,6 +25,6 @@ enum class GameState {
 };
 
 State& getGameState();
-void setGameState(GameState newState);
 bool checkMainState();
 bool checkPlayingState();
+void setGameState(GameState newState);

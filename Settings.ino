@@ -2,8 +2,15 @@
 
 Difficulty getCurrentDif() { return savedData.difficulty; }
 
-void setCurrentDif(Difficulty diff) { 
-  savedData.difficulty = diff;
+const char getCurrentDifAsChar() {
+  switch(getCurrentDif()) {
+    case Difficulty::Easy:
+      return 'E';
+    case Difficulty::Medium:
+      return 'M';
+    case Difficulty::Hard:
+      return 'H';
+  }
 }
 
 const char* getCurrentDifAsString() {
@@ -17,15 +24,8 @@ const char* getCurrentDifAsString() {
   }
 }
 
-const char getCurrentDifAsChar() {
-  switch(getCurrentDif()) {
-    case Difficulty::Easy:
-      return 'E';
-    case Difficulty::Medium:
-      return 'M';
-    case Difficulty::Hard:
-      return 'H';
-  }
+void setCurrentDif(Difficulty diff) { 
+  savedData.difficulty = diff;
 }
 
 void increaseDifficulty() {
@@ -74,17 +74,6 @@ const byte getStartingJumpsByDif() {
       return 2;
     case Difficulty::Hard:
       return 1;
-  }
-}
-
-const byte getVehicleSpeedByDif() {
-  switch(getCurrentDif()) {
-    case Difficulty::Easy:
-      return 0;
-    case Difficulty::Medium:
-      return 2;
-    case Difficulty::Hard:
-      return 4;
   }
 }
 
@@ -189,7 +178,6 @@ const float vehicleLenByLevel() {
   }
 }
 
-
 // lcd
 
 byte getCurrentLcdContrast() { return savedData.lcdContrast; }
@@ -226,6 +214,7 @@ void changeMusicState() {
 void changeSoundState() {
   savedData.soundState = !savedData.soundState;
 }
+
 // matrix
 
 byte getCurrentMatrixBright() { return savedData.matrixBrightness; }

@@ -3,6 +3,8 @@
 #include "Matrix.h"
 #include "Buzzer.h"
 
+const byte infoNum = 12;
+const int scrollDelay = 400;
 const char* const info[] = { "Frogger",
                              "Created by Richiteanu Sebastian",
                              "Project for @UnibucRobotics",
@@ -16,10 +18,6 @@ const char* const info[] = { "Frogger",
                              "Go up to finish levels",
                              "Pay attention to the time"};
                                   
-
-const byte infoNum = 12;
-const Timer scrollDelay = 400;
-
 void AboutMenuState::addScrollDelayAtStart() {
   lastScrollTime = updateTime + 2 * scrollDelay;
 }
@@ -91,5 +89,4 @@ void AboutMenuState::update() {
 
   // melody
   buzzer.updateOrRestart();
-
 }

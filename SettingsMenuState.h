@@ -1,8 +1,7 @@
 #pragma once
 
 class SettingsMenuState : public State {
-  byte currentIndex;
-  byte chrIndex;
+  byte currentIndex, chrIndex;
   bool isEditing;
 
   void copySaveData();
@@ -15,6 +14,7 @@ class SettingsMenuState : public State {
   void printMatrixBright();
   void printMusicState();
   void printSoundState();
+  void printResetEEPROM();
   void printField(byte);
   void printFields(byte);
   void changeToPrevChar();

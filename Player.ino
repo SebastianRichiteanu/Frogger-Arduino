@@ -1,9 +1,9 @@
 #include "Player.h" 
 
-const Timer blinkDelay = 500;
-const Timer deathDelay = 2000;
-const Timer moveDelay = 100;
-const Timer jumpDelay = 150;
+const int blinkDelay = 500;
+const int deathDelay = 2000;
+const byte moveDelay = 100;
+const byte jumpDelay = 150;
 
 Player player;
 
@@ -132,6 +132,7 @@ void Player::update() {
 }
 
 byte Player::getX() const { return x; }
+byte Player::getRelativeX() const { return x - levelMap.getOffset(); }
 byte Player::getY() const { return y; }
 
 void Player::setLives(byte newLives) { lives = newLives; }
@@ -154,6 +155,3 @@ void Player::checkCrash() {
     }
   }
 }
-
-byte Player::getRelativeX() const { return x - levelMap.getOffset(); }
-  
