@@ -7,10 +7,17 @@ const char* const info[] = { "Frogger",
                              "Created by Richiteanu Sebastian",
                              "Project for @UnibucRobotics",
                              "GitHub: tinyurl.com/2umzw7wf",
-                             "Press JS to go to menu"};
+                             "Press JS to go to menu",
+                             "How to play:",
+                             "Move/jump with the JS",
+                             "Pause with the button",
+                             "Don't get hit by cars",
+                             "Collect bonus points",
+                             "Go up to finish levels",
+                             "Pay attention to the time"};
                                   
 
-const byte infoNum = 5;
+const byte infoNum = 12;
 const Timer scrollDelay = 400;
 
 void AboutMenuState::addScrollDelayAtStart() {

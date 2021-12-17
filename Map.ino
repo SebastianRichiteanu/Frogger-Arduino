@@ -6,6 +6,7 @@ Map::Map() {
   level = 1;
   isActive = true;
   lastFinishBlinkUpdateTime = updateTime;
+  lastBonusRemoveTime = updateTime;
 }
 
 int Map::get(byte x) const { return data[x]; }
@@ -36,6 +37,7 @@ void Map::createWalls() {
 }
 
 void Map::createBonus() {
+  lastBonusRemoveTime = updateTime;
   for (byte i = 0; i < getNumberOfBonusByDif(); ++i) {
     byte randomX = random(2, levelMap.height - 2);
     if (!walls[randomX] && !bonus[randomX]) {
@@ -49,6 +51,11 @@ void Map::createBonus() {
 
 void Map::updateBonus(byte x) {
   levelMap.set(x + 1, bonus[x], true);
+}
+
+void Map::removeBonus(byte x) {
+  levelMap.set(x + 1, bonus[x], false);
+  bonus[x] = 0;
 }
 
 void Map::updateWalls(byte x) {
@@ -75,7 +82,14 @@ void Map::update() {
     } else {
       levelMap.vehicles[i].update(i + 1); // i + 1 = real x
       if (bonus[i]) {
-        levelMap.updateBonus(i);
+        if (level >= removeStartLevel) {
+          if (debounce(lastBonusRemoveTime, removeDelay)) {
+            removeBonus(i);
+          }
+        }
+        if (bonus[i]) {
+          levelMap.updateBonus(i);
+        }
       }
     }
   }

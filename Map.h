@@ -10,9 +10,11 @@ class Map {
     byte xOffset = height - matrix.rows;
 
     byte level;
+    static const byte removeStartLevel = 5;
+    static const Timer removeDelay = 5000;
     static const byte blinkDelay = 250;
-    bool isActive; //, bonusActive;
-    Timer lastFinishBlinkUpdateTime; //, lastBonusBlinkTime;
+    bool isActive;
+    Timer lastFinishBlinkUpdateTime, lastBonusRemoveTime;
     Vehicle vehicles[height];
     byte bonus[height]; // if 0 no bonus, if > 0 then bonus point at matrix[x][bonus[x]]
     short walls[height]; // if 0 no wall, if > 0 then length 
@@ -28,6 +30,7 @@ class Map {
     void createWalls();
     void updateWalls(byte x);
     void createBonus();
+    void removeBonus(byte x);
     void updateBonus(byte x);
 
     void render() const;
