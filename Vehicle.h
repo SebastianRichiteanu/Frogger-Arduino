@@ -19,5 +19,6 @@ class Vehicle {
   public:
     Vehicle();
     void update(byte x);
-    bool getMoving();
+    bool getMoving() const;
+    byte getY() const;
 };

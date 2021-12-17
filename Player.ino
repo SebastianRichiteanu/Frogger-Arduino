@@ -147,9 +147,11 @@ bool Player::finishedLevel() const { return x == 0; }
 bool Player::isPlayer(byte X, byte Y) const { return x == X && y == Y; }
 
 void Player::checkCrash() { 
-  if (levelMap.vehicles[x - 1].getMoving() && debounce(lastDeathTime, deathDelay)) {
-    buzzer.playCrashed();
-    --lives;
+  if (levelMap.vehicles[x - 1].getMoving() && levelMap.vehicles[x - 1].getY() == player.getY()) {
+    if (debounce(lastDeathTime, deathDelay)) {
+      buzzer.playCrashed();
+      --lives;
+    }
   }
 }
 

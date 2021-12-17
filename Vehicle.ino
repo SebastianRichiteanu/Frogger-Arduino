@@ -17,7 +17,9 @@ Vehicle::Vehicle() {
 
 
 
-bool Vehicle::getMoving() { return isMoving; }
+bool Vehicle::getMoving() const { return isMoving; }
+
+byte Vehicle::getY() const { return y; }
 
 void Vehicle::increaseLength(byte x) {
   if (length < maxLength) {
@@ -78,7 +80,8 @@ void Vehicle::setVehicleCellsRight(byte x) {
       levelMap.set(x, i, false);
     }
   }
-  if (!isMoving) {
+  
+  if (!isMoving && !player.isPlayer(x, 0)) {
     levelMap.set(x, 0, false);
   }
   
