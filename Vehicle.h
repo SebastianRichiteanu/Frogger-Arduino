@@ -1,20 +1,17 @@
 #pragma once
 
 class Vehicle {
-  bool direction, isMoving, visibility, blinking;
-  byte y, length;
-  Timer delayTime, lastUpdateTime, lastBlinkUpdateTime;
+  bool direction, isMoving, visibility;
+  byte y, length, maxLength;
+  Timer delayTime, lastUpdateTime;
 
-  static const int blinkDelay = 300;
-  static const int startBlinkDelay = 2000;
-
-  void blink(byte x, byte y);
+  void increaseLength(byte x);
 
   void setVehicleCells(byte x);
-  void moveVehicle(byte x);
+  void moveVehicle();
 
-  void moveVehicleLeft(byte x);
-  void moveVehicleRight(byte x);
+  void moveVehicleLeft();
+  void moveVehicleRight();
 
   void setVehicleCellsLeft(byte x);
   void setVehicleCellsRight(byte x);  

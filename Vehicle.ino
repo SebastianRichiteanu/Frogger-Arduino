@@ -1,18 +1,17 @@
 #include "Vehicle.h"
 
 Vehicle::Vehicle() {
-  blinking = false;
   isMoving = false;
   delayTime = random(5000, 10000) * vehicleDelayByDif() * vehicleDelayByLevel();
   lastUpdateTime = updateTime;
-  lastBlinkUpdateTime = updateTime;
   if (direction) { // from right
     y = levelMap.width - 1;
   } else { // from left
     y = levelMap.width - 1;
   }
   direction = random(0, 2);
-  length = random(2, 5) * vehicleLenByDif() * vehicleLenByLevel();
+  maxLength = random(2, 5) * vehicleLenByDif() * vehicleLenByLevel();
+  length = 0;
   visibility = false;
 }
 
@@ -20,36 +19,28 @@ Vehicle::Vehicle() {
 
 bool Vehicle::getMoving() { return isMoving; }
 
-void Vehicle::blink(byte x, byte y) {
-  if (blinking) {
-    if (debounce(lastBlinkUpdateTime, blinkDelay)) {
-       visibility = !visibility;
-       if (visibility) {
-        levelMap.set(x, y, false);
-       } else {
-        levelMap.set(x, y, true);
-       }
-    }
+void Vehicle::increaseLength(byte x) {
+  if (length < maxLength) {
+    ++length;
   }
 }
 
-void Vehicle::moveVehicleLeft(byte x) { 
+void Vehicle::moveVehicleLeft() { 
   if (y < levelMap.width) {
     isMoving = true;
-    ++y; 
+    ++y;
   } else {
     if (debounce(lastUpdateTime, delayTime)) {
       isMoving = true;
       y = 0;
     } else {
+      length = 0;
       isMoving = false;
-      // kinda broken for now
-      blink(x, 0);
     }
   }
 }
 
-void Vehicle::moveVehicleRight(byte x) {
+void Vehicle::moveVehicleRight() {
   if (y > 0) {
     isMoving = true;
     --y;
@@ -58,9 +49,8 @@ void Vehicle::moveVehicleRight(byte x) {
       isMoving = true;
       y = levelMap.width - 1;
     } else {
+      length = 0;
       isMoving = false;
-      // kinda broken for now
-      blink(x, 7);
     }
   }
 }
@@ -113,15 +103,18 @@ void Vehicle::setVehicleCells(byte x) {
   }
 }
 
-void Vehicle::moveVehicle(byte x) {
+void Vehicle::moveVehicle() {
   if (direction) {
-    moveVehicleRight(x);
+    moveVehicleRight();
   } else {
-    moveVehicleLeft(x);
+    moveVehicleLeft();
   }
 }
 
 void Vehicle::update(byte x) {
   setVehicleCells(x);
-  moveVehicle(x);
+  moveVehicle();
+  if (isMoving) {
+    increaseLength(x);
+  }
 }
