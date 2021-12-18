@@ -10,19 +10,25 @@
   ### In the menu
   The menus can be navigated using the joystick (left/right/up/down). Pressing the joystick will activate the currently selected item.
   
+  
   In the start menu, we have 4 options:
-    - Start game
-    - About: Information about the game, the creator and a short how to play.
-    - Hi-Scores: A list with the top 5 high scores.
-    - Settings: Here you can customize the game. For example LCD contrast, brightness, sound, music, and even reset EEPROM **(be careful with this because it will erase all saved memory including settings and high scores)**
+   - Start game
+   - About: Information about the game, the creator and a short how to play.
+   - Hi-Scores: A list with the top 5 high scores.
+   - Settings: Here you can customize the game. For example LCD contrast, brightness, sound, music, and even reset EEPROM **(be careful with this because it will erase all saved memory including settings and high scores).**
   
   ### During the game
   Moving the joystick makes the player move to the corresponding direction.
+  
   Pressing the joystick makes the player jump. He can even jump over walls!
+  
   Pressing the button will pause the game. Another press will unpause it.
+  
   The objective is to move and jump to the finish line, as fast as you can, completing as many levels as possible.
-  Along the way you can collect gifts (simple dots) for extra lives, jumps, time. *Disclaimer*: Starting with level 5 the bonus points will disappear after some time.
+  
   If you get hit by a vehicle, you'll lose one life point.
+  
+  Along the way you can collect gifts (simple dots) for extra lives, jumps, time. *Disclaimer*: Starting with level 5 the bonus points will disappear after some time.
     
   ## Desing
 
