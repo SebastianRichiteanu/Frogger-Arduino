@@ -4,8 +4,10 @@
 #include "Player.h"
 #include "Map.h"
 
+// const for auto-disappearing message
 const Timer messageDisplayDelay = 4000;
 
+// prints the congrats message and sets the matrix effect :(
 void GameOverState::printCongrats() {
   printingCongrats = true;
   printingScore = false;
@@ -19,6 +21,7 @@ void GameOverState::printCongrats() {
   lcd.print(score.getCurrentScore());
 }
 
+// prints the player values
 void GameOverState::printScore() {
   printingCongrats = false;
   printingScore = true;
@@ -39,6 +42,7 @@ void GameOverState::printScore() {
   lcd.print(player.getJumps());
 }
 
+// prints the highscore message
 void GameOverState::printHighscore() {
   printingScore = false;
   if (score.isHighScore()) {
@@ -53,6 +57,7 @@ void GameOverState::printHighscore() {
   }
 }
 
+// prints the return to menu message
 void GameOverState::printReturnToMenu() {
   printingHighscore = false;
   lcd.clear();
@@ -62,6 +67,7 @@ void GameOverState::printReturnToMenu() {
   lcd.print("back to menu");
 }
 
+// on begin we calculate the score, check if it's a new highscore and display the congrats message
 void GameOverState::onBegin() {
   score.addPointsForLevel(levelMap.getLevel() - 1);
   score.addPointsForTimeLeft(timerDisplay.getTimeLeftInSec());
@@ -76,11 +82,15 @@ void GameOverState::onBegin() {
   printCongrats();
 }
 
+// resets the score and sets the level to 1
 void GameOverState::onEnd() {
   score.reset();
   levelMap.setLevel(1);
 }
 
+// the update function check the debounce on messages
+// and also will check for input (button pressed)
+// because the messages can be skipped
 void GameOverState::update() {
   if (debounce(printingCongrats, lastTime, messageDisplayDelay)) {
     printScore();

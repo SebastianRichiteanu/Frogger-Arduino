@@ -2,6 +2,7 @@
 
 Difficulty getCurrentDif() { return savedData.difficulty; }
 
+// returns a char for each difficulty (for lcd output purposes)
 const char getCurrentDifAsChar() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -13,6 +14,7 @@ const char getCurrentDifAsChar() {
   }
 }
 
+// returns a string for each difficulty (for lcd output purposes)
 const char* getCurrentDifAsString() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -40,6 +42,7 @@ void decreaseDifficulty() {
   savedData.difficulty = (Difficulty)diff;
 }
 
+// returns the starting time corresponding to the selected difficulty
 const Timer getStartingTimeByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -51,10 +54,7 @@ const Timer getStartingTimeByDif() {
   }
 }
 
-const Timer getStartingTimeByDifAsSec() {
-  return getStartingTimeByDif() / 1000;
-}
-
+// returns the starting number of lives corresponding to the selected difficulty
 const byte getStartingLivesByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -66,6 +66,7 @@ const byte getStartingLivesByDif() {
   }
 }
 
+// returns the starting number of jumps corresponding to the selected difficulty
 const byte getStartingJumpsByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -77,6 +78,7 @@ const byte getStartingJumpsByDif() {
   }
 }
 
+// returns the number of walls corresponding to the selected difficulty
 const byte getNumberOfWallsByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -88,6 +90,7 @@ const byte getNumberOfWallsByDif() {
   }
 }
 
+// returns the length of walls corresponding to the selected difficulty
 const byte getLengthOfWallsByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -99,6 +102,7 @@ const byte getLengthOfWallsByDif() {
   }
 }
 
+// returns the walls length multiplier corresponding to the selected difficulty
 const float getLengthOfWallsByLvl() {
   byte currentLvl = levelMap.getLevel();
   switch(getCurrentDif()) {
@@ -111,6 +115,7 @@ const float getLengthOfWallsByLvl() {
   }
 }
 
+// returns the starting number of bonus points corresponding to the selected difficulty
 const byte getNumberOfBonusByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -122,6 +127,7 @@ const byte getNumberOfBonusByDif() {
   }
 }
 
+// returns the score multiplier by difficulty
 const byte getScoreMultiplierByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -133,6 +139,7 @@ const byte getScoreMultiplierByDif() {
   }
 }
 
+// returns the vehicle delay multiplier by difficulty
 const float vehicleDelayByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -143,6 +150,8 @@ const float vehicleDelayByDif() {
       return 0.8;
   }
 }
+
+// returns the vehicle delay multiplier by level
 const float vehicleDelayByLevel() {
   byte currentLvl = levelMap.getLevel();
   switch(getCurrentDif()) {
@@ -155,6 +164,7 @@ const float vehicleDelayByLevel() {
   }
 }
 
+// returns the vehicle length multiplier by difficulty
 const float vehicleLenByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
@@ -166,6 +176,7 @@ const float vehicleLenByDif() {
   }
 }
 
+// returns the vehicle length multiplier by level
 const float vehicleLenByLevel() {
   byte currentLvl = levelMap.getLevel();
   switch(getCurrentDif()) {

@@ -1,8 +1,10 @@
 #include "SaveSettingsMenuState.h"
 #include "SettingsMenuState.h"
 
+// const for this menu options
 const byte saveSettingsMenuItems = 2;
 
+// print the lcd messages
 void SaveSettingsMenuState::printMenuLabels() const {
   lcd.setCursor(1, 0);
   lcd.print("Save Settings?");
@@ -14,6 +16,7 @@ void SaveSettingsMenuState::printMenuLabels() const {
   lcd.print("no");
 }
 
+// print the selection arrow to the selected item
 void SaveSettingsMenuState::printSelectionArrow() const {
   if (selIndex == 0) {
     lcd.setCursor(0, 1);
@@ -23,6 +26,9 @@ void SaveSettingsMenuState::printSelectionArrow() const {
   lcd.print('>');
 }
 
+// revert the settings to the old ones
+// the copy saved data is instantiated every time
+// the player opens the settings menu
 void SaveSettingsMenuState::resetSettings() {
   strcpy(savedData.playerName, copySavedData.playerName);
   savedData.lcdBrightness = copySavedData.lcdBrightness;
@@ -35,6 +41,11 @@ void SaveSettingsMenuState::resetSettings() {
 
 void SaveSettingsMenuState::onBegin() { selIndex = 0; }
 
+// check for player input to change the selected item
+// if the selected item is yes 
+  // update the hardware to the new settings and save them to the EEPROM
+// if not
+  // revert the settings and save them to the EEPROM 
 void SaveSettingsMenuState::update() {
   if (js.isLeftDebounce()) {
     selIndex = (selIndex + saveSettingsMenuItems - 1) % saveSettingsMenuItems;
@@ -54,6 +65,7 @@ void SaveSettingsMenuState::update() {
   }
 }
 
+// clear the lcd and print the labels and the arrow
 void SaveSettingsMenuState::render() const {
   lcd.clear();
   printMenuLabels();

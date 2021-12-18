@@ -1,6 +1,6 @@
 #include "Melody.h"
-// https://github.com/robsoncouto/arduino-songs/blob/master/asabranca/asabranca.ino
 
+// jingle bells frequenices
 const uint16_t PROGMEM jingleBellsFreq[] = {
   NOTE_E5, NOTE_E5, NOTE_E5,
   NOTE_E5, NOTE_E5, NOTE_E5,
@@ -12,6 +12,7 @@ const uint16_t PROGMEM jingleBellsFreq[] = {
   NOTE_D5, NOTE_G5,
 };
 
+// jingle bells durations
 const uint8_t PROGMEM jingleBellsDur[] = {
   8, 8, 4,
   8, 8, 4,
@@ -23,8 +24,10 @@ const uint8_t PROGMEM jingleBellsDur[] = {
   4, 4,
 };
 
+// jingle bells base duration
 const static Timer jingleBellsBaseDuration = 2000;
 
+// sets the struct values to those above
 Melody jingleBellsMelody{jingleBellsFreq, jingleBellsDur, sizeof(jingleBellsDur) / sizeof(jingleBellsDur[0]), jingleBellsBaseDuration};
 
 const uint16_t PROGMEM takeOnMeFreq[] = {

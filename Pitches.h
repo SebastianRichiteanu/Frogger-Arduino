@@ -1,7 +1,5 @@
 #pragma once
 
-// https://www.arduino.cc/en/Tutorial/BuiltInExamples/toneMelody
-
 #define REST      0
 #define NOTE_B0  31
 #define NOTE_C1  33

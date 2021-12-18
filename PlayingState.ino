@@ -1,5 +1,6 @@
 #include "PlayingState.h"
 
+// a heart char for lcd
 static byte heartChar[] = {0b00000,
   0b01010,
   0b11111,
@@ -9,10 +10,14 @@ static byte heartChar[] = {0b00000,
   0b00000,
   0b00000};
 
+// check if the game is over
+// player has no lives or no more time
 bool PlayingState::isGameOver() const {
   return player.hasNoLivesLeft() || timerDisplay.isFinished();
 }
 
+// on begin we get the difficulty set in the settings
+// pause the timer, update the player and start the sound track
 void PlayingState::onBegin() {
   savedDifficulty = getCurrentDif();
 
@@ -26,11 +31,16 @@ void PlayingState::onBegin() {
   buzzer.play();
 }
 
+// reset the player
 void PlayingState::onEnd() {
   player.reset();
 }
 
-
+// check if the player crashed
+// if the game is over, set the game state to game over
+// is the player finished the level, set the game state to new level and play a sound
+// check the button to pause/unpause the game
+// and moves the panning camera according to the relative x
 void PlayingState::update() {
   player.checkCrash();
   
@@ -76,6 +86,10 @@ void PlayingState::update() {
   }
 }
 
+// render the lcd messages
+// if the game is pause we get "game paused"
+// if not we can see all the stats: difficulty, level, lives, etc
+// and update the time, the map and the buzzer
 void PlayingState::render() const {
   if (paused) {
     lcd.clear();
@@ -86,7 +100,7 @@ void PlayingState::render() const {
     return;
   } else {
     lcd.clear();
-    lcd.createChar(0, heartChar); // TODO do this once somewhere
+    lcd.createChar(0, heartChar);
 
     lcd.setCursor(0, 0);
     lcd.print("Dif:");
@@ -114,6 +128,5 @@ void PlayingState::render() const {
   levelMap.update();
   levelMap.render();
 
-  // melody
   buzzer.updateOrRestart();
 }

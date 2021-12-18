@@ -1,5 +1,6 @@
 #include "HighScoreMenuState.h"
 
+// printing a high-score line with the player name and score
 void HighScoreMenuState::printScore(byte index) {
   // if i don't do this the string will not be null-terminated
   const Highscore& score = savedData.highscores[index];
@@ -17,6 +18,7 @@ void HighScoreMenuState::printScore(byte index) {
   lcd.print(score.score);
 }
 
+// clears the screen and then prints the scores
 void HighScoreMenuState::printScores() {
   lcd.clear();
 
@@ -29,11 +31,15 @@ void HighScoreMenuState::printScores() {
   }
 }
 
+// on begin we set the mattrix effect to a cup and print the scores
 void HighScoreMenuState::onBegin() { 
   matrix.cupEffect();
   printScores(); 
 }
 
+// the update function checks for input
+// update the rows poisitions if so
+// or go back to the menu if the js is pressed
 void HighScoreMenuState::update() {
   if (js.isDownDebounce()) {
     topScoreIndex = (topScoreIndex + maxHighScores - 1) % maxHighScores;

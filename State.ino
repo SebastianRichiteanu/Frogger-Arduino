@@ -1,3 +1,4 @@
+// vars for each state possible
 IntroState introState;
 StartMenuState startMenuState;
 AboutMenuState aboutMenuState;
@@ -9,6 +10,7 @@ GameOverState gameOverState;
 SaveSettingsMenuState saveSettingsMenuState;
 NewLevelState newLevelState;
 
+// generic state var for current state
 State* currentState = &introState;
 
 State& getGameState() { return *currentState; }
@@ -17,11 +19,13 @@ bool checkMainState() { return currentState == &startMenuState; }
 
 bool checkPlayingState() { return currentState == &playingState; }
 
+// renders and calls on end for the old state
+// change the state to the new one
+// and calls the on begin for the new state
 void setGameState(GameState newState) {
   currentState -> render();
   currentState -> onEnd();
 
-  // change
   switch (newState) {
     case GameState::Intro:
       currentState = &introState;
@@ -55,6 +59,5 @@ void setGameState(GameState newState) {
       break;
   }
 
-  // render new
   currentState -> onBegin();
 }

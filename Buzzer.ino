@@ -1,7 +1,10 @@
 #include "Buzzer.h"
 
+// buzzer instance
 Buzzer buzzer;
 
+// plays a tone for a certain period of time
+// only works if soundState is true, it can be enabled/disabled in the settings
 void Buzzer::playTone(int frequency, Timer duration) {
   if (savedData.soundState) {
     playing = false;
@@ -10,6 +13,7 @@ void Buzzer::playTone(int frequency, Timer duration) {
   }
 }
 
+// set the melody to a new one by chaning the frequencies, durations, etc.
 void Buzzer::setMelody(const Melody &melody) {
   frequencies = melody.frequencies;
   durations = melody.durations;
@@ -17,6 +21,7 @@ void Buzzer::setMelody(const Melody &melody) {
   baseDuration = melody.baseDuration;
 }
 
+// plays a song while there are notes to play
 void Buzzer::play() {
   if (noteCount == 0) {
     return;
@@ -26,12 +31,15 @@ void Buzzer::play() {
   nextTimerNote = updateTime;
 }
 
+// stops the song
 void Buzzer::stop() {
   playing = false;
   currentNote = 0;
   nextTimerNote = updateTime;
 }
 
+// the update function check if the musicState is on
+// if so it reads from the PROGMEM and updates the buzzer tone
 void Buzzer::update() {
   if (!playing || !savedData.musicState) {
     return;
@@ -56,6 +64,7 @@ void Buzzer::update() {
   }
 }
 
+// if the melody was finished we start all over again
 void Buzzer::updateOrRestart() {
   update();
   if (!isPlaying()) {
@@ -65,14 +74,17 @@ void Buzzer::updateOrRestart() {
 
 bool Buzzer::isPlaying () const { return playing; }
 
+// play the player crashed by a vehicle sound
 void Buzzer::playCrashed() const {
   playTone(75, 300);
 }
 
+// play the player collected a bonus sound
 void Buzzer::playBonus() const {
   playTone(2512, 200);
 }
 
+// play the player finished a level sound
 void Buzzer::playFinishedLevel() const {
   playTone(1568, 200);
 }

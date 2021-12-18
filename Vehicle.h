@@ -8,7 +8,7 @@ class Vehicle {
     byte getY() const;
   
   private:
-    bool direction, isMoving, visibility;
+    bool direction, isMoving;
     byte y, length, maxLength;
     Timer delayTime, lastUpdateTime;
   

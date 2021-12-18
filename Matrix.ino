@@ -1,25 +1,32 @@
 #include "Matrix.h"
 
+// address of the matrix
 const byte addrMatrix = 0;
 
+// the matrix instance
 Matrix matrix;
 
+// set one position of the matrix to a given value
 void Matrix::set(byte row, byte column, byte value) {
   lc.setLed(addrMatrix, row, column, value);
 }
 
+// set one row of the matrix to a given value
 void Matrix::setRow(byte row, byte rowValue) {
   lc.setRow(addrMatrix, row, rowValue);
 }
 
+// clear the whole matrix
 void Matrix::clear() { lc.clearDisplay(addrMatrix); }
 
+// fills the whole matrix
 void Matrix::fill() {
   for (byte row = 0; row < 8; ++row) {
-    setRow(row, 0xFF); // full
+    setRow(row, 0xFF);
   }
 }
 
+// set the matrix to an effect by chaning each row to a given value
 void Matrix::setEffect(byte matr[]) {
   for (byte row = 0; row < 8; ++row) {
     setRow(row, matr[row]);

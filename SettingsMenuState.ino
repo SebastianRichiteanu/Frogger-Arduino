@@ -1,12 +1,16 @@
 #include "SettingsMenuState.h"
 
+// constant for number of settings in the menu
 const byte settingsNum = 8;
 
+// blink constants
 const int arrowBlinkDelay = 1000;
 const int chrBlinkDelay = 500;
 
 const char nameFieldString[] = "Name: ";
 
+// called every time the player enters this menu
+// makes a copy of the current settings
 void SettingsMenuState::copySaveData() {
   strcpy(copySavedData.playerName, savedData.playerName);
   copySavedData.lcdBrightness = savedData.lcdBrightness;
@@ -17,21 +21,25 @@ void SettingsMenuState::copySaveData() {
   copySavedData.soundState = savedData.soundState;
 }
 
+// sets the arrow position to a blank space
 void SettingsMenuState::clearSelArrow() {
   lcd.setCursor(0, 0);
   lcd.print(" ");
 }
 
+// sets the arrow position to an arrow
 void SettingsMenuState::printSelArrow() {
   lcd.setCursor(0, 0);
   lcd.print(">");
 }
 
+// prints the "Name: " and player name
 void SettingsMenuState::printNameField() {
   lcd.print(nameFieldString);
   lcd.print(savedData.playerName);
 }
 
+// prints the difficulty field as a string
 void SettingsMenuState::printDifficultyLevelField() {
   lcd.print("Diff: ");
   if (isEditing && currentIndex == 1) {
@@ -43,6 +51,7 @@ void SettingsMenuState::printDifficultyLevelField() {
   }
 }
 
+// prints the lcd contrast as a number
 void SettingsMenuState::printLcdContrast() {
   lcd.print("Contrast: ");
   if (isEditing && currentIndex == 2) {
@@ -54,6 +63,7 @@ void SettingsMenuState::printLcdContrast() {
   }
 }
 
+// prints the lcd brightness as a number
 void SettingsMenuState::printLcdBrightness() {
   lcd.print("LCD Bright:");
   if (isEditing && currentIndex == 3) {
@@ -67,6 +77,7 @@ void SettingsMenuState::printLcdBrightness() {
   }
 }
 
+// prints the matrix brightness as a number
 void SettingsMenuState::printMatrixBright() {
   lcd.print("Mat Bright:");
   if (isEditing && currentIndex == 4) {
@@ -80,6 +91,7 @@ void SettingsMenuState::printMatrixBright() {
   }
 }
 
+// prints the music state (ON/OFF)
 void SettingsMenuState::printMusicState() {
   lcd.print("Music:");
   if (isEditing && currentIndex == 5) {
@@ -97,6 +109,7 @@ void SettingsMenuState::printMusicState() {
   }
 }
 
+// prints the sound state (ON/OFF)
 void SettingsMenuState::printSoundState() {
   lcd.print("Sound:");
   if (isEditing && currentIndex == 6) {
@@ -114,6 +127,7 @@ void SettingsMenuState::printSoundState() {
   }
 }
 
+// prints the reset EEPROM setting
 void SettingsMenuState::printResetEEPROM() {
   if (isEditing && currentIndex == 7) {
     lcd.print("{");
@@ -124,6 +138,7 @@ void SettingsMenuState::printResetEEPROM() {
   }
 }
 
+// prints the field by index
 void SettingsMenuState::printField(byte index) {
   if (index == 0) {
     printNameField();
@@ -144,6 +159,8 @@ void SettingsMenuState::printField(byte index) {
   }
 }
 
+// clears the lcd and then prints the index field
+// and the index + 1 field (on the next row)
 void SettingsMenuState::printFields(byte index) {
   lcd.clear();
   lcd.setCursor(1, 0);
@@ -154,6 +171,7 @@ void SettingsMenuState::printFields(byte index) {
   printField(index + 1);
 }
 
+// change the name char to the previous char
 void SettingsMenuState::changeToPrevChar() {
   char& ch = savedData.playerName[chrIndex];
   if (ch == 'a') {
@@ -163,6 +181,7 @@ void SettingsMenuState::changeToPrevChar() {
   }
 }
 
+// change the name char to the next char
 void SettingsMenuState::changeToNextChar() {
   char& ch = savedData.playerName[chrIndex];
   if (ch == 'z') {
@@ -172,6 +191,8 @@ void SettingsMenuState::changeToNextChar() {
   }
 }
 
+// on begin, copy the saved data, reset the index 
+// and print the fields along with the hammer effect
 void SettingsMenuState::onBegin() {
   copySaveData();
   currentIndex = 0;
@@ -180,6 +201,11 @@ void SettingsMenuState::onBegin() {
   matrix.hammerEffect();
 }
 
+// the update function checks the js button to select a row
+// blinks the arrow
+// change the corresponding values according to the input
+// and change the selected index position accroding to the input
+// also goes back to the menu once the player inputs left
 void SettingsMenuState::update() {
   if (js.isPressedDebounce()) {
     isEditing = !isEditing;

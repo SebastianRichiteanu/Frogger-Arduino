@@ -1,6 +1,6 @@
 #include "Hardware.h"
 
-// LCD
+// LCD pins
 const byte RS = 7;
 const byte enable = 13;
 const byte d4 = A5;
@@ -11,23 +11,29 @@ const byte lcdPinContrast = 9;
 const byte lcdPinBrightness = 6; // PWM
 LiquidCrystal lcd(RS, enable, d4, d5, d6, d7);
 
-// matrix
+// matrix pins
 const byte dinPin = 12;
 const byte clockPin = 11;
 const byte loadPin = 10;
 const byte noDrivers = 1;
 LedControl lc(dinPin, clockPin, loadPin, noDrivers);
 
-// JS
+// JS instance
 Joystick js;
 
-// button
+// button pin
+const byte buttonPin = A4;
+
+// button variables + a constant delay
+const Timer buttonDebounceDelay = 100;
 bool lastButtonState = LOW;
 bool buttonState = LOW;
-const byte buttonPin = A4;
-const Timer buttonDebounceDelay = 100;
 Timer lastButtonDebounceTime = updateTime;
 
+// init hardware will pin mode all the necessary pins
+// set the brightness to a mapped value
+// and set the seed to the value of pin 0, which is not plugged in
+// to get a real random effect
 void initHardware() {
   Serial.begin(9600); // debugging purposes
 
@@ -51,6 +57,7 @@ void initHardware() {
   randomSeed(analogRead(0));
 }
 
+// updates the contrast and brightness with the mapped values
 void updateHardware() {
   analogWrite(lcdPinContrast, savedData.lcdContrast);
   byte mappedBrightness = map(savedData.lcdBrightness, 0, 95, 100, 255);
@@ -59,6 +66,7 @@ void updateHardware() {
   lc.setIntensity(0, mappedMatrixBright);
 }
 
+// debounce for the button pressed so it won't fail
 bool buttonPressed() {
   bool retVal = false;
   bool reading = digitalRead(buttonPin);
