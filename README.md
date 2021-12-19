@@ -60,34 +60,34 @@
   
   What follows is an overview of the files and classes used to program the game.
   
-   - Frogger-arduino [[ino](Frogger-Arduino.ino)] contains the setup() and loop() entry points.
-   - Game states [[h](State.h) / [ino](State.ino)]:
-       - Intro state [[h](IntroState.h) / [ino](IntroState.ino)]: The initial game state when turning on the game. This displays a greetings message which can be skipped.
+   - Frogger-arduino [[ino](Frogger-Arduino/Frogger-Arduino.ino)] contains the setup() and loop() entry points.
+   - Game states [[h](Frogger-Arduino/State.h) / [ino](Frogger-Arduino/State.ino)]:
+       - Intro state [[h](Frogger-Arduino/IntroState.h) / [ino](Frogger-Arduino/IntroState.ino)]: The initial game state when turning on the game. This displays a greetings message which can be skipped.
        - Menu states:
-          - Start Menu [[h](StartMenuState.h) / [ino](StartMenuState.ino)]: The main menu of the game where we can start the game or navigate to another menu.
-          - High Scores Menu [[h](HighScoreMenuState.h) / [ino](HighScoreMenuState.ino)]: The high scores menu where we can see a list with the top 5 scores.
-          - Settings Menu [[h](SettingsMenuState.h) / [ino](SettingsMenuState.ino)]: The settings menu where we can change player name, hardware settings and reset the memory.
-          - Save Settings Menu [[h](SaveSettingsMenuState.h) / [ino](SaveSettingsMenuState.ino)]: A prompt which asks the player if they want to save the settings or close the menu without saving.
-          - About Menu [[h](AboutMenuState.h) / [ino](AboutMenuState.ino)]: The about menu where we can see information about the game and the creator.
-        - Starting state [[h](StartingState.h) / [ino](StartingState.ino)]: The state where the map is generated and the player stats are reset if this is a new game.
-        - Playing state [[h](PlayingState.h) / [ino](PlayingState.ino)]: The state where the game is played. This state renders the map and take care of the player status (was hit, finished level, etc.)
-        - Game over state [[h](GameOverState.h) / [ino](GameOverState.ino)]: The state where the final score is calculated and the player receives feedback.
-        - New level state [[h](NewLevelState.h) / [ino](NewLevelState.ino)] The state where the level is increased and the player receives feedback.
-      - Hardware [[h](Hardware.h) / [ino](Hardware.ino)]: Information about the hardware (expl: pins, states) but also init and update it:
-        - Buzzer [[h](Buzzer.h) / [ino](Buzzer.ino)]: Information about the buzzer and how it plays sounds & soundtracks.
-        - Joystick [[h](Joystick.h) / [ino](Joystick.ino)]: Information about the joystick and input checkings.
-        - Matrix [[h](Matrix.h) / [ino](Matrix.ino)]: Information about the matrix and set functions, including "effects".
+          - Start Menu [[h](Frogger-Arduino/StartMenuState.h) / [ino](Frogger-Arduino/StartMenuState.ino)]: The main menu of the game where we can start the game or navigate to another menu.
+          - High Scores Menu [[h](Frogger-Arduino/HighScoreMenuState.h) / [ino](Frogger-Arduino/HighScoreMenuState.ino)]: The high scores menu where we can see a list with the top 5 scores.
+          - Settings Menu [[h](Frogger-Arduino/SettingsMenuState.h) / [ino](Frogger-Arduino/SettingsMenuState.ino)]: The settings menu where we can change player name, hardware settings and reset the memory.
+          - Save Settings Menu [[h](Frogger-Arduino/SaveSettingsMenuState.h) / [ino](Frogger-Arduino/SaveSettingsMenuState.ino)]: A prompt which asks the player if they want to save the settings or close the menu without saving.
+          - About Menu [[h](Frogger-Arduino/AboutMenuState.h) / [ino](Frogger-Arduino/AboutMenuState.ino)]: The about menu where we can see information about the game and the creator.
+        - Starting state [[h](Frogger-Arduino/StartingState.h) / [ino](Frogger-Arduino/StartingState.ino)]: The state where the map is generated and the player stats are reset if this is a new game.
+        - Playing state [[h](Frogger-Arduino/PlayingState.h) / [ino](Frogger-Arduino/PlayingState.ino)]: The state where the game is played. This state renders the map and take care of the player status (was hit, finished level, etc.)
+        - Game over state [[h](Frogger-Arduino/GameOverState.h) / [ino](Frogger-Arduino/GameOverState.ino)]: The state where the final score is calculated and the player receives feedback.
+        - New level state [[h](Frogger-Arduino/NewLevelState.h) / [ino](Frogger-Arduino/NewLevelState.ino)] The state where the level is increased and the player receives feedback.
+      - Hardware [[h](Frogger-Arduino/Hardware.h) / [ino](Frogger-Arduino/Hardware.ino)]: Information about the hardware (expl: pins, states) but also init and update it:
+        - Buzzer [[h](Frogger-Arduino/Buzzer.h) / [ino](Frogger-Arduino/Buzzer.ino)]: Information about the buzzer and how it plays sounds & soundtracks.
+        - Joystick [[h](Frogger-Arduino/Joystick.h) / [ino](Frogger-Arduino/Joystick.ino)]: Information about the joystick and input checkings.
+        - Matrix [[h](Frogger-Arduino/Matrix.h) / [ino](Frogger-Arduino/Matrix.ino)]: Information about the matrix and set functions, including "effects".
       - Music system:
-        - Note Pitches [[h](Pitches.h)]: Defines note pitches. "Inspired" :) from [here](https://www.arduino.cc/en/Tutorial/BuiltInExamples/toneMelody).
-        - Melody [[h](Melody.h) / [ino](Melody.ino)]: Defines the soundtracks with notes and tempo.
+        - Note Pitches [[h](Frogger-Arduino/Pitches.h)]: Defines note pitches. "Inspired" :) from [here](https://www.arduino.cc/en/Tutorial/BuiltInExamples/toneMelody).
+        - Melody [[h](Frogger-Arduino/Melody.h) / [ino](Frogger-Arduino/Melody.ino)]: Defines the soundtracks with notes and tempo.
       - Game world:
-        - Player [[h](Player.h) / [ino](Player.ino)]: Get/set player information, check for collisions, game over, finished level, etc.
-        - Map [[h](Map.h) / [ino](Map.ino)]: Get/set map information, create/update/remove vehicle, walls & bonus points and takes care of the panning camera.
-        - Vehicle [[h](Vehicle.h) / [ino](Vehicle.ino)]: Get/set vehicle information, move and update on the map vehicle location.
-        - Score [[h](Score.h) / [ino](Score.ino)]: Get/set score, calculates the score and checks if it is a high score.
-      - Saved Data [.h](SavedData.h) / [ino](SavedData.ino)]: Struct with settings and high scores, which is saved to the EEPROM.
-      - Settings [[h](Settings.h) / [ino](Settings.ino)]: Store constants about difficulty, player name length, max contrast etc. and also about difficulty multipliers, starting lives by difficulty, etc.
-      - Timer [[h](Timer.h) / [ino](Timer.ino)]: Used for debounce.
-      - Timer Display [[h](TimerDisplay.h) / [ino](TimerDisplay.ino)]: Increase/decrease, pause/unpause game time.
-      - Utility [[h](Utility.h)]: Swap function
-      - Bit ops [[h](BitOps.h)]: Wrapper for integral types, adding bit-manipulation operations.
+        - Player [[h](Frogger-Arduino/Player.h) / [ino](Frogger-Arduino/Player.ino)]: Get/set player information, check for collisions, game over, finished level, etc.
+        - Map [[h](Frogger-Arduino/Map.h) / [ino](Frogger-Arduino/Map.ino)]: Get/set map information, create/update/remove vehicle, walls & bonus points and takes care of the panning camera.
+        - Vehicle [[h](Frogger-Arduino/Vehicle.h) / [ino](Frogger-Arduino/Vehicle.ino)]: Get/set vehicle information, move and update on the map vehicle location.
+        - Score [[h](Frogger-Arduino/Score.h) / [ino](Frogger-Arduino/Score.ino)]: Get/set score, calculates the score and checks if it is a high score.
+      - Saved Data [.h](Frogger-Arduino/SavedData.h) / [ino](Frogger-Arduino/SavedData.ino)]: Struct with settings and high scores, which is saved to the EEPROM.
+      - Settings [[h](Frogger-Arduino/Settings.h) / [ino](Frogger-Arduino/Settings.ino)]: Store constants about difficulty, player name length, max contrast etc. and also about difficulty multipliers, starting lives by difficulty, etc.
+      - Timer [[h](Frogger-Arduino/Timer.h) / [ino](Frogger-Arduino/Timer.ino)]: Used for debounce.
+      - Timer Display [[h](Frogger-Arduino/TimerDisplay.h) / [ino](Frogger-Arduino/TimerDisplay.ino)]: Increase/decrease, pause/unpause game time.
+      - Utility [[h](Frogger-Arduino/Utility.h)]: Swap function
+      - Bit ops [[h](Frogger-Arduino/BitOps.h)]: Wrapper for integral types, adding bit-manipulation operations.
