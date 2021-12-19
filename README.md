@@ -33,7 +33,7 @@
   
   Along the way you can collect gifts (simple dots) for extra lives, jumps, time. *Disclaimer*: Starting with level 5 the bonus points will disappear after some time.
     
-  ## Desing
+  ## Design
 
   ### Hardware
   #### Display / Output
