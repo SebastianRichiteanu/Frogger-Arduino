@@ -10,8 +10,10 @@ Vehicle::Vehicle() {
   isMoving = false;
   delayTime = random(5000, 10000) * vehicleDelayByDif() * vehicleDelayByLevel();
   lastUpdateTime = updateTime;
-  y = levelMap.width - 1;
   direction = random(0, 2);
+  if (!direction) {
+    y = levelMap.width - 1;
+  }
   maxLength = random(2, 5) * vehicleLenByDif() * vehicleLenByLevel();
   length = 0;
 }

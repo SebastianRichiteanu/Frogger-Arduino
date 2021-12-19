@@ -59,6 +59,7 @@ void SaveSettingsMenuState::update() {
       saveSavedData();
     } else {
       resetSettings();
+      updateHardware();
       saveSavedData();
     }
     setGameState(GameState::StartMenu);
