@@ -28,7 +28,7 @@ bool Player::collidesRight() const {
   short currentWall = levelMap.walls[x - 1];
   if (currentWall) {
     if (currentWall < 0) {
-      return y >= levelMap.width + currentWall;
+      return y >= levelMap.width + currentWall - 1;
     } 
   }
   return y == 7;
