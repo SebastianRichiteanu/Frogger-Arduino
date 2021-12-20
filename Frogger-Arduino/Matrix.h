@@ -11,6 +11,7 @@ class Matrix {
     void fill();
     
     void setEffect(byte matr[]);
+    void frogEffect();
     void cupEffect();
     void hammerEffect();
     void heartEffect();

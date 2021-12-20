@@ -26,11 +26,16 @@ void Matrix::fill() {
   }
 }
 
-// set the matrix to an effect by chaning each row to a given value
+// set the matrix to an effect by chaning each row to a given value 
 void Matrix::setEffect(byte matr[]) {
   for (byte row = 0; row < 8; ++row) {
     setRow(row, matr[row]);
   }
+}
+
+void Matrix::frogEffect() {
+  byte frog[8] = {0x7E, 0x7E, 0x60, 0x60, 0x7C, 0x7C, 0x60, 0x60};
+  setEffect(frog);
 }
 
 void Matrix::cupEffect() {

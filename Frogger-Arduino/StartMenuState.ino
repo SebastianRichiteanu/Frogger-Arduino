@@ -55,6 +55,7 @@ void StartMenuState::printSelectionArrow() const {
 void StartMenuState::onBegin() { 
   initMenuChars();
   matrix.clear();
+  matrix.frogEffect();
   selIndex = 0; 
   lcd.clear();
   printMenuLabels();
