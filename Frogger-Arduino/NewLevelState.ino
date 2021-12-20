@@ -4,9 +4,9 @@
 void NewLevelState::printInfo() const {
   lcd.clear();
   lcd.setCursor(3, 0);
-  lcd.print("Good job!!");
+  lcd.print(F("Good job!!"));
   lcd.setCursor(3, 1);
-  lcd.print("Next lvl:");
+  lcd.print(F("Next lvl:"));
   lcd.print(levelMap.getLevel());
 }
 

@@ -5,7 +5,7 @@ class StartMenuState : public State {
 
   void printChar(byte chr) const;
   void printMenuLabels() const;
-  void printSelectionArrow() const;
+  void printSelectionArrows() const;
 
   public:
     void onBegin() override;

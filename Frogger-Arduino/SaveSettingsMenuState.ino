@@ -7,13 +7,13 @@ const byte saveSettingsMenuItems = 2;
 // print the lcd messages
 void SaveSettingsMenuState::printMenuLabels() const {
   lcd.setCursor(1, 0);
-  lcd.print("Save Settings?");
+  lcd.print(F("Save Settings?"));
 
   lcd.setCursor(1, 1);
-  lcd.print("yes");
+  lcd.print(F("yes"));
 
   lcd.setCursor(14, 1);
-  lcd.print("no");
+  lcd.print(F("no"));
 }
 
 // print the selection arrow to the selected item

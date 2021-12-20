@@ -15,9 +15,9 @@ void GameOverState::printCongrats() {
   matrix.sadFace();
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Congrats for rea");
+  lcd.print(F("Congrats for rea"));
   lcd.setCursor(0, 1);
-  lcd.print("ching score:");
+  lcd.print(F("ching score:"));
   lcd.print(score.getCurrentScore());
 }
 
@@ -27,18 +27,18 @@ void GameOverState::printScore() {
   printingScore = true;
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Name: ");
+  lcd.print(F("Name: "));
   lcd.print(savedData.playerName);
   lcd.setCursor(12, 0);
   lcd.write((byte)0);
-  lcd.print(":");
+  lcd.print(F(":"));
   lcd.print(player.getLives());
   lcd.setCursor(0, 1);
-  lcd.print("Time: ");
+  lcd.print(F("Time: "));
   lcd.print(timerDisplay.getElapsedTimeInSec() - timerDisplay.getTimeLeftInSec());
-  lcd.print(" s");
+  lcd.print(F(" s"));
   lcd.setCursor(12, 1);
-  lcd.print("J:");
+  lcd.print(F("J:"));
   lcd.print(player.getJumps());
 }
 
@@ -49,9 +49,9 @@ void GameOverState::printHighscore() {
     printingHighscore = true;
     lcd.clear();
     lcd.setCursor(1, 0);
-    lcd.print("You have a new");
+    lcd.print(F("You have a new"));
     lcd.setCursor(3, 1);
-    lcd.print("HIGHSCORE!");
+    lcd.print(F("HIGHSCORE!"));
   } else {
     printReturnToMenu();
   }
@@ -62,9 +62,9 @@ void GameOverState::printReturnToMenu() {
   printingHighscore = false;
   lcd.clear();
   lcd.setCursor(1, 0);
-  lcd.print("Press JS to go");
+  lcd.print(F("Press JS to go"));
   lcd.setCursor(2, 1);
-  lcd.print("back to menu");
+  lcd.print(F("back to menu"));
 }
 
 // on begin we calculate the score, check if it's a new highscore and display the congrats message

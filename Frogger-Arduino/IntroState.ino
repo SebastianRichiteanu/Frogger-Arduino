@@ -10,9 +10,9 @@ void IntroState::onBegin() {
 
   lcd.clear();
   lcd.setCursor(5, 0);
-  lcd.print("Frogger");
+  lcd.print(F("Frogger"));
   lcd.setCursor(4, 1);
-  lcd.print("Welcome!!");
+  lcd.print(F("Welcome!!"));
 }
 
 // the update function check if the js is pressed

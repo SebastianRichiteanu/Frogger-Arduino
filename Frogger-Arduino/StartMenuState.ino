@@ -6,16 +6,16 @@ const byte startMenuItems = 4;
 // print the labels in the corresponding position of the lcd
 void StartMenuState::printMenuLabels() const {
   lcd.setCursor(1, 0);
-  lcd.print("Play");
+  lcd.print(F("Play"));
 
   lcd.setCursor(8, 0);
-  lcd.print("HiScores");
+  lcd.print(F("HiScores"));
 
   lcd.setCursor(1,1);
-  lcd.print("About");
+  lcd.print(F("About"));
 
   lcd.setCursor(8,1);
-  lcd.print("Settings");
+  lcd.print(F("Settings"));
 }
 
 void StartMenuState::printChar(byte chr) const {
@@ -29,7 +29,7 @@ void StartMenuState::printChar(byte chr) const {
 // print the arrows in the corresponding position of the lcd
 // nr variable contains in each position the char code
 // [up left corner, up right corner, down left corner, down right corner]
-void StartMenuState::printSelectionArrow() const {
+void StartMenuState::printSelectionArrows() const {
   int nr = 9305; // selIndex == 0
   if (selIndex == 1) {
     nr = 2940;
@@ -109,7 +109,7 @@ void StartMenuState::update() {
     }
   }
   if (checkMainState()) {
-    printSelectionArrow();
+    printSelectionArrows();
   }
 
   buzzer.updateOrRestart();

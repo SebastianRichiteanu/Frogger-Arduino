@@ -41,118 +41,118 @@ void SettingsMenuState::printNameField() {
 
 // prints the difficulty field as a string
 void SettingsMenuState::printDifficultyLevelField() {
-  lcd.print("Diff: ");
+  lcd.print(F("Diff: "));
   if (isEditing && currentIndex == 1) {
-    lcd.print("{");
+    lcd.print(F("{"));
   }
   lcd.print(getCurrentDifAsString());
   if (isEditing && currentIndex == 1) {
-    lcd.print("}");
+    lcd.print(F("}"));
   }
 }
 
 // prints the lcd contrast as a number
 void SettingsMenuState::printLcdContrast() {
-  lcd.print("Contrast: ");
+  lcd.print(F("Contrast: "));
   if (isEditing && currentIndex == 2) {
-    lcd.print("{");
+    lcd.print(F("{"));
   }
   lcd.print(savedData.lcdContrast);
   if (isEditing && currentIndex == 2) {
-    lcd.print("}");
+    lcd.print(F("}"));
   }
 }
 
 // prints the lcd brightness as a number
 void SettingsMenuState::printLcdBrightness() {
-  lcd.print("LCD Bright:");
+  lcd.print(F("LCD Bright:"));
   if (isEditing && currentIndex == 3) {
-    lcd.print("{");
+    lcd.print(F("{"));
   } else {
-    lcd.print(" ");
+    lcd.print(F(" "));
   }
   lcd.print(savedData.lcdBrightness);
   if (isEditing && currentIndex == 3) {
-    lcd.print("}");
+    lcd.print(F("}"));
   }
 }
 
 // prints the matrix brightness as a number
 void SettingsMenuState::printMatrixBright() {
-  lcd.print("Mat Bright:");
+  lcd.print(F("Mat Bright:"));
   if (isEditing && currentIndex == 4) {
-    lcd.print("{");
+    lcd.print(F("{"));
   } else {
-    lcd.print(" ");
+    lcd.print(F(" "));
   }
   lcd.print(savedData.matrixBrightness);
   if (isEditing && currentIndex == 4) {
-    lcd.print("}");
+    lcd.print(F("}"));
   }
 }
 
 // prints the music state (ON/OFF)
 void SettingsMenuState::printMusicState() {
-  lcd.print("Music:");
+  lcd.print(F("Music:"));
   if (isEditing && currentIndex == 5) {
-    lcd.print("{");
+    lcd.print(F("{"));
   } else {
-    lcd.print(" ");
+    lcd.print(F(" "));
   }
   if (savedData.musicState) {
-    lcd.print("ON");
+    lcd.print(F("ON"));
   } else {
-    lcd.print("OFF");
+    lcd.print(F("OFF"));
   }
   if (isEditing && currentIndex == 5) {
-    lcd.print("}");
+    lcd.print(F("}"));
   }
 }
 
 // prints the game sound state (ON/OFF)
 void SettingsMenuState::printGameSoundState() {
-  lcd.print("GameSound:");
+  lcd.print(F("GameSound:"));
   if (isEditing && currentIndex == 6) {
-    lcd.print("{");
+    lcd.print(F("{"));
   } else {
-    lcd.print(" ");
+    lcd.print(F(" "));
   }
   if (savedData.gameSoundState) {
-    lcd.print("ON");
+    lcd.print(F("ON"));
   } else {
-    lcd.print("OFF");
+    lcd.print(F("OFF"));
   }
   if (isEditing && currentIndex == 6) {
-    lcd.print("}");
+    lcd.print(F("}"));
   }
 }
 
 //prints the menu sound state (ON/OFF)
 void SettingsMenuState::printMenuSoundState() {
-  lcd.print("MenuSound:");
+  lcd.print(F("MenuSound:"));
   if (isEditing && currentIndex == 7) {
-    lcd.print("{");
+    lcd.print(F("{"));
   } else {
-    lcd.print(" ");
+    lcd.print(F(" "));
   }
   if (savedData.menuSoundState) {
-    lcd.print("ON");
+    lcd.print(F("ON"));
   } else {
-    lcd.print("OFF");
+    lcd.print(F("OFF"));
   }
   if (isEditing && currentIndex == 7) {
-    lcd.print("}");
+    lcd.print(F("}"));
   }
 }
 
 // prints the reset EEPROM setting
 void SettingsMenuState::printResetEEPROM() {
   if (isEditing && currentIndex == 8) {
-    lcd.print("{");
+    lcd.print(F("{"));
   }
-  lcd.print("Reset EEPROM");
+  lcd.print(F("Reset EEPROM"));
   if (isEditing && currentIndex == 8) {
-    lcd.print("}");
+    lcd.print(F("}"));
   }
 }
 

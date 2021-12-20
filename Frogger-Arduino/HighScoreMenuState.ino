@@ -8,13 +8,13 @@ void HighScoreMenuState::printScore(byte index) {
   strncpy(name, score.name, playerNameLen);
   
   lcd.print(index+1); // idented at 0
-  lcd.print(". ");
+  lcd.print(F(". "));
   if (strlen(name)) {
     lcd.print(name);
   } else {
-    lcd.print("NaN");
+    lcd.print(F("NaN"));
   }
-  lcd.print(" ");
+  lcd.print(F(" "));
   lcd.print(score.score);
 }
 

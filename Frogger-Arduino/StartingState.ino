@@ -15,9 +15,9 @@ void StartingState::onBegin() {
   initHeart();
   lcd.clear();
   lcd.setCursor(2, 0);
-  lcd.print("Hi! Press JS");
+  lcd.print(F("Hi! Press JS"));
   lcd.setCursor(4, 1);
-  lcd.print("to start");
+  lcd.print(F("to start"));
 
   generateInitialMap();
   player.reset();
