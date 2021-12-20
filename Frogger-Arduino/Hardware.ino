@@ -30,6 +30,123 @@ bool lastButtonState = LOW;
 bool buttonState = LOW;
 Timer lastButtonDebounceTime = updateTime;
 
+// a heart char for lcd
+// byte code: 0
+static byte heartChar[] = {
+  0b00000,
+  0b01010,
+  0b11111,
+  0b11111,
+  0b01110,
+  0b00100,
+  0b00000,
+  0b00000};
+
+// an arrow down char for lcd menu
+// byte code 1
+static byte arrowDownChar[] = {
+  B00100,
+  B00100,
+  B00100,
+  B00100,
+  B10101,
+  B01110,
+  B00100,
+  B00000};
+
+// byte code 2
+static byte arrowUpChar[] = {
+  B00100,
+  B01110,
+  B10101,
+  B00100,
+  B00100,
+  B00100,
+  B00100,
+  B00000};
+
+// byte code 3
+static byte arrowLeftChar[] = {
+  B00010,
+  B00100,
+  B01000,
+  B11111,
+  B01000,
+  B00100,
+  B00010,
+  B00000};
+
+// byte code 4
+static byte arrowRightChar[] = {
+  B01000,
+  B00100,
+  B00010,
+  B11111,
+  B00010,
+  B00100,
+  B01000,
+  B00000};
+
+// byte code 5
+static byte arrowDownLeftChar[] = {
+  B00000,
+  B10001,
+  B10010,
+  B10100,
+  B11000,
+  B11111,
+  B00000,
+  B00000};
+
+// byte code 6
+static byte arrowDownRightChar[] = {
+  B00000,
+  B10001,
+  B01001,
+  B00101,
+  B00011,
+  B11111,
+  B00000,
+  B00000};
+
+// byte code 7
+static byte arrowUpLeftChar[] = {
+  B00000,
+  B11111,
+  B11000,
+  B10100,
+  B10010,
+  B10001,
+  B00000,
+  B00000};
+
+// byte code 8
+static byte arrowUpRightChar[] = {
+  B00000,
+  B11111,
+  B00011,
+  B00101,
+  B01001,
+  B10001,
+  B00000,
+  B00000};
+
+// create heart and arrow chars for lcd
+void initMenuChars() {
+  lcd.createChar(0, arrowDownChar);
+  lcd.createChar(1, arrowUpChar);
+  lcd.createChar(2, arrowLeftChar);
+  lcd.createChar(3, arrowRightChar);
+  lcd.createChar(4, arrowDownLeftChar);
+  lcd.createChar(5, arrowDownRightChar);
+  lcd.createChar(6, arrowUpLeftChar);
+  lcd.createChar(7, arrowUpRightChar);
+}
+
+void initHeart() {
+  lcd.createChar(0, heartChar);
+}
+
 // init hardware will pin mode all the necessary pins
 // set the brightness to a mapped value
 // and set the seed to the value of pin 0, which is not plugged in
@@ -55,6 +172,8 @@ void initHardware() {
 
   // random seed on pin 0 because it s not connected and will generate noise
   randomSeed(analogRead(0));
+
+  
 }
 
 // updates the contrast and brightness with the mapped values

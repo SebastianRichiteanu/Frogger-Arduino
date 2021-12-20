@@ -6,7 +6,7 @@ Buzzer buzzer;
 // plays a tone for a certain period of time
 // only works if soundState is true, it can be enabled/disabled in the settings
 void Buzzer::playTone(int frequency, Timer duration) {
-  if (savedData.soundState) {
+  if (savedData.gameSoundState) {
     playing = false;
     tone(buzzerPin, frequency, duration);
     playing = true;
@@ -73,6 +73,15 @@ void Buzzer::updateOrRestart() {
 }
 
 bool Buzzer::isPlaying () const { return playing; }
+
+// play the menu scrolling sound
+void Buzzer::playMenuTone() {
+  if (savedData.menuSoundState) {
+    playing = false;
+    tone(buzzerPin, 4699, 50);
+    playing = true;
+  }
+}
 
 // play the player crashed by a vehicle sound
 void Buzzer::playCrashed() const {

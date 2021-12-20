@@ -1,15 +1,5 @@
 #include "PlayingState.h"
 
-// a heart char for lcd
-static byte heartChar[] = {0b00000,
-  0b01010,
-  0b11111,
-  0b11111,
-  0b01110,
-  0b00100,
-  0b00000,
-  0b00000};
-
 // check if the game is over
 // player has no lives or no more time
 bool PlayingState::isGameOver() const {
@@ -100,7 +90,6 @@ void PlayingState::render() const {
     return;
   } else {
     lcd.clear();
-    lcd.createChar(0, heartChar);
 
     lcd.setCursor(0, 0);
     lcd.print("Dif:");

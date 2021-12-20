@@ -18,48 +18,42 @@ void StartMenuState::printMenuLabels() const {
   lcd.print("Settings");
 }
 
-// print the arrow in the corresponding position of the lcd
-void StartMenuState::printSelectionArrow() const {
-  switch(selIndex) {
-    case 1:
-      lcd.setCursor(7,0);
-      break;
-    case 2:
-      lcd.setCursor(0,1);
-      break;
-    case 3:
-      lcd.setCursor(7,1);
-      break;
-    default:
-      lcd.setCursor(0,0);
-      break;
+void StartMenuState::printChar(byte chr) const {
+  if (chr == 9) { 
+    lcd.print('>'); 
+  } else {
+    lcd.write((byte)chr);
   }
-  lcd.print('>');
 }
 
-// delete the arrow in the correspoding position fo the lcd
-// delete means overwriting the arrow with a blank space
-void StartMenuState::deleteSelectionArrow() const {
-  switch(selIndex) {
-    case 1:
-      lcd.setCursor(7,0);
-      break;
-    case 2:
-      lcd.setCursor(0,1);
-      break;
-    case 3:
-      lcd.setCursor(7,1);
-      break;
-    default:
-      lcd.setCursor(0,0);
-      break;
+// print the arrows in the corresponding position of the lcd
+// nr variable contains in each position the char code
+// [up left corner, up right corner, down left corner, down right corner]
+void StartMenuState::printSelectionArrow() const {
+  int nr = 9305; // selIndex == 0
+  if (selIndex == 1) {
+    nr = 2940;
+  } else if (selIndex == 2) {
+    nr = 1793;
+  } else if (selIndex == 3) {
+    nr = 6129;
   }
-  lcd.print(' ');
+  
+  lcd.setCursor(0, 0);
+  printChar(nr / 1000);
+  lcd.setCursor(7, 0);
+  printChar(nr / 100 % 10);
+  lcd.setCursor(0, 1);
+  printChar(nr / 10 % 10);
+  lcd.setCursor(7, 1);
+  printChar(nr % 10);
+  
 }
 
 // on begin the matrix & lcd are cleared, index is set to 0
 // the menu labels are printed and the music starts
 void StartMenuState::onBegin() { 
+  initMenuChars();
   matrix.clear();
   selIndex = 0; 
   lcd.clear();
@@ -71,7 +65,6 @@ void StartMenuState::onBegin() {
 
 // on end the arrow get deleted and the lcd cleared
 void StartMenuState::onEnd() {
-  deleteSelectionArrow();
   lcd.clear();
 }
 
@@ -81,18 +74,21 @@ void StartMenuState::onEnd() {
 // the game state is changed to the selected label
 // also updates the song
 void StartMenuState::update() {
-  deleteSelectionArrow();
   if (js.isLeftDebounce()) {
     selIndex = (selIndex + startMenuItems - 1) % startMenuItems;
+    buzzer.playMenuTone();
   } 
   if (js.isRightDebounce()) {
     selIndex = (selIndex + 1) % startMenuItems;
+    buzzer.playMenuTone();
   }
   if (js.isUpDebounce()) {
     selIndex = (selIndex + startMenuItems - 2) % startMenuItems;
+    buzzer.playMenuTone();
   }
   if (js.isDownDebounce()) {
     selIndex = (selIndex + startMenuItems + 2) % startMenuItems;
+    buzzer.playMenuTone();
   }
 
   if (js.isPressedDebounce()) {

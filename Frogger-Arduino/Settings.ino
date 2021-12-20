@@ -222,8 +222,12 @@ void changeMusicState() {
   savedData.musicState = !savedData.musicState;
 }
 
-void changeSoundState() {
-  savedData.soundState = !savedData.soundState;
+void changeGameSoundState() {
+  savedData.gameSoundState = !savedData.gameSoundState;
+}
+
+void changeMenuSoundState() {
+  savedData.menuSoundState = !savedData.menuSoundState;
 }
 
 // matrix

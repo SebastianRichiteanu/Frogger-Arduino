@@ -11,11 +11,8 @@ struct Highscore {
 
 struct SavedData {
   char playerName[playerNameLen + 1];
-  byte lcdBrightness;
-  byte lcdContrast;
-  byte matrixBrightness;
-  bool musicState;
-  bool soundState;
+  byte lcdBrightness, lcdContrast, matrixBrightness;
+  bool musicState, gameSoundState, menuSoundState;
   Difficulty difficulty;
   Highscore highscores[maxHighScores];
 }savedData;

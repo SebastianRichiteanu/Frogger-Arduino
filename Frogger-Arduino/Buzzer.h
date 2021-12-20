@@ -25,6 +25,7 @@ class Buzzer {
 
     bool isPlaying() const;
 
+    void playMenuTone();
     void playCrashed() const;
     void playBonus() const;
     void playFinishedLevel() const;

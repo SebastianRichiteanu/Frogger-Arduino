@@ -36,7 +36,7 @@ void SaveSettingsMenuState::resetSettings() {
   savedData.matrixBrightness = copySavedData.matrixBrightness;
   savedData.difficulty = copySavedData.difficulty;
   savedData.musicState = copySavedData.musicState;
-  savedData.soundState = copySavedData.soundState;
+  savedData.gameSoundState = copySavedData.gameSoundState;
 }
 
 void SaveSettingsMenuState::onBegin() { selIndex = 0; }
@@ -49,11 +49,14 @@ void SaveSettingsMenuState::onBegin() { selIndex = 0; }
 void SaveSettingsMenuState::update() {
   if (js.isLeftDebounce()) {
     selIndex = (selIndex + saveSettingsMenuItems - 1) % saveSettingsMenuItems;
+    buzzer.playMenuTone();
   }
   if (js.isRightDebounce()) {
     selIndex = (selIndex + 1) % saveSettingsMenuItems;
+    buzzer.playMenuTone();
   }
   if (js.isPressedDebounce()) {
+    buzzer.playMenuTone();
     if (selIndex == 0) {
       updateHardware();
       saveSavedData();

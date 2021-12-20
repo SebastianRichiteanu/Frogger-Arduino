@@ -12,6 +12,7 @@ void StartingState::generateInitialMap() {
 // the map is generated, the player reset
 // and if is the first level, the player stats are reset
 void StartingState::onBegin() {
+  initHeart();
   lcd.clear();
   lcd.setCursor(2, 0);
   lcd.print("Hi! Press JS");

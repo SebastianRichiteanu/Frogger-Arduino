@@ -48,7 +48,8 @@ void AboutMenuState::printCurrentLines() {
   byte lineLen = printInfoLine(topLineIndex, currentScroll);
   maxScroll = lineLen;
   if (topLineIndex + 1 < infoNum) {
-    lcd.setCursor(1, 1);
+    lcd.setCursor(0, 1);
+    lcd.write((byte)0);
     printInfoLine(topLineIndex + 1);
   }
 }
@@ -90,12 +91,15 @@ void AboutMenuState::update() {
 
   if (js.isDownDebounce()) {
     scrollToLine((topLineIndex + infoNum - 1) % infoNum);
+    buzzer.playMenuTone();
   }
   if (js.isUpDebounce()) {
     scrollToLine((topLineIndex + 1) % infoNum);
+    buzzer.playMenuTone();
   }
   if (js.isPressedDebounce()) {
     setGameState(GameState::StartMenu);
+    buzzer.playMenuTone();
   }
 
   buzzer.updateOrRestart();

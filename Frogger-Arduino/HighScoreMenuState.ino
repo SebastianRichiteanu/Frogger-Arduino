@@ -18,15 +18,17 @@ void HighScoreMenuState::printScore(byte index) {
   lcd.print(score.score);
 }
 
-// clears the screen and then prints the scores
+// clears the screen and then prints the scores and arrows
 void HighScoreMenuState::printScores() {
   lcd.clear();
 
   lcd.setCursor(0, 0);
+  lcd.print('>');
   printScore(topScoreIndex);
 
   if (topScoreIndex + 1 < maxHighScores) {
     lcd.setCursor(0, 1);
+    lcd.write((byte)0);
     printScore(topScoreIndex + 1);
   }
 }
@@ -44,12 +46,15 @@ void HighScoreMenuState::update() {
   if (js.isDownDebounce()) {
     topScoreIndex = (topScoreIndex + maxHighScores - 1) % maxHighScores;
     printScores();
+    buzzer.playMenuTone();
   }
   if (js.isUpDebounce()) {
     topScoreIndex = (topScoreIndex + 1) % maxHighScores;
     printScores();
+    buzzer.playMenuTone();
   }
   if (js.isPressedDebounce()) {
+    buzzer.playMenuTone();
     setGameState(GameState::StartMenu);
   }
 }

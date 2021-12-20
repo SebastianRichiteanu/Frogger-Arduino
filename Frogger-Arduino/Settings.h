@@ -42,7 +42,8 @@ void increaseLcdBrightness();
 void decreaseLcdBrightness();
 
 void changeMusicState();
-void changeSoundState();
+void changeGameSoundState();
+void changeMenuSoundState();
 
 // matrix
 
