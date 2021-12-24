@@ -7,10 +7,10 @@
   
   Being a frog stranded in the vast city of Bucharest (represented in the game as a blinking dot), your goal is to cross an entire street unharmed. The frog objective is to get back to university for his robotics course. Of course that would be easy in any city except Bucharest where the vehicles are unpredictable, so the frog gets a little help from his friend who left bonus points behind.  
   
-  [Watch YouTube demo](https://www.youtube.com/watch?v=mU8MxvrkBjo&ab_channel=SebastianRichiteanu)
+  [Watch YouTube demo](https://www.youtube.com/watch?v=TaY7y_Gawg8)
   
   ## How to play
-  The primary method to control the game is through the joystick, but also the pause button and the volume potentiometer.
+  The primary method to control the game is through the joystick, but also the game can be paused/unpaused using the button and the sound effects & soundtracks volume are controlled by the potentiometer.
     
   ### In the menu
   The menus can be navigated using the joystick (left/right/up/down). Pressing the joystick will activate the currently selected item.
