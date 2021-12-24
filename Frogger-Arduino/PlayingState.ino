@@ -1,5 +1,9 @@
 #include "PlayingState.h"
 
+// constants for panning camera
+const int relativeXUpThreshold = 4;
+const int relativeYDownThreshold = 3;
+
 // check if the game is over
 // player has no lives or no more time
 bool PlayingState::isGameOver() const {
@@ -68,10 +72,10 @@ void PlayingState::update() {
     player.update();
   }
   
-  if (player.getRelativeX() < 3) {
+  if (player.getRelativeX() < relativeYDownThreshold) {
     levelMap.moveDown();
   } 
-  if (player.getRelativeX() > 4) {
+  if (player.getRelativeX() > relativeXUpThreshold) {
     levelMap.moveUp();
   }
 }

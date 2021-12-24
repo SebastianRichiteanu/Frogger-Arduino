@@ -1,5 +1,14 @@
 #include "Vehicle.h"
 
+// vehicle directions
+#define leftDirection 0
+#define rightDirection 1
+
+// consts for vehicle resets
+const int defaultLength = 0;
+const int rightDefaultPos = levelMap.width - 1;
+const int leftDefaultPos = 0;
+
 // the constructor sets the delay time to the random and modified by difficulty and level value
 // updates the update time
 // sets the y to the max
@@ -11,11 +20,11 @@ Vehicle::Vehicle() {
   delayTime = random(5000, 10000) * vehicleDelayByDif() * vehicleDelayByLevel();
   lastUpdateTime = updateTime;
   direction = random(0, 2);
-  if (!direction) {
-    y = levelMap.width - 1;
+  if (direction == rightDirection) {
+    y = rightDefaultPos;
   }
   maxLength = random(2, 5) * vehicleLenByDif() * vehicleLenByLevel();
-  length = 0;
+  length = defaultLength;
 }
 
 // set the vehicle cells to true
@@ -43,7 +52,7 @@ void Vehicle::increaseLength(byte x) {
 
 // move the vehicle in the corresponding direction
 void Vehicle::moveVehicle() {
-  if (direction) {
+  if (direction == rightDirection) {
     moveVehicleRight();
   } else {
     moveVehicleLeft();
@@ -61,9 +70,9 @@ void Vehicle::moveVehicleLeft() {
   } else {
     if (debounce(lastUpdateTime, delayTime)) {
       isMoving = true;
-      y = 0;
+      y = leftDefaultPos;
     } else {
-      length = 0;
+      length = defaultLength;
       isMoving = false;
     }
   }
@@ -76,9 +85,9 @@ void Vehicle::moveVehicleRight() {
   } else {
     if (debounce(lastUpdateTime, delayTime)) {
       isMoving = true;
-      y = levelMap.width - 1;
+      y = rightDefaultPos;
     } else {
-      length = 0;
+      length = defaultLength;
       isMoving = false;
     }
   }
@@ -86,7 +95,7 @@ void Vehicle::moveVehicleRight() {
 
 // set the vehicle cells by the corresponding direction
 void Vehicle::setVehicleCells(byte x) {
-  if (direction) {
+  if (direction == rightDirection) {
     setVehicleCellsRight(x);
   } else {
     setVehicleCellsLeft(x);

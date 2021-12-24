@@ -2,6 +2,63 @@
 
 Difficulty getCurrentDif() { return savedData.difficulty; }
 
+const Timer startingTimeEasy = 100000,
+            startingTimeMedium = 75000,
+            startingTimeHard = 50000;
+
+const byte startingLivesEasy = 4,
+           startingLivesMedium = 3,
+           startingLivesHard = 2;
+
+const byte startingJumpsEasy = 3,
+           startingJumpsMedium = 2,
+           startingJumpsHard = 1;
+
+const byte numberOfWallsEasy = 2,
+           numberOfWallsMedium = 3,
+           numberOfWallsHard = 4;
+
+const byte minLengthWallsEasy = 2,
+           minLengthWallsMedium = 2,
+           minLengthWallsHard = 3;
+
+const byte maxLengthWallsEasy = 4,
+           maxLengthWallsMedium = 5,
+           maxLengthWallsHard = 5;
+
+const float multiplierLenWallsEasy = 0.3,
+            multiplierLenWallsMedium = 0.25,
+            multiplierLenWallsHard = 0.2;
+
+const byte minNumberOfBonusEasy = 2,
+           minNumberOfBonusMedium = 1,
+           minNumberOfBonusHard = 0;
+
+const byte maxNumberOfBonusEasy = 4,
+           maxNumberOfBonusMedium = 3,
+           maxNumberOfBonusHard = 2;
+
+const byte scoreMultiplierEasy = 30,
+           scoreMultiplierMedium = 40,
+           scoreMultiplierHard = 50;
+
+const float multiplierVehicleDelayEasy = 1,
+            multiplierVehicleDelayMedium = 0.9,
+            multiplierVehicleDelayHard = 0.8;
+
+const float multiplierVehicleDelayByLvlEasy = 0.01,
+           multiplierVehicleDelayByLvlMedium = 0.025,
+           multiplierVehicleDelayByLvlHard = 0.05;
+
+
+const float multiplierVehicleLengthEasy = 1,
+            multiplierVehicleLengthMedium = 1.1,
+            multiplierVehicleLengthHard = 1.2;
+
+const float multiplierVehicleLengthByLvlEasy = 0.01,
+            multiplierVehicleLengthByLVlMedium = 0.025,
+            multiplierVehicleLengtgByLvlHard = 0.05;
+
 // returns a char for each difficulty (for lcd output purposes)
 const char getCurrentDifAsChar() {
   switch(getCurrentDif()) {
@@ -46,35 +103,38 @@ void decreaseDifficulty() {
 const Timer getStartingTimeByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 100000;
+      return startingTimeEasy;
     case Difficulty::Medium:
-      return 75000;
+      return startingTimeMedium;
     case Difficulty::Hard:
-      return 50000;
+      return startingTimeHard;
   }
 }
+
 
 // returns the starting number of lives corresponding to the selected difficulty
 const byte getStartingLivesByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 4;
+      return startingLivesEasy;
     case Difficulty::Medium:
-      return 3;
+      return startingLivesMedium;
     case Difficulty::Hard:
-      return 2;
+      return startingLivesHard;
   }
 }
+
+
 
 // returns the starting number of jumps corresponding to the selected difficulty
 const byte getStartingJumpsByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 3;
+      return startingJumpsEasy;
     case Difficulty::Medium:
-      return 2;
+      return startingJumpsMedium;
     case Difficulty::Hard:
-      return 1;
+      return startingJumpsHard;
   }
 }
 
@@ -82,23 +142,24 @@ const byte getStartingJumpsByDif() {
 const byte getNumberOfWallsByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 2;
+      return numberOfWallsEasy;
     case Difficulty::Medium:
-      return 3;
+      return numberOfWallsMedium;
     case Difficulty::Hard:
-      return 4;
+      return numberOfWallsHard;
   }
 }
+
 
 // returns the length of walls corresponding to the selected difficulty
 const byte getLengthOfWallsByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return random(2, 4);
+      return random(minLengthWallsEasy, maxLengthWallsEasy);
     case Difficulty::Medium:
-      return random(2, 5);
+      return random(minLengthWallsMedium, maxLengthWallsMedium);
     case Difficulty::Hard:
-      return random(3, 5);
+      return random(minLengthWallsHard, maxLengthWallsHard);
   }
 }
 
@@ -107,11 +168,11 @@ const float getLengthOfWallsByLvl() {
   byte currentLvl = levelMap.getLevel();
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 1 + currentLvl * 0.3;
+      return 1 + currentLvl * multiplierLenWallsEasy;
     case Difficulty::Medium:
-      return 1 + currentLvl * 0.25;
+      return 1 + currentLvl * multiplierLenWallsMedium;
     case Difficulty::Hard:
-      return 1 + currentLvl * 0.2;
+      return 1 + currentLvl * multiplierLenWallsHard;
   }
 }
 
@@ -119,11 +180,11 @@ const float getLengthOfWallsByLvl() {
 const byte getNumberOfBonusByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return random(2, 4);
+      return random(minNumberOfBonusEasy, maxNumberOfBonusEasy);
     case Difficulty::Medium:
-      return random(1, 3);
+      return random(minNumberOfBonusMedium, maxNumberOfBonusMedium);
     case Difficulty::Hard:
-      return random(0, 2);
+      return random(minNumberOfBonusHard, maxNumberOfBonusHard);
   }
 }
 
@@ -131,11 +192,11 @@ const byte getNumberOfBonusByDif() {
 const byte getScoreMultiplierByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 30;
+      return scoreMultiplierEasy;
     case Difficulty::Medium:
-      return 40;
+      return scoreMultiplierMedium;
     case Difficulty::Hard:
-      return 50;
+      return scoreMultiplierHard;
   }
 }
 
@@ -143,11 +204,11 @@ const byte getScoreMultiplierByDif() {
 const float vehicleDelayByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 1;
+      return multiplierVehicleDelayEasy;
     case Difficulty::Medium:
-      return 0.9;
+      return multiplierVehicleDelayMedium;
     case Difficulty::Hard:
-      return 0.8;
+      return multiplierVehicleDelayHard;
   }
 }
 
@@ -156,11 +217,11 @@ const float vehicleDelayByLevel() {
   byte currentLvl = levelMap.getLevel();
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 1 - currentLvl * 0.01;
+      return 1 - currentLvl * multiplierVehicleDelayByLvlEasy;
     case Difficulty::Medium:
-      return 1 - currentLvl * 0.025;
+      return 1 - currentLvl * multiplierVehicleDelayByLvlMedium;
     case Difficulty::Hard:
-      return 1 - currentLvl * 0.05;
+      return 1 - currentLvl * multiplierVehicleDelayByLvlHard;
   }
 }
 
@@ -168,11 +229,11 @@ const float vehicleDelayByLevel() {
 const float vehicleLenByDif() {
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 1;
+      return multiplierVehicleLengthEasy;
     case Difficulty::Medium:
-      return 1.1;
+      return multiplierVehicleLengthMedium;
     case Difficulty::Hard:
-      return 1.2;
+      return multiplierVehicleLengthHard;
   }
 }
 
@@ -181,11 +242,11 @@ const float vehicleLenByLevel() {
   byte currentLvl = levelMap.getLevel();
   switch(getCurrentDif()) {
     case Difficulty::Easy:
-      return 1 + currentLvl * 0.01;
+      return 1 + currentLvl * multiplierVehicleLengthByLvlEasy;
     case Difficulty::Medium:
-      return 1 + currentLvl * 0.025;
+      return 1 + currentLvl * multiplierVehicleLengthByLVlMedium;
     case Difficulty::Hard:
-      return 1 + currentLvl * 0.05;
+      return 1 + currentLvl * multiplierVehicleLengtgByLvlHard;
   }
 }
 

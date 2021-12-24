@@ -1,5 +1,15 @@
 #include "SettingsMenuState.h"
 
+#define nameIndex 0
+#define difficultyIndex 1
+#define lcdContrastIndex 2
+#define lcdBrightnessIndex 3
+#define matrixBrightnessIndex 4
+#define musicStateIndex 5
+#define gameSoundIndex 6
+#define menuSoundIndex 7
+#define resetEEPROMIndex 8
+
 // constant for number of settings in the menu
 const byte settingsNum = 9;
 
@@ -42,11 +52,11 @@ void SettingsMenuState::printNameField() {
 // prints the difficulty field as a string
 void SettingsMenuState::printDifficultyLevelField() {
   lcd.print(F("Diff: "));
-  if (isEditing && currentIndex == 1) {
+  if (isEditing && currentIndex == difficultyIndex) {
     lcd.print(F("{"));
   }
   lcd.print(getCurrentDifAsString());
-  if (isEditing && currentIndex == 1) {
+  if (isEditing && currentIndex == difficultyIndex) {
     lcd.print(F("}"));
   }
 }
@@ -54,11 +64,11 @@ void SettingsMenuState::printDifficultyLevelField() {
 // prints the lcd contrast as a number
 void SettingsMenuState::printLcdContrast() {
   lcd.print(F("Contrast: "));
-  if (isEditing && currentIndex == 2) {
+  if (isEditing && currentIndex == lcdContrastIndex) {
     lcd.print(F("{"));
   }
   lcd.print(savedData.lcdContrast);
-  if (isEditing && currentIndex == 2) {
+  if (isEditing && currentIndex == lcdContrastIndex) {
     lcd.print(F("}"));
   }
 }
@@ -66,13 +76,13 @@ void SettingsMenuState::printLcdContrast() {
 // prints the lcd brightness as a number
 void SettingsMenuState::printLcdBrightness() {
   lcd.print(F("LCD Bright:"));
-  if (isEditing && currentIndex == 3) {
+  if (isEditing && currentIndex == lcdBrightnessIndex) {
     lcd.print(F("{"));
   } else {
     lcd.print(F(" "));
   }
   lcd.print(savedData.lcdBrightness);
-  if (isEditing && currentIndex == 3) {
+  if (isEditing && currentIndex == lcdBrightnessIndex) {
     lcd.print(F("}"));
   }
 }
@@ -80,13 +90,13 @@ void SettingsMenuState::printLcdBrightness() {
 // prints the matrix brightness as a number
 void SettingsMenuState::printMatrixBright() {
   lcd.print(F("Mat Bright:"));
-  if (isEditing && currentIndex == 4) {
+  if (isEditing && currentIndex == matrixBrightnessIndex) {
     lcd.print(F("{"));
   } else {
     lcd.print(F(" "));
   }
   lcd.print(savedData.matrixBrightness);
-  if (isEditing && currentIndex == 4) {
+  if (isEditing && currentIndex == matrixBrightnessIndex) {
     lcd.print(F("}"));
   }
 }
@@ -94,7 +104,7 @@ void SettingsMenuState::printMatrixBright() {
 // prints the music state (ON/OFF)
 void SettingsMenuState::printMusicState() {
   lcd.print(F("Music:"));
-  if (isEditing && currentIndex == 5) {
+  if (isEditing && currentIndex == musicStateIndex) {
     lcd.print(F("{"));
   } else {
     lcd.print(F(" "));
@@ -104,7 +114,7 @@ void SettingsMenuState::printMusicState() {
   } else {
     lcd.print(F("OFF"));
   }
-  if (isEditing && currentIndex == 5) {
+  if (isEditing && currentIndex == musicStateIndex) {
     lcd.print(F("}"));
   }
 }
@@ -112,7 +122,7 @@ void SettingsMenuState::printMusicState() {
 // prints the game sound state (ON/OFF)
 void SettingsMenuState::printGameSoundState() {
   lcd.print(F("GameSound:"));
-  if (isEditing && currentIndex == 6) {
+  if (isEditing && currentIndex == gameSoundIndex) {
     lcd.print(F("{"));
   } else {
     lcd.print(F(" "));
@@ -122,7 +132,7 @@ void SettingsMenuState::printGameSoundState() {
   } else {
     lcd.print(F("OFF"));
   }
-  if (isEditing && currentIndex == 6) {
+  if (isEditing && currentIndex == gameSoundIndex) {
     lcd.print(F("}"));
   }
 }
@@ -130,7 +140,7 @@ void SettingsMenuState::printGameSoundState() {
 //prints the menu sound state (ON/OFF)
 void SettingsMenuState::printMenuSoundState() {
   lcd.print(F("MenuSound:"));
-  if (isEditing && currentIndex == 7) {
+  if (isEditing && currentIndex == menuSoundIndex) {
     lcd.print(F("{"));
   } else {
     lcd.print(F(" "));
@@ -140,41 +150,41 @@ void SettingsMenuState::printMenuSoundState() {
   } else {
     lcd.print(F("OFF"));
   }
-  if (isEditing && currentIndex == 7) {
+  if (isEditing && currentIndex == menuSoundIndex) {
     lcd.print(F("}"));
   }
 }
 
 // prints the reset EEPROM setting
 void SettingsMenuState::printResetEEPROM() {
-  if (isEditing && currentIndex == 8) {
+  if (isEditing && currentIndex == resetEEPROMIndex) {
     lcd.print(F("{"));
   }
   lcd.print(F("Reset EEPROM"));
-  if (isEditing && currentIndex == 8) {
+  if (isEditing && currentIndex == resetEEPROMIndex) {
     lcd.print(F("}"));
   }
 }
 
 // prints the field by index
 void SettingsMenuState::printField(byte index) {
-  if (index == 0) {
+  if (index == nameIndex) {
     printNameField();
-  } else if (index == 1) {
+  } else if (index == difficultyIndex) {
     printDifficultyLevelField();
-  } else if (index == 2) {
+  } else if (index == lcdContrastIndex) {
     printLcdContrast();
-  } else if (index == 3) {
+  } else if (index == lcdBrightnessIndex) {
     printLcdBrightness();
-  } else if (index == 4) {
+  } else if (index == matrixBrightnessIndex) {
     printMatrixBright();
-  } else if (index == 5) {
+  } else if (index == musicStateIndex) {
     printMusicState();
-  } else if (index == 6) {
+  } else if (index == gameSoundIndex) {
     printGameSoundState();
-  } else if (index == 7) {
+  } else if (index == menuSoundIndex) {
     printMenuSoundState();
-  } else if (index == 8) {
+  } else if (index == resetEEPROMIndex) {
     printResetEEPROM();
   }
 }
@@ -217,7 +227,7 @@ void SettingsMenuState::changeToNextChar() {
 // and print the fields along with the hammer effect
 void SettingsMenuState::onBegin() {
   copySaveData();
-  currentIndex = 0;
+  currentIndex = nameIndex;
   isEditing = false;
   printFields(currentIndex);
   matrix.hammerEffect();
@@ -231,8 +241,8 @@ void SettingsMenuState::onBegin() {
 void SettingsMenuState::update() {
   if (js.isPressedDebounce()) {
     isEditing = !isEditing;
-    if (currentIndex == 0) {
-      chrIndex = 0;
+    if (currentIndex == nameIndex) {
+      chrIndex = nameIndex;
     }
     printFields(currentIndex);
     buzzer.playMenuTone();
@@ -246,7 +256,7 @@ void SettingsMenuState::update() {
       clearSelArrow();
     }
   
-    if (currentIndex == 0) {
+    if (currentIndex == nameIndex) {
       if (js.isLeftDebounce()) {
         buzzer.playMenuTone();
         chrIndex = (chrIndex + playerNameLen - 1) % playerNameLen;
@@ -271,7 +281,7 @@ void SettingsMenuState::update() {
       } else {
         lcd.print(savedData.playerName[chrIndex]);
       } 
-    } else if (currentIndex == 1) {
+    } else if (currentIndex == difficultyIndex) {
       if (js.isLeftDebounce()) {
         buzzer.playMenuTone();
         decreaseDifficulty();
@@ -282,7 +292,7 @@ void SettingsMenuState::update() {
         increaseDifficulty();
         printFields(currentIndex);
       }
-    } else if (currentIndex == 2) {
+    } else if (currentIndex == lcdContrastIndex) {
       if (js.isLeftDebounce()) {
         buzzer.playMenuTone();
         decreaseLcdContrast();
@@ -295,7 +305,7 @@ void SettingsMenuState::update() {
         printFields(currentIndex);
         updateHardware();
       }
-    } else if (currentIndex == 3) {
+    } else if (currentIndex == lcdBrightnessIndex) {
       if (js.isLeftDebounce()) {
         buzzer.playMenuTone();
         decreaseLcdBrightness();
@@ -308,7 +318,7 @@ void SettingsMenuState::update() {
         printFields(currentIndex);
         updateHardware();
       }
-    } else if (currentIndex == 4) {
+    } else if (currentIndex == matrixBrightnessIndex) {
       if (js.isLeftDebounce()) {
         buzzer.playMenuTone();
         decreaseMatrixBright();
@@ -321,25 +331,25 @@ void SettingsMenuState::update() {
         printFields(currentIndex);
         updateHardware();
       }
-    } else if (currentIndex == 5) {
+    } else if (currentIndex == musicStateIndex) {
       if (js.isLeftDebounce() || js.isRightDebounce()) {
         buzzer.playMenuTone();
         changeMusicState();
         printFields(currentIndex);
       } 
-    } else if (currentIndex == 6) {
+    } else if (currentIndex == gameSoundIndex) {
       if (js.isLeftDebounce() || js.isRightDebounce()) {
         buzzer.playMenuTone();
         changeGameSoundState();
         printFields(currentIndex);
       }
-    } else if (currentIndex == 7) {
+    } else if (currentIndex == menuSoundIndex) {
       if (js.isLeftDebounce() || js.isRightDebounce()) {
         buzzer.playMenuTone();
         changeMenuSoundState();
         printFields(currentIndex);
       }
-    } else if (currentIndex == 8) {
+    } else if (currentIndex == resetEEPROMIndex) {
       if (js.isLeftDebounce() || js.isRightDebounce()) {
         buzzer.playMenuTone();
         resetSavedData();

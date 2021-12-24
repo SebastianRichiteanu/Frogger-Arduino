@@ -1,10 +1,20 @@
 #include "Player.h" 
 
+#define randomLives 0
+#define randomJumps 1
+
 // delay constants
 const int blinkDelay = 500;
 const int deathDelay = 2000;
 const byte moveDelay = 100;
 const byte jumpDelay = 150;
+
+// bonus point timer value
+const int bonusAddTime = 10000;
+
+// default value for reset
+const byte defaultY = 3;
+const byte defaultX = levelMap.height - 1;
 
 // player instance
 Player player;
@@ -75,14 +85,14 @@ void Player::collectBonus() {
 // life, jump or more time
 void Player::getRandomBonus() {
   switch (random(0, 3)) {
-    case 0:
+    case randomLives:
       ++lives;
       return;
-    case 1:
+    case randomJumps:
       ++jumps;
       return;
     default:
-      timerDisplay.increaseTime(10000);
+      timerDisplay.increaseTime(bonusAddTime);
       return;
   }
 }
@@ -110,8 +120,8 @@ void Player::jump() {
 // resets the player to the default spawn position
 // sets his cell to true and reset the timers
 void Player::reset() {
-  x = levelMap.height - 1; 
-  y = 3;
+  x = defaultX; 
+  y = defaultY;
   setPlayerCell(true);
   canJump = false;
 

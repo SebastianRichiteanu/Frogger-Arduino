@@ -172,8 +172,6 @@ void initHardware() {
 
   // random seed on pin 0 because it s not connected and will generate noise
   randomSeed(analogRead(0));
-
-  
 }
 
 // updates the contrast and brightness with the mapped values

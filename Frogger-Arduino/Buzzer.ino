@@ -1,5 +1,14 @@
 #include "Buzzer.h"
 
+#define menuFrequency 4699
+#define menuDuration 50
+#define crashedFrequency 75 
+#define crashedDuration 300
+#define bonusFrequency 2512
+#define bonusDuration 200
+#define finishFrequency 1568
+#define finishDuration 200
+
 // buzzer instance
 Buzzer buzzer;
 
@@ -78,22 +87,22 @@ bool Buzzer::isPlaying () const { return playing; }
 void Buzzer::playMenuTone() {
   if (savedData.menuSoundState) {
     playing = false;
-    tone(buzzerPin, 4699, 50);
+    tone(buzzerPin, menuFrequency, menuDuration);
     playing = true;
   }
 }
 
 // play the player crashed by a vehicle sound
 void Buzzer::playCrashed() const {
-  playTone(75, 300);
+  playTone(crashedFrequency, crashedDuration);
 }
 
 // play the player collected a bonus sound
 void Buzzer::playBonus() const {
-  playTone(2512, 200);
+  playTone(bonusFrequency, bonusDuration);
 }
 
 // play the player finished a level sound
 void Buzzer::playFinishedLevel() const {
-  playTone(1568, 200);
+  playTone(finishFrequency, finishDuration);
 }

@@ -1,5 +1,19 @@
 #include "StartMenuState.h"
 
+// index for menu options
+#define startingIndex 0
+#define highScoreIndex 1
+#define aboutIndex 2
+#define settingsIndex 3
+
+// numbers for arrows in the main menu
+// each figure is an arrow
+// check Hardware.ino for more info
+#define startingArrows 9305
+#define highScoreArrows 2940
+#define aboutArrows 1793
+#define settingsArrows 6129
+
 // constant for number of items in the start menu
 const byte startMenuItems = 4;
 
@@ -30,13 +44,13 @@ void StartMenuState::printChar(byte chr) const {
 // nr variable contains in each position the char code
 // [up left corner, up right corner, down left corner, down right corner]
 void StartMenuState::printSelectionArrows() const {
-  int nr = 9305; // selIndex == 0
-  if (selIndex == 1) {
-    nr = 2940;
-  } else if (selIndex == 2) {
-    nr = 1793;
-  } else if (selIndex == 3) {
-    nr = 6129;
+  int nr = startingArrows; // selIndex == startingIndex
+  if (selIndex == highScoreIndex) {
+    nr = highScoreArrows;
+  } else if (selIndex == aboutIndex) {
+    nr = aboutArrows;
+  } else if (selIndex == settingsIndex) {
+    nr = settingsArrows;
   }
   
   lcd.setCursor(0, 0);
@@ -94,16 +108,16 @@ void StartMenuState::update() {
 
   if (js.isPressedDebounce()) {
     switch(selIndex) {
-      case 0:
+      case startingIndex:
         setGameState(GameState::Starting);
         break;
-      case 1:
+      case highScoreIndex:
         setGameState(GameState::HighScoreMenu);
         break;
-      case 2:
+      case aboutIndex:
         setGameState(GameState::AboutMenu);
         break;
-      case 3:
+      case settingsIndex:
         setGameState(GameState::SettingsMenu);
         break;
     }

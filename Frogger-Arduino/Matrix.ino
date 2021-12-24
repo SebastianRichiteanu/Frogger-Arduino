@@ -1,5 +1,7 @@
 #include "Matrix.h"
 
+#define fullRow 0xFF
+
 // address of the matrix
 const byte addrMatrix = 0;
 
@@ -22,7 +24,7 @@ void Matrix::clear() { lc.clearDisplay(addrMatrix); }
 // fills the whole matrix
 void Matrix::fill() {
   for (byte row = 0; row < 8; ++row) {
-    setRow(row, 0xFF);
+    setRow(row, fullRow);
   }
 }
 
