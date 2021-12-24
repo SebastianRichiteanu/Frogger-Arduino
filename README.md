@@ -46,6 +46,8 @@
    - The **button** controls the pause/unpause state.
    - The **potentiometer** controls the buzzer volume.
  
+  ### Software
+  
   #### Difficulty
    - There are 3 difficulties: **Easy**, **Medium**, **Hard**. The difficulty controls the number of walls, bonus points and vehicles. Also, their length and the vehicles respawn time.
   
@@ -56,7 +58,17 @@
   ## Implementation
   
   ### Hardware
-  <img src="https://user-images.githubusercontent.com/61471997/147350769-b48e5d8e-d803-4cec-b28d-31ba122607cb.jpg" data-canonical-src="https://user-images.githubusercontent.com/61471997/147350769-b48e5d8e-d803-4cec-b28d-31ba122607cb.jpg" width="750" height="580" />
+  A short overview of the components, for a more detailed view check the Design tab.
+  
+  <img src="https://user-images.githubusercontent.com/61471997/147355652-66ed39c7-a3a4-4426-8350-62116d26e834.jpg" data-canonical-src="https://user-images.githubusercontent.com/61471997/147355652-66ed39c7-a3a4-4426-8350-62116d26e834.jpg" width="750" height="580" />
+
+   1. Joystick
+   2. Potentiometer
+   3. Button
+   4. Buzzer
+   5. 8x8 Matrix
+   6. MAX7219 driver
+   7. LCD display
     
   ### File Hierarchy
   
