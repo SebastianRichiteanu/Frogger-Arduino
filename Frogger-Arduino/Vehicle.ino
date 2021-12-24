@@ -22,6 +22,8 @@ Vehicle::Vehicle() {
   direction = random(0, 2);
   if (direction == rightDirection) {
     y = rightDefaultPos;
+  } else {
+    y = leftDefaultPos;
   }
   maxLength = random(2, 5) * vehicleLenByDif() * vehicleLenByLevel();
   length = defaultLength;
